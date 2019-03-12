@@ -67,6 +67,9 @@ public class DataBase {
 
                 arrayList.add(Result.getString("Status_ID"));
 
+                arrayList.add(Result.getString("Status_Name"));
+                arrayList.add(Result.getString("Status_type"));
+
 
             }
             System.out.println("Done");
