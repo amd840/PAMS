@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/jdks/javafx-swt.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jdks/javafx.base.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jdks/javafx.controls.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jdks/javafx.fxml.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jdks/javafx.graphics.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jdks/javafx.media.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jdks/javafx.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jdks/javafx.swing.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/jdks/javafx.web.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx_swt.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/javafx_swt.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_15.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_15.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hospitalDataBase.iml" beforeDir="false" afterPath="$PROJECT_DIR$/hospitalDataBase.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/sample/DataBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/sample/DataBase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/DataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/txt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/txt.txt" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -210,7 +197,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552413071335" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552413652054" />
     <property name="dynamic.classpath" value="false" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -324,7 +311,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.25767368" />
       <window_info id="Structure" order="1" weight="0.25" />
@@ -335,7 +321,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32876712" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
