@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -42,27 +43,28 @@ public class Main extends Application {
 
         GridPane root = new GridPane();
 
-        Connection  c = getConnection();
+        //Connection  c = getConnection();
         Statement statement;
 
 
         Button btn = new Button("Ok");
         root.add(btn,0,1);
         //Connection conn = getConnection();
-        statement = c.createStatement();
+        //statement = c.createStatement();
         String datainfo = ("SELECT * FROM Status;");
-        ResultSet Result =statement.executeQuery(datainfo);
+        //ResultSet Result =statement.executeQuery(datainfo);
 
 
         Label label1 = new Label("\t0\t");
         Label label2 = new Label("\t0\t");
         String Result2 = "";
-        if (!Result.next()) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+       /* if (!Result.next()) {
             String Name = Result.getString("Status_ID");
             String GPA = Result.getString("Status_Name");
             String Major = Result.getString("Status_type");
             Result2 = Name+GPA+Major;
-        }
+        }*/
 
 
         label1.setText(Result2);
@@ -70,7 +72,14 @@ public class Main extends Application {
         root.add(label2,1,0);
 
         DataBase dataBase = new DataBase();
-        label1.setText(dataBase.get().toString());
+        label1.setText(dataBase.getStatus().toString());
+        try {
+            label2.setText(dataBase.getUser().toString());
+        }catch(Exception e){
+            alert.setContentText(e.getMessage());
+            alert.show();
+            System.out.println();
+        }
 
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 275));
