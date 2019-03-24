@@ -16,7 +16,7 @@ public class Main extends Application {
     public static Connection getConnection() throws Exception{
         try{
             String driver = "com.mysql.jdbc.Driver";
-            String url = "jdbc:mysql://localhost:3306/ICS_324_P";
+            String url = "jdbc:mysql://127.0.0.1:3306/ICS_324_P";
             String username = "root";
             String pass = "asd123123";
             Class.forName(driver);
