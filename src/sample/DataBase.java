@@ -10,15 +10,32 @@ public class DataBase {
     // Connect to The DataBase
     DataBase() throws Exception {
 
+
         String driver = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/ICS_324_P";
         String url2 = "jdbc:mysql://localhost:8080/PAMS?zeroDataTimeBehavior=convertToNull";
+        String url3 = "jdbc:mysql://pams.cknp9z0b9nmv.us-east-2.rds.amazonaws.com:3306/pams";
+        String url4 = "jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12285138";
 
-        String username = "root";
+        String user = "root";
+        String user1 = "amd840";
+
+
+        String user4 = "sql12285138";
+
         String pass = "asd123123";
-        Class.forName(driver);
-        connection = DriverManager.getConnection(url,username,pass);
+        String pass4 = "wcjfeGj8QN";
 
+        Class.forName(driver);
+        try {
+
+            //try url4, user4, pass
+            //try url3, user, password
+
+            connection = DriverManager.getConnection(url4, user4, pass4);
+        }catch(Exception e){
+            System.out.println("Error ------"+e.getMessage());
+        }
     }
     public String getData() throws Exception{
         statement = connection.createStatement();
@@ -36,6 +53,15 @@ public class DataBase {
 
         return Result2;
     }
+    public void addUser(Users users)throws Exception{
+
+
+        PreparedStatement add = connection.prepareStatement("INSERT INTO Users () values ("+users.getUID()+",'"+users.getUserName()+"','"+users.getFName()+"','"+users.getLname()+"','"+users.getHashPassword()+"','"+users.getEmail()+"',CURRENT_TIMESTAMP,'"+users.getTypeID()+"',1)");
+        add.executeUpdate();
+
+
+    }
+
     public void createTable() throws Exception{
         try {
             PreparedStatement create = connection.prepareStatement(" CREATE TABLE");
@@ -47,7 +73,7 @@ public class DataBase {
     }
     public ArrayList<String> getUser() throws Exception{
         PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Users;");
-        ResultSet Result =statement1.executeQuery();
+        ResultSet Result = statement1.executeQuery();
 
         ArrayList<String> arrayList = new ArrayList<String>();
 
