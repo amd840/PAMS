@@ -16,6 +16,8 @@ public class DataBase {
         String url2 = "jdbc:mysql://localhost:8080/PAMS?zeroDataTimeBehavior=convertToNull";
         String url3 = "jdbc:mysql://pams.cknp9z0b9nmv.us-east-2.rds.amazonaws.com:3306/pams";
         String url4 = "jdbc:mysql://sql12.freemysqlhosting.net:3306/sql12285138";
+        String url5 = "jdbc:mysql://db4free.net:3306/ics324";
+                                    
 
         String user = "root";
         String user1 = "amd840";
@@ -32,7 +34,7 @@ public class DataBase {
             //try url4, user4, pass
             //try url3, user, password
 
-            connection = DriverManager.getConnection(url4, user4, pass4);
+            connection = DriverManager.getConnection(url5, user1, pass);
         }catch(Exception e){
             System.out.println("Error ------"+e.getMessage());
         }
@@ -71,11 +73,11 @@ public class DataBase {
         }
 
     }
-    public ArrayList<String> getUser() throws Exception{
+    public ArrayList<Users> getUser() throws Exception{
         PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Users;");
         ResultSet Result = statement1.executeQuery();
 
-        ArrayList<String> arrayList = new ArrayList<String>();
+        ArrayList<Users> arrayList = new ArrayList<Users>();
 
         if (!Result.next())
             throw new Exception("There is no Users");
@@ -92,7 +94,12 @@ public class DataBase {
 
             System.out.println(Result.getString("LName"));
             System.out.println(" ");
+            int id = Integer.valueOf(Result.getString("U_ID"));
+            Users users = new Users(Result.getString("UserName"),Result.getString("Hashed_PW"),Result.getString("EMail"),Result.getString("FName"),Result.getString("LName"),Result.getString("Reg_Date"),id,1,0);
 
+            arrayList.add(users);
+
+            /*
             arrayList.add(Result.getString("U_ID"));
 
             arrayList.add(Result.getString("UserName"));
@@ -102,7 +109,7 @@ public class DataBase {
             arrayList.add(Result.getString("EMail"));
             arrayList.add(Result.getString("Reg_Date"));
             arrayList.add(Result.getString("Type_ID"));
-
+            */
 
 
         }

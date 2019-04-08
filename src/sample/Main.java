@@ -6,10 +6,15 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import java.sql.*;
+import javax.swing.JButton;
 import javafx.event.ActionEvent;
 
 import java.util.Date;
@@ -53,6 +58,8 @@ public class Main extends Application {
 
 
         Button btn = new Button("register");
+        Button sign = new Button("Sign in");
+
         //Connection conn = getConnection();
         //statement = c.createStatement();
         //ResultSet Result =statement.executeQuery(datainfo);
@@ -60,12 +67,28 @@ public class Main extends Application {
         TextField username = new TextField();
         username.setPromptText("Enter User Name");
         PasswordField password = new PasswordField();
+        password.setPromptText("Enter Password");
+
 
         root.add(textgrid,0,0);
-        root.add(btn,0,1);
+        root.add(sign,0,1);
+        root.add(btn,0,2);
+        root.setVgap(10);
+        //sign.setMinWidth(150);
+        sign.setPrefSize(200,30);
+        btn.setPrefSize(200,30);
+
+        Color color = Color.BLACK;
+        username.setPrefSize(200,30);
+        password.setPrefSize(200,30);
+
+        textgrid.setAlignment(Pos.CENTER);
+        btn.setAlignment(Pos.CENTER);
+        sign.setAlignment(Pos.CENTER);
 
         textgrid.add(username,0,0);
         textgrid.add(password,0,1);
+        textgrid.setVgap(5);
 
         DataBase dataBase = new DataBase();
         btn.setOnAction((ActionEvent a)-> {
@@ -102,7 +125,7 @@ public class Main extends Application {
         */
         root.setAlignment(Pos.CENTER);
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 400));
+        primaryStage.setScene(new Scene(root, 300, 200));
         primaryStage.show();
     }
 
