@@ -153,11 +153,42 @@ public class DataBase {
             System.out.println("Done");
             return arrayList;
 
-
-
     }
 
+    ////////////////////////////////////////////////////////
+    
+    public ArrayList<String> Login(Users user,String username, String password) throws Exception{
+        PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Users WHERE UserName = '" + username + "';");
+        ResultSet Result =statement1.executeQuery();
 
+        ArrayList<String> arrayList = new ArrayList<String>();
+
+        if (!Result.next())
+            throw new Exception("User doesnt exist");
+        while(Result.next()){
+        	if(Result.getString("Hashed_PW").
+            System.out.println(Result.getString("Status_ID"));
+            System.out.println(" ");
+
+            System.out.println(Result.getString("Status_Name"));
+            System.out.println(" ");
+
+
+            System.out.println(Result.getString("Status_type"));
+            System.out.println(" ");
+
+            System.out.println(Result.getString("Description"));
+            System.out.println(" ");
+
+            arrayList.add(Result.getString("Status_ID"));
+
+            arrayList.add(Result.getString("Status_Name"));
+            arrayList.add(Result.getString("Status_type"));
+        }
+        System.out.println("Done");
+        return arrayList;
+
+}
 
 
 
