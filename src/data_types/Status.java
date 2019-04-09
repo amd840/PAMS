@@ -3,32 +3,20 @@ package data_types;
 public class Status {
     private int Status_ID;
     private String Status_Name,
-    Status_type,
+    Status_Type,
     Description;
     
-    public Status(int Status_ID, String Status_Name, String Status_type, String Description) {
-    	if(Meth.var_valid(Status_Name,64)){
+    public Status(int Status_ID, String Status_Name, String Status_Type, String Description) {
+    	if(Meth.var_valid(Status_Name,64) && Meth.var_valid(Status_Type,64)){
     		this.Status_ID = Status_ID;
 			this.Status_Name = Status_Name;
-			this.Status_type = Status_type;
+			this.Status_Type = Status_Type;
 			this.Description = Description;
     	}
 		else{
 			System.out.println("Error... input invalid");
 		}
-	}
-    
-    public Status(int Status_ID, String Status_Name, String Description) {
-		if(Meth.var_valid(Status_Name,64)){
-			this.Status_ID = Status_ID;
-			this.Status_Name = Status_Name;
-			this.Status_type = null;
-			this.Description = Description;
-		}
-		else{
-			System.out.println("Error... input invalid");
-		}
-	}
+    }
     
     public String getDescription() {
 		return Description;
@@ -43,7 +31,7 @@ public class Status {
 	}
     
     public String getStatus_type() {
-		return Status_type;
+		return Status_Type;
 	}
     
     public void setDescription(String description) {
@@ -62,8 +50,12 @@ public class Status {
     	return false;
 	}
     
-    public void setStatus_type(String status_type) {
-		Status_type = status_type;
+    public boolean setStatus_type(String status_Type) {
+    	if(Meth.var_valid(status_Type,64)){
+		Status_Type = status_Type;
+		return true;
+	}
+	return false;
 	}
 }
 
@@ -74,7 +66,7 @@ public class Status {
 
     Status_Name     VARCHAR(64)     NOT NULL,
 
-    Status_type     TEXT,
+    Status_type     VARCHAR(64)     NOT NULL,
 
     Description     TEXT            NOT NULL,
 
