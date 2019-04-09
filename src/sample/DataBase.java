@@ -188,9 +188,46 @@ public class DataBase {
         System.out.println("Done");
         return arrayList;
 
-}
+	}
 
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///// login.... enter the password and username in the method to check if the user exist and the enter password is correct... null will be returned if password or username are wrong.
+    public Users U_Login(String username, String password) throws Exception{
+        PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Users WHERE UserName = '" + username + "';");
+        ResultSet Result =statement1.executeQuery();
+        Users u = null;
+        if (!Result.next())
+            throw new Exception("User doesnt exist");
+        
+        if(Result.getString("Hashed_PW").equals(password)){
+        	System.out.println("Login Success");
+        	u = new Users(Result);
+        }
+        return u;
+    }
+    ///// signup... it checks if the username or email is used before or not... if they are unique... user is created... true is returned if the signuo is sucessful... if it failed, false will be returned.
+    ///// note: a method to create an apropriate ID for a new user is needed before using this method.
+    public boolean U_SignUp(Users u) throws Exception{
+        PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Users WHERE UserName = '" + u.getUserName() + "';");
+        PreparedStatement statement2 = connection.prepareStatement("SELECT * FROM Users WHERE EMail = '" + u.getEMail() + "';");
+        ResultSet Result1 =statement1.executeQuery();
+        ResultSet Result2 =statement2.executeQuery();
+        if (!Result1.next()){
+        	if(!Result2.next()){
+        		u.addToDB(connection);
+        	}else{
+            	throw new Exception("Email already used");
+            	return false;
+        	}
+        }else{
+        	throw new Exception("user already exist");
+        	return false;
+        }
+    }
+    
+    public boolean addNewClinic(Clinics c,ArrayList<Clinic_Contact_Numbers> ccn) throws Exception{
 
+    }
 
 
 }
