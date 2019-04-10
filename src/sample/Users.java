@@ -9,10 +9,11 @@ public class Users {
     private String FName;
     private String Lname;
     private String date;
-    private int UID;
+    private int U_ID;
     private int typeID;
     private int statusID;
 
+    public Users(){}
     public Users( String userName,
              String hashPassword,
              String email,
@@ -28,24 +29,60 @@ public class Users {
         this.FName=FName;
         this.Lname=Lname;
         this.date=date;
-        this.UID=UID;
+        this.U_ID=UID;
         this.typeID=typeID;
         this.statusID=statusID;
     }
 
-    public int getUID() {
-        return UID;
+    public int getU_ID() {
+        return U_ID;
     }
 
     public String getDate() {
         return date;
     }
 
-    public int getTypeID() {
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setFName(String FName) {
+        this.FName = FName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setHashPassword(String hashPassword) {
+        this.hashPassword = hashPassword;
+    }
+
+    public void setLname(String lname) {
+        Lname = lname;
+    }
+
+    public void setStatusID(int statusID) {
+        this.statusID = statusID;
+    }
+
+    public void setTypeID(int typeID) {
+        this.typeID = typeID;
+    }
+
+    public void setUID(int UID) {
+        this.U_ID = UID;
+    }
+
+    public int getType_ID() {
         return typeID;
     }
 
-    public String getEmail() {
+    public String getEMail() {
         return email;
     }
 
@@ -53,7 +90,7 @@ public class Users {
         return FName;
     }
 
-    public String getLname() {
+    public String getLName() {
         return Lname;
     }
 
@@ -61,8 +98,12 @@ public class Users {
         return userName;
     }
 
-    public int getStatusID() {
+    public int getStatus_ID() {
         return statusID;
+    }
+
+    public String getReg_Date() {
+        return date;
     }
 
     public String getHashPassword() {

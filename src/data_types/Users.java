@@ -33,6 +33,18 @@ public class Users {
 		}
 	}
     
+    public Users() {
+  			this.U_ID = -1;
+  			this.UserName = null;
+  			this.FName = null;
+  			this.LName = null;
+  			this.Hashed_PW = null;
+  			this.EMail = null;
+  			this.Reg_Date = null;
+  			this.Type_ID = -1;
+  			this.Status_ID = -1;
+  	}
+    
     public Users(ResultSet r) {
 			try {
 				this.U_ID = Integer.parseInt(r.getString("U_ID"));
@@ -148,8 +160,12 @@ public class Users {
     public boolean addToDB(Connection connection){
     	PreparedStatement add;
 		try {
-			add = connection.prepareStatement("INSERT INTO Users () values ("+U_ID+",'"+UserName+"','"+FName+"','"+LName+"','"+Hashed_PW+"','"+EMail+"',CURRENT_TIMESTAMP,'"+Type_ID+"',1)");
+			add = connection.prepareStatement("INSERT INTO Users () values ("+U_ID+",'"+UserName+"','"+FName+"','"+LName+"','"+Hashed_PW+"','"+EMail+"',CURRENT_TIMESTAMP,"+Type_ID+","+Status_ID+");");
 			add.executeUpdate();
+			add = connection.prepareStatement("Select Reg_Date From Users WHERE U_ID = "+U_ID+";");
+			ResultSet r = add.executeQuery();
+			r.next();
+			Reg_Date = r.getDate("Reg_Date");
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

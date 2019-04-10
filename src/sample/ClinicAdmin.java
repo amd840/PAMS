@@ -53,21 +53,38 @@ public class ClinicAdmin extends Application {
         TableBox.setAlignment(Pos.CENTER);
 
 
-        TableColumn columnCourse = new TableColumn("Course");
-        columnCourse.setStyle("-fx-alignment: CENTER;");
-        columnCourse.setCellValueFactory(new PropertyValueFactory<>("Course"));
-        TableColumn columnCRN = new TableColumn("CRN");
-        columnCRN.setStyle("-fx-alignment: CENTER;");
-        columnCRN.setCellValueFactory(new PropertyValueFactory<>("CRN"));
+        TableColumn columnId = new TableColumn("U_ID");
+        columnId.setStyle("-fx-alignment: CENTER;");
+        columnId.setCellValueFactory(new PropertyValueFactory<>("U_ID"));
+        TableColumn columnUser = new TableColumn("UserName");
+        columnUser.setStyle("-fx-alignment: CENTER;");
+        columnUser.setCellValueFactory(new PropertyValueFactory<>("UserName"));
 
-        TableColumn columnDay = new TableColumn("Day");
-        columnDay.setCellValueFactory(new PropertyValueFactory<>("Day"));
-        columnDay.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnCredit = new TableColumn("Credit");
-        columnCredit.setCellValueFactory(new PropertyValueFactory<>("Credit"));
-        columnCredit.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnState = new TableColumn("State");
-        columnState.setCellValueFactory(new PropertyValueFactory<>("State"));
+        TableColumn columnFN = new TableColumn("FName");
+        columnFN.setCellValueFactory(new PropertyValueFactory<>("FName"));
+        columnFN.setStyle("-fx-alignment: CENTER;");
+        TableColumn columnLN = new TableColumn("LName");
+        columnLN.setCellValueFactory(new PropertyValueFactory<>("LName"));
+        columnLN.setStyle("-fx-alignment: CENTER;");
+
+        TableColumn columnPW = new TableColumn("Hashed_PW");
+        columnPW.setCellValueFactory(new PropertyValueFactory<>("Hashed_PW"));
+        columnPW.setStyle("-fx-alignment: CENTER;");
+        TableColumn columnEmail = new TableColumn("EMail");
+        columnEmail.setCellValueFactory(new PropertyValueFactory<>("EMail"));
+        columnEmail.setStyle("-fx-alignment: CENTER;");
+
+
+        TableColumn columnDate = new TableColumn("Reg_Date");
+        columnDate.setCellValueFactory(new PropertyValueFactory<>("Reg_Date"));
+        columnDate.setStyle("-fx-alignment: CENTER;");
+        TableColumn columnType = new TableColumn("Type_ID");
+        columnType.setCellValueFactory(new PropertyValueFactory<>("Type_ID"));
+        columnType.setStyle("-fx-alignment: CENTER;");
+
+
+        TableColumn columnState = new TableColumn("Status_ID");
+        columnState.setCellValueFactory(new PropertyValueFactory<>("Status_ID"));
         columnState.setStyle("-fx-alignment: CENTER;");
         ArrayList<Users> x1 = new ArrayList<>();
          x1 = Connecter.getUser();
@@ -89,12 +106,12 @@ public class ClinicAdmin extends Application {
        // Button btn3 = new Button("reset");
 
         //Add Columns and set their width
-        tableView.getColumns().addAll(columnCourse, columnCRN, columnDay, columnCredit, columnState);
-        columnCourse.setPrefWidth(100);
-        columnCRN.setPrefWidth(75);
-        columnDay.setPrefWidth(75);
-        columnCredit.setPrefWidth(100);
-        columnState.setPrefWidth(150);
+        tableView.getColumns().addAll(columnId,columnUser,columnFN,columnLN,columnPW,columnEmail,columnDate, columnType, columnState);
+        //columnCourse.setPrefWidth(100);
+        //columnCRN.setPrefWidth(75);
+        //columnDay.setPrefWidth(75);
+        //columnCredit.setPrefWidth(100);
+       // columnState.setPrefWidth(150);
 
         tableView.setPrefSize(500, 150);
 
@@ -155,7 +172,7 @@ public class ClinicAdmin extends Application {
         });*/
 
         //Setect the Term Action
-        Term.setOnAction((event) -> {
+        /*Term.setOnAction((event) -> {
 
             Login.Current_term = Integer.parseInt((String) Term.getSelectionModel().getSelectedItem());
             try {
@@ -167,19 +184,25 @@ public class ClinicAdmin extends Application {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
-        });
+        });*/
         //Add Clinics
-        /*
+
         try{
             tableView.getItems().clear();
             //Users user = Main.TheUser;
 
             DataBase admin = new DataBase();
+            Users user = admin.U_Login("a201","444");
+            tableView.getItems().addAll(user);
 
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+
+            // eXception & Errors
         }
 
 
-         */
+
 
         //reset CRN Text Field
         /*btn3.setOnAction((ActionEvent e) -> {
