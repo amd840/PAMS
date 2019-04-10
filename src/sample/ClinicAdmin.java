@@ -37,11 +37,11 @@ public class ClinicAdmin extends Application {
 
         // ...
 
-        Label Title = new Label("Add and Drop");
+        Label Title = new Label("Clinic Admin");
         Title.setFont(new Font(20));
         Title.setTextAlignment(TextAlignment.CENTER);
-        ObservableList<String> options = FXCollections.observableArrayList("182", "181", "173");
-        ComboBox<String> Term = new ComboBox<String>(options);
+        //ObservableList<String> options = FXCollections.observableArrayList("182", "181", "173");
+        //ComboBox<String> Term = new ComboBox<String>(options);
 
         //Term.setPromptText(Login.Current_term + "");
 
@@ -79,14 +79,14 @@ public class ClinicAdmin extends Application {
         if (x != null)
             tableView.getItems().addAll(x);
 
-        TextField[] T = new TextField[8];
-        for (int i = 0; i < T.length; i++)
+        //TextField[] T = new TextField[8];
+        /*for (int i = 0; i < T.length; i++)
             T[i] = new TextField();
-
+           */
         //Add Butttons
         Button btn1 = new Button("Submit");
-        Button btn2 = new Button("search");
-        Button btn3 = new Button("reset");
+       // Button btn2 = new Button("search");
+       // Button btn3 = new Button("reset");
 
         //Add Columns and set their width
         tableView.getColumns().addAll(columnCourse, columnCRN, columnDay, columnCredit, columnState);
@@ -117,7 +117,7 @@ public class ClinicAdmin extends Application {
         grid.add(btnB, 0, 0);
         grid.add(Title, 0, 1);
 
-        grid.add(Term, 0, 2);
+        //grid.add(Term, 0, 2);
         grid.add(TableBox, 0, 3);
         grid.add(grid2, 0, 4);
 
@@ -125,17 +125,17 @@ public class ClinicAdmin extends Application {
 
         grid4.add(new Label("Add Course CRN"), 0, 0);
 
-        grid5.setHgap(10);
+        //grid5.setHgap(10);
         grid6.setHgap(10);
-        for (int i = 0; i < T.length; i++)
+        /*for (int i = 0; i < T.length; i++)
             grid5.add(T[i], i, 0);
-
+*/
         grid6.add(btn1, 0, 0);
-        grid6.add(btn2, 1, 0);
-        grid6.add(btn3, 2, 0);
+        //grid6.add(btn2, 1, 0);
+       // grid6.add(btn3, 2, 0);
 
         grid3.add(grid4, 0, 0);
-        grid3.add(grid5, 0, 1);
+        //grid3.add(grid5, 0, 1);
         grid3.add(grid6, 0, 2);
 
         grid5.setPadding(new Insets(0, 10, 0, 5));
@@ -155,7 +155,7 @@ public class ClinicAdmin extends Application {
         });*/
 
         //Setect the Term Action
-        /*Term.setOnAction((event) -> {
+        Term.setOnAction((event) -> {
 
             Login.Current_term = Integer.parseInt((String) Term.getSelectionModel().getSelectedItem());
             try {
@@ -167,15 +167,26 @@ public class ClinicAdmin extends Application {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
-        });*/
+        });
+        //Add Clinics
+        /*
+        try{
+            tableView.getItems().clear();
+            //Users user = Main.TheUser;
 
+            DataBase admin = new DataBase();
+
+        }
+
+
+         */
 
         //reset CRN Text Field
-        btn3.setOnAction((ActionEvent e) -> {
+        /*btn3.setOnAction((ActionEvent e) -> {
             for (int i = 0; i < T.length; i++)
                 T[i].clear();
         });
-
+*/
         //Set the message that will show the errors
         Alert message = new Alert(Alert.AlertType.INFORMATION);
         message.setHeaderText(null);

@@ -166,7 +166,7 @@ public class DataBase {
         if (!Result.next())
             throw new Exception("User doesnt exist");
         while(Result.next()){
-        	if(Result.getString("Hashed_PW").
+        	//if(Result.getString("Hashed_PW"))
             System.out.println(Result.getString("Status_ID"));
             System.out.println(" ");
 
