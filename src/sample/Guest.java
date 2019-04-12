@@ -1,27 +1,30 @@
 package sample;
 
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.scene.input.MouseEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
+import java.sql.*;
+import javax.swing.JButton;
+import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-
-public class ClinicAdmin extends Application {
+public class Guest extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -35,35 +38,9 @@ public class ClinicAdmin extends Application {
         HBox btnB = new HBox();
         btnB.getChildren().add(back);
 
-
-
-        //...... ADDING COMPONANT
-        Label id = new Label("Clinic ID");
-        Label profile = new Label("Clinic Profile");
-        Label services = new Label("Clinic Services");
-        Label location = new Label("Clinic Location");
-        Label website = new Label("Clinic Website");
-        Label email = new Label("Clinic Email");
-        Label rating = new Label("Clinic Rating");
-        Label manid = new Label("Clinic ManID");
-        Label status = new Label("Status ID");
-
-        TextField tid = new TextField();
-        TextField tprofile = new TextField();
-        TextField tservices = new TextField();
-        TextField tlocation = new TextField();
-        TextField twebsite = new TextField();
-        TextField temail = new TextField();
-        TextField trating = new TextField();
-        TextField tmanid = new TextField();
-        TextField tstatus = new TextField();
-
-        Button add = new Button("Add Clinic");
-
-
         // ...
 
-        Label Title = new Label("Clinic Admin");
+        Label Title = new Label("PAMS");
         Title.setFont(new Font(20));
         Title.setTextAlignment(TextAlignment.CENTER);
         //ObservableList<String> options = FXCollections.observableArrayList("182", "181", "173");
@@ -79,39 +56,44 @@ public class ClinicAdmin extends Application {
         TableBox.setAlignment(Pos.CENTER);
 
 
-            TableColumn columnId = new TableColumn("C_ID");
+        TableColumn columnId = new TableColumn("U_ID");
         columnId.setStyle("-fx-alignment: CENTER;");
-        columnId.setCellValueFactory(new PropertyValueFactory<>("C_ID"));
-        TableColumn columnUser = new TableColumn("_Profile");
+        columnId.setCellValueFactory(new PropertyValueFactory<>("U_ID"));
+        TableColumn columnUser = new TableColumn("UserName");
         columnUser.setStyle("-fx-alignment: CENTER;");
-        columnUser.setCellValueFactory(new PropertyValueFactory<>("_Profile"));
+        columnUser.setCellValueFactory(new PropertyValueFactory<>("UserName"));
 
-        TableColumn columnFN = new TableColumn("Services");
-        columnFN.setCellValueFactory(new PropertyValueFactory<>("Services"));
+        TableColumn columnFN = new TableColumn("FName");
+        columnFN.setCellValueFactory(new PropertyValueFactory<>("FName"));
         columnFN.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnLN = new TableColumn("Location");
-        columnLN.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        TableColumn columnLN = new TableColumn("LName");
+        columnLN.setCellValueFactory(new PropertyValueFactory<>("LName"));
         columnLN.setStyle("-fx-alignment: CENTER;");
 
-        TableColumn columnPW = new TableColumn("EMail");
-        columnPW.setCellValueFactory(new PropertyValueFactory<>("EMail"));
+        TableColumn columnPW = new TableColumn("Hashed_PW");
+        columnPW.setCellValueFactory(new PropertyValueFactory<>("Hashed_PW"));
         columnPW.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnEmail = new TableColumn("Rating");
-        columnEmail.setCellValueFactory(new PropertyValueFactory<>("Rating"));
+        TableColumn columnEmail = new TableColumn("EMail");
+        columnEmail.setCellValueFactory(new PropertyValueFactory<>("EMail"));
         columnEmail.setStyle("-fx-alignment: CENTER;");
 
 
-        TableColumn columnDate = new TableColumn("Clinic_ManID");
-        columnDate.setCellValueFactory(new PropertyValueFactory<>("Clinic_ManID"));
+        TableColumn columnDate = new TableColumn("Reg_Date");
+        columnDate.setCellValueFactory(new PropertyValueFactory<>("Reg_Date"));
         columnDate.setStyle("-fx-alignment: CENTER;");
-
+        TableColumn columnType = new TableColumn("Type_ID");
+        columnType.setCellValueFactory(new PropertyValueFactory<>("Type_ID"));
+        columnType.setStyle("-fx-alignment: CENTER;");
 
 
         TableColumn columnState = new TableColumn("Status_ID");
         columnState.setCellValueFactory(new PropertyValueFactory<>("Status_ID"));
         columnState.setStyle("-fx-alignment: CENTER;");
         ArrayList<Users> x1 = new ArrayList<>();
-        /* x1 = Connecter.getUser();
+
+       //add element in the table
+
+       /* x1 = Connecter.getUser();
 
         Users[] x = new Users[x1.size()];
         for(int i=0 ; i<x1.size();i++)
@@ -119,33 +101,30 @@ public class ClinicAdmin extends Application {
 
         if (x != null)
             tableView.getItems().addAll(x);
-*/
+        */
+
+
         //TextField[] T = new TextField[8];
         /*for (int i = 0; i < T.length; i++)
             T[i] = new TextField();
            */
         //Add Butttons
-        Button btn1 = new Button("Submit");
-       // Button btn2 = new Button("search");
-       // Button btn3 = new Button("reset");
+        Button btn1 = new Button("Register");
+        // Button btn2 = new Button("search");
+        // Button btn3 = new Button("reset");
 
         //Add Columns and set their width
-        tableView.getColumns().addAll(columnId,columnUser,columnFN,columnLN,columnPW,columnEmail,columnDate, columnState);
+        tableView.getColumns().addAll(columnId,columnUser,columnFN,columnLN,columnPW,columnEmail,columnDate, columnType, columnState);
         //columnCourse.setPrefWidth(100);
         //columnCRN.setPrefWidth(75);
         //columnDay.setPrefWidth(75);
         //columnCredit.setPrefWidth(100);
-       // columnState.setPrefWidth(150);
+        // columnState.setPrefWidth(150);
 
-        tableView.setPrefSize(640, 250);
+        tableView.setPrefSize(500, 150);
 
 
         //Adding the Main Drid for Coordinate the Page
-        GridPane MainGrid = new GridPane();
-        MainGrid.setAlignment(Pos.CENTER);
-        MainGrid.setHgap(30);
-
-
         GridPane grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setVgap(20);
@@ -154,50 +133,31 @@ public class ClinicAdmin extends Application {
         GridPane grid2 = new GridPane();
         grid2.setAlignment(Pos.CENTER);
         GridPane grid3 = new GridPane();
-        MainGrid.add(grid, 1, 0);
-        MainGrid.add(grid3, 0, 0);
 
-        grid3.add(id,0,0);
-        grid3.add(tid,1,0);
 
-        grid3.add(profile,0,1);
-        grid3.add(tprofile,1,1);
-
-        grid3.add(services,0,2);
-        grid3.add(tservices,1,2);
-
-        grid3.add(location,0,3);
-        grid3.add(tlocation,1,3);
-
-        grid3.add(website,0,4);
-        grid3.add(twebsite,1,4);
-
-        grid3.add(email,0,5);
-        grid3.add(temail,1,5);
-
-        grid3.add(rating,0,6);
-        grid3.add(trating,1,6);
-
-        grid3.add(manid,0,7);
-        grid3.add(tmanid,1,7);
-
-        grid3.add(status,0,8);
-        grid3.add(tstatus,1,8);
-        grid3.add(add,0,9);
-
-        //grid.add(btnB, 1, 0);
-        //grid.add(Title, 1, 0);
+        grid.add(btnB, 0, 0);
+        grid.add(Title, 0, 1);
 
         //grid.add(Term, 0, 2);
-        grid.add(TableBox, 1, 0);
-        grid.add(grid2, 1, 1);
+        grid.add(TableBox, 0, 2);
+        grid.add(grid2, 0, 3);
 
         grid3.setVgap(10);
-        grid3.setHgap(10);
 
 
+        //grid5.setHgap(10);
+        /*for (int i = 0; i < T.length; i++)
+            grid5.add(T[i], i, 0);
+*/
+        //grid6.add(btn1, 0, 0);
+        //grid6.add(btn2, 1, 0);
+        // grid6.add(btn3, 2, 0);
 
-        grid.add(btn1, 1, 2);
+        //grid3.add(grid5, 0, 1);
+        //grid3.add(btn1, 0, 2);
+
+
+        grid.add(btn1, 0, 5);
         grid.setPadding(new Insets(10, 10, 10, 10));
 
         //Set Back Action
@@ -317,8 +277,8 @@ public class ClinicAdmin extends Application {
 
         });*/
 
-        primaryStage.setTitle("Clinics");
-        primaryStage.setScene(new Scene(MainGrid, 1000, 450));
+        primaryStage.setTitle("ADD and DROP SYSTEM");
+        primaryStage.setScene(new Scene(grid, 550, 450));
         primaryStage.show();
 
     }

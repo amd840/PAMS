@@ -21,7 +21,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 
-public class ClinicAdmin extends Application {
+public class Clinics extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -79,7 +79,7 @@ public class ClinicAdmin extends Application {
         TableBox.setAlignment(Pos.CENTER);
 
 
-            TableColumn columnId = new TableColumn("C_ID");
+        TableColumn columnId = new TableColumn("C_ID");
         columnId.setStyle("-fx-alignment: CENTER;");
         columnId.setCellValueFactory(new PropertyValueFactory<>("C_ID"));
         TableColumn columnUser = new TableColumn("_Profile");
@@ -126,8 +126,8 @@ public class ClinicAdmin extends Application {
            */
         //Add Butttons
         Button btn1 = new Button("Submit");
-       // Button btn2 = new Button("search");
-       // Button btn3 = new Button("reset");
+        // Button btn2 = new Button("search");
+        // Button btn3 = new Button("reset");
 
         //Add Columns and set their width
         tableView.getColumns().addAll(columnId,columnUser,columnFN,columnLN,columnPW,columnEmail,columnDate, columnState);
@@ -135,7 +135,7 @@ public class ClinicAdmin extends Application {
         //columnCRN.setPrefWidth(75);
         //columnDay.setPrefWidth(75);
         //columnCredit.setPrefWidth(100);
-       // columnState.setPrefWidth(150);
+        // columnState.setPrefWidth(150);
 
         tableView.setPrefSize(640, 250);
 
