@@ -1,25 +1,32 @@
 package data_types;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.math.BigDecimal;
+
 public class Clinics {
-	    private int C_ID;
-	    private String Profile,
+	    private int C_ID,
+	    Clinic_ManID,
+	    Status_ID;
+	    private String _Profile,
 	    Services,
 	    Location,
 	    Website,
-	    EMail,
-	    Clinic_ManID,
-	    Status_ID;
-	    private double Rating;
+	    EMail;
+
+	    private BigDecimal Rating;
 	    
-	    public Clinics(int C_ID, String Profile, String Services, String Location, String Website, String EMail, double Rating, String Clinic_ManID, String Status_ID) {
+	    public Clinics(int C_ID, String Profile, String Services, String Location, String Website, String EMail, BigDecimal Rating, int Clinic_ManID, int Status_ID) {
 	    	if(Meth.var_valid(EMail,64)){
 		    	this.C_ID = C_ID;
-		    	this.Profile = Profile;
+		    	this._Profile = Profile;
 		    	this.Services = Services;
 		    	this.Location = Location;
 		    	this.Website = Website;
 		    	this.EMail = EMail;
-		    	this.Rating = Meth.round(Rating, 2);
+		    	this.Rating = Rating;
 		    	this.Clinic_ManID = Clinic_ManID;
 		    	this.Status_ID = Status_ID;
 	    	}else{
@@ -27,27 +34,39 @@ public class Clinics {
 			}
 		}
 	    
-	    public Clinics(int C_ID, String Profile, String Services, String Location,  String EMail, String Clinic_ManID, String Status_ID) {
+	    public Clinics(int C_ID, String Profile, String Services, String Location,  String EMail, int Clinic_ManID, int Status_ID) {
 	    	if(Meth.var_valid(EMail,64)){
 		    	this.C_ID = C_ID;
-		    	this.Profile = Profile;
+		    	this._Profile = Profile;
 		    	this.Services = Services;
 		    	this.Location = Location;
 		    	this.Website = null;
 		    	this.EMail = EMail;
-		    	this.Rating = -1;
+		    	this.Rating = null;
 		    	this.Clinic_ManID = Clinic_ManID;
 		    	this.Status_ID = Status_ID;
 	    	}else{
 				System.out.println("Error... input invalid");
 			}
+		}
+	    
+	    public Clinics() {
+		    	this.C_ID = -1;
+		    	this._Profile = null;
+		    	this.Services = null;
+		    	this.Location = null;
+		    	this.Website = null;
+		    	this.EMail = null;
+		    	this.Rating = null;
+		    	this.Clinic_ManID = -1;
+		    	this.Status_ID = -1;
 		}
 	    
 	    public int getC_ID() {
 			return C_ID;
 		}
 	    
-	    public String getClinic_ManID() {
+	    public int getClinic_ManID() {
 			return Clinic_ManID;
 		}
 	    
@@ -59,11 +78,11 @@ public class Clinics {
 			return Location;
 		}
 	    
-	    public String getProfile() {
-			return Profile;
+	    public String get_Profile() {
+			return _Profile;
 		}
 	    
-	    public double getRating() {
+	    public BigDecimal getRating() {
 			return Rating;
 		}
 	    
@@ -71,7 +90,7 @@ public class Clinics {
 			return Services;
 		}
 	    
-	    public String getStatus_ID() {
+	    public int getStatus_ID() {
 			return Status_ID;
 		}
 	    
@@ -83,7 +102,7 @@ public class Clinics {
 			C_ID = c_ID;
 		}
 	    
-	    public void setClinic_ManID(String clinic_ManID) {
+	    public void setClinic_ManID(int clinic_ManID) {
 			Clinic_ManID = clinic_ManID;
 		}
 	    
@@ -99,19 +118,19 @@ public class Clinics {
 			Location = location;
 		}
 	    
-	    public void setProfile(String profile) {
-			Profile = profile;
+	    public void set_Profile(String profile) {
+			_Profile = profile;
 		}
 	    
-	    public void setRating(double rating) {
-			Rating = Meth.round(rating, 2);
+	    public void setRating(BigDecimal rating) {
+			Rating = rating;
 		}
 	    
 	    public void setServices(String services) {
 			Services = services;
 		}
 	    
-	    public void setStatus_ID(String status_ID) {
+	    public void setStatus_ID(int status_ID) {
 			Status_ID = status_ID;
 		}
 	    
@@ -119,6 +138,60 @@ public class Clinics {
 			Website = website;
 		}
 
+	    public boolean addToDB(Connection connect){
+	    	PreparedStatement add;
+			try {
+				add = connect.prepareStatement("Select C_ID From Clinics WHERE C_ID = "+C_ID+";");
+				ResultSet r = add.executeQuery();
+				if(r.next()){
+					System.out.println("C_ID already taken.");
+					return false;
+				}
+				add = connect.prepareStatement("Select EMail From Clinics WHERE EMail = '"+EMail+"';");
+				r = add.executeQuery();
+				if(r.next()){
+					System.out.println("EMail already taken.");
+					return false;
+				}
+				add = connect.prepareStatement("INSERT INTO Clinics () values ("+C_ID+",'"+_Profile+"','"+Services+"','"+Location+"','"+Website+"','"+EMail+"',"+Rating+","+Clinic_ManID+","+Status_ID+");");
+				add.executeUpdate();
+				return true;
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return false;
+			} 
+	    }
+	    
+	    public static void toStringClinics(Connection connect,boolean pick) throws Exception{
+	    	PreparedStatement statement;
+	    	if(pick){
+	    		statement = connect.prepareStatement("SELECT * FROM Clinics WHERE Status_ID = 0;");
+	    	}else{
+	    		statement = connect.prepareStatement("SELECT * FROM Clinics;");
+	    	}
+	        
+			ResultSet Result = statement.executeQuery();
+
+	        if (!Result.next())
+	        	System.out.println("Empty Set");
+	        do{
+	            System.out.println("C_ID: " + Result.getInt("C_ID"));
+
+	            System.out.println("Profile: " + Result.getString("_Profile"));
+	            
+	            System.out.println("Location: " + Result.getString("Location"));
+	            
+	            System.out.println("E-Mail: " + Result.getString("EMail"));
+	            
+	            System.out.println("Website: " + Result.getString("Website"));
+	            
+	            System.out.println("Rating: " + Result.getBigDecimal("Rating"));
+	            
+	        }while(Result.next());
+	        System.out.println("Done");
+	        
+	    }
 }
 
 

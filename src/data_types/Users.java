@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Users {
     private int U_ID;			//INT             NOT NULL,
@@ -50,12 +51,21 @@ public class Users {
 				this.U_ID = Integer.parseInt(r.getString("U_ID"));
 				this.UserName = r.getString("UserName");
 				this.FName = r.getString("FName");
-				this.LName = r.getString("FLName");
+				this.LName = r.getString("LName");
 				this.Hashed_PW = r.getString("Hashed_PW");
 				this.EMail = r.getString("EMail");
 				this.Reg_Date = r.getDate("Reg_Date");
 				this.Type_ID = Integer.parseInt(r.getString("Type_ID"));
 				this.Status_ID = Integer.parseInt(r.getString("Status_ID"));
+				/*u.setU_ID(r.getInt("U_ID"));
+				u.setUserName(r.getString("UserName"));
+				u.setFName(r.getString("FName"));
+				u.setLName(r.getString("LName"));
+				u.setHashed_PW(r.getString("Hashed_PW"));
+				u.setEMail(r.getString("EMail"));
+				u.setReg_Date(r.getDate("Reg_Date"));
+				u.setType_ID(r.getInt("Type_ID"));
+				u.setStatus_ID(r.getInt("Status_ID"));*/
 			} catch (NumberFormatException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -160,10 +170,28 @@ public class Users {
     public boolean addToDB(Connection connection){
     	PreparedStatement add;
 		try {
+			add = connection.prepareStatement("Select U_ID From Users WHERE U_ID = "+U_ID+";");
+			ResultSet r = add.executeQuery();
+			if(r.next()){
+				System.out.println("U_ID already taken.");
+				return false;
+			}
+			add = connection.prepareStatement("Select UserName From Users WHERE UserName = '"+UserName+"';");
+			r = add.executeQuery();
+			if(r.next()){
+				System.out.println("UserName already taken.");
+				return false;
+			}
+			add = connection.prepareStatement("Select EMail From Users WHERE EMail = '"+EMail+"';");
+			r = add.executeQuery();
+			if(r.next()){
+				System.out.println("EMail already taken.");
+				return false;
+			}
 			add = connection.prepareStatement("INSERT INTO Users () values ("+U_ID+",'"+UserName+"','"+FName+"','"+LName+"','"+Hashed_PW+"','"+EMail+"',CURRENT_TIMESTAMP,"+Type_ID+","+Status_ID+");");
 			add.executeUpdate();
 			add = connection.prepareStatement("Select Reg_Date From Users WHERE U_ID = "+U_ID+";");
-			ResultSet r = add.executeQuery();
+			r = add.executeQuery();
 			r.next();
 			Reg_Date = r.getDate("Reg_Date");
 			return true;
@@ -172,6 +200,32 @@ public class Users {
 			e.printStackTrace();
 			return false;
 		} 
+    }
+    
+    public static void toStringClinicAdminUsers(Connection connect) throws Exception{
+        PreparedStatement statement1 = connect.prepareStatement("SELECT U_ID,UserName,FName,LName,Email From Users WHERE Type_ID = 1;");
+        ResultSet Result = statement1.executeQuery();
+
+        System.out.println("U_ID\t\tUserName\tName\t\t\t\tEMail");
+        if (!Result.next())
+            throw new Exception("There is no Users");
+        do{
+            System.out.print(Result.getString("U_ID"));
+            System.out.print("\t\t");
+
+            System.out.print(Result.getString("UserName"));
+            System.out.print("\t\t");
+
+            System.out.print(Result.getString("FName"));
+            System.out.print(" ");
+
+            System.out.print(Result.getString("LName"));
+            System.out.print("\t\t");
+            
+            System.out.println(Result.getString("EMail"));
+        }while(Result.next());
+        System.out.println("Done");
+        
     }
     
 }

@@ -1,16 +1,20 @@
 package data_types;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public class User_Contact_Numbers {
-	private int Number,
-	U_ID,
-	Order;
-	private String Type;
+	private int U_ID,
+	_Order;
+	private String Number,Type;
 	
-	public User_Contact_Numbers(int Number, int U_ID, String Type, int Order) {
+	public User_Contact_Numbers(String Number, int U_ID, String Type, int _Order) {
 		if(Meth.var_valid(Type,32)){
 			this.Number = Number;
 			this.U_ID = U_ID;
-			this.Order = Order;
+			this._Order = _Order;
 			this.Type = Type;
 		}
 		else{
@@ -18,19 +22,41 @@ public class User_Contact_Numbers {
 		}
 	}
 	
-	public User_Contact_Numbers(int Number, int U_ID, int Order) {
-		this.Number = Number;
-		this.U_ID = U_ID;
-		this.Order = Order;
+	public User_Contact_Numbers(User_Contact_Numbers u) {
+		this.Number = u.getNumber();
+		this.U_ID = u.getU_ID();
+		this._Order = u.getOrder();
+		this.Type = u.getType();
+	}
+	
+	public User_Contact_Numbers(ResultSet r) throws NumberFormatException, SQLException {
+		this.Number = r.getString("Number");
+		this.U_ID = Integer.parseInt(r.getString("U_ID"));
+		this._Order = Integer.parseInt(r.getString("_Order"));
+		this.Type = r.getString("Type");
+	}
+	
+	
+	public User_Contact_Numbers() {
+		this.Number = null;
+		this.U_ID = -1;
+		this._Order = -1;
 		this.Type = null;
 	}
 	
-	public int getNumber() {
+	public User_Contact_Numbers(String Number, int U_ID, int _Order) {
+		this.Number = Number;
+		this.U_ID = U_ID;
+		this._Order = _Order;
+		this.Type = null;
+	}
+	
+	public String getNumber() {
 		return Number;
 	}
 	
 	public int getOrder() {
-		return Order;
+		return _Order;
 	}
 	
 	public String getType() {
@@ -41,12 +67,12 @@ public class User_Contact_Numbers {
 		return U_ID;
 	}
 	
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		Number = number;
 	}
 	
-	public void setOrder(int order) {
-		Order = order;
+	public void set_Order(int order) {
+		_Order = order;
 	}
 	
 	public boolean setType(String type) {
@@ -60,12 +86,31 @@ public class User_Contact_Numbers {
 	public void setU_ID(int u_ID) {
 		U_ID = u_ID;
 	}
+	
+    public boolean addToDB(Connection connection){
+    	PreparedStatement add;
+		try {
+			add = connection.prepareStatement("Select U_ID From User_Contact_Numbers WHERE U_ID = "+U_ID+" AND Number = '" + Number + "';");
+			ResultSet r = add.executeQuery();
+			if(r.next()){
+				System.out.println("U_ID/Number combination already exists.");
+				return false;
+			}
+			add = connection.prepareStatement("INSERT INTO User_Contact_Numbers () values ('"+Number+"','"+U_ID+"','"+Type+"',"+_Order+");");
+			add.executeUpdate();
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} 
+    }
 }
 
 
 /* CREATE table User_Contact_Numbers(
  
-   Number          INT             NOT NULL,
+   Number           VARCHAR(16)     NOT NULL,
 
     U_ID            INT             NOT NULL,
 

@@ -1,5 +1,10 @@
 package data_types;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
 public class Status {
     private int Status_ID;
     private String Status_Name,
@@ -57,6 +62,25 @@ public class Status {
 	}
 	return false;
 	}
+    
+    public static void toStringStatus(Connection connect) throws Exception{
+        PreparedStatement statement1 = connect.prepareStatement("SELECT * FROM Status;");
+        ResultSet Result =statement1.executeQuery();
+
+        if (!Result.next())
+            throw new Exception("There is no input");
+        do{
+            System.out.println("Status ID: "+Result.getString("Status_ID"));
+
+            System.out.println("Status Name: "+Result.getString("Status_Name"));
+
+            System.out.println("Status Type: "+Result.getString("Status_type"));
+
+            System.out.println("Discription: "+Result.getString("Description"));
+            
+            System.out.println("");
+        }while(Result.next());
+    }
 }
 
 
