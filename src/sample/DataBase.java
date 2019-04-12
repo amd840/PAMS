@@ -1,6 +1,13 @@
 package sample;
+import data_types.Clinic_Contact_Numbers;
+import data_types.Clinics;
+
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class DataBase {
 
@@ -189,6 +196,118 @@ public class DataBase {
         return arrayList;
 
 	}
+    public ArrayList<Clinics> ClinicAdd(Connection connect, Scanner kb){
+        boolean main_loop = true;
+        boolean pass = true;
+        Pattern p1 = Pattern.compile("[^0-9]");
+        data_types.Clinics c = new Clinics();
+        String temp = null;
+        boolean hasContact;
+        int contactCount = 0;
+        LinkedList<Clinic_Contact_Numbers> contacts = new LinkedList<Clinic_Contact_Numbers>();
+
+        while(main_loop){
+            try {
+
+                System.out.print("\nplease enter clinic  profile (including clinic name):");
+                kb.nextLine();
+                c.set_Profile(kb.nextLine());
+                System.out.print("\nplease enter clinic services:");
+                c.setServices(kb.nextLine());
+                System.out.print("\nplease enter the clinic location:");
+                c.setLocation(kb.nextLine());
+                System.out.print("\nplease enter the clinic Web (optional, type \"null\" if clinic doesnt have):");
+                temp =kb.nextLine();
+                if(!temp.equals("null")){
+                    c.setWebsite(temp);
+                }
+                System.out.print("\nplease enter the clinic official customer support E-mail:");
+                c.setEMail(kb.next());
+                c.setStatus_ID(0);
+                System.out.print("\nList of All Clinic Admins, Please enter the C_ID of the desired Clinic admin to have control rights on the clinic:-\n\n");
+                data_types.Users.toStringClinicAdminUsers(connect);
+                c.setClinic_ManID(kb.nextInt());
+                System.out.println("Does the clinic have any contact numbers? (y/n)");
+                hasContact = Y_N(kb);
+                Clinic_Contact_Numbers tempContact = new Clinic_Contact_Numbers();
+
+                while(hasContact){
+                    System.out.print("Please enter contact number:");
+                    pass = true;
+                    while(pass){
+                        tempContact.setNumber(kb.next());
+                        pass = p1.matcher(tempContact.getNumber()).find();
+                        if(pass){
+                            System.out.print("wrong input\nPlease enter contact number:");
+                        }
+                    }
+                    System.out.print("Please enter contact type (mobile/landline/fax etc.):");
+                    tempContact.setType(kb.next());
+                    contactCount += 1;
+                    tempContact.set_Order(contactCount);
+                    contacts.add(new Clinic_Contact_Numbers(tempContact));
+                    System.out.print("Want to add more contacts? (y/n)");
+                    hasContact = Y_N(kb);
+                }
+
+                c.setRating(new BigDecimal(0));
+                PreparedStatement ps1 = connect.prepareStatement("SELECT MAX(C_ID) From Clinics;");
+                ResultSet rs1 = ps1.executeQuery();
+
+                if(!rs1.next())
+                    c.setC_ID(rs1.getInt("MAX(C_ID)") + 1);
+                else
+                    c.setC_ID(1);
+
+                pass = c.addToDB(connect);
+
+                for(int i=0; i<contactCount;i++){
+                    contacts.get(i).setClinic_ID(c.getC_ID());
+                    pass = pass & contacts.get(i).addToDB(connect);
+                }
+
+                //"INSERT INTO Users () values ("+users.getUID()+",'"+users.getUserName()+"','"+users.getFName()+"','"+users.getLname()+"','"+users.getHashPassword()+"','"+users.getEmail()+"',CURRENT_TIMESTAMP,'"+users.getTypeID()+"',1)"
+                main_loop = false;
+                while(!pass){
+                    System.out.print("What do you want to do?\n<1> Change EMail\n<2> Start over\n<3> Exit Signup\n");
+                    int x = kb.nextInt();
+                    switch(x){
+                        case 1:
+                            System.out.print("\nplease enter your EMail:");
+                            c.setEMail(kb.next());
+                            break;
+                        case 2:
+                            main_loop = true;
+                            pass = true;
+                            break;
+                        case 3:
+                            main_loop = false;
+                            pass = true;
+                            break;
+                    };
+
+
+                }
+            }catch(Exception e){
+                System.out.println("Error ------"+e.getMessage());
+                System.out.println("\ntry again? (y/n)");
+                main_loop = Y_N(kb);
+            }
+        }
+        return null;
+    }
+    public static boolean Y_N(Scanner kb){
+        while(true){
+            String k = kb.next();
+            if(k.equals("n")){
+                return false;
+            }else if(k.equals("y")){
+                return true;
+            }else{
+                System.out.println("Wrong Input.");
+            }
+        }
+    }
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///// login.... enter the password and username in the method to check if the user exist and the enter password is correct... null will be returned if password or username are wrong.

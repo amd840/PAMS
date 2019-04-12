@@ -79,7 +79,7 @@ public class ClinicAdmin extends Application {
         TableBox.setAlignment(Pos.CENTER);
 
 
-            TableColumn columnId = new TableColumn("C_ID");
+        TableColumn columnId = new TableColumn("C_ID");
         columnId.setStyle("-fx-alignment: CENTER;");
         columnId.setCellValueFactory(new PropertyValueFactory<>("C_ID"));
         TableColumn columnUser = new TableColumn("_Profile");

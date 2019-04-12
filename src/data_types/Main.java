@@ -14,12 +14,20 @@ public class Main {
 		boolean loop = true;
 		//Statement state;
 		
-		String url = "jdbc:mysql://localhost:3306/ICS_324_Project";                             
+		String url = "jdbc:mysql://localhost:3306/ICS_324_Project";
+		String url5 = "jdbc:mysql://db4free.net:3306/ics324";
+
 		String user = "root";
+		String user1 = "amd840";
+
 		String pass = "Mot1mot2fir3@";
+		String pass1 = "asd123123";
+
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			connect = DriverManager.getConnection(url, user, pass);
+			//connect = DriverManager.getConnection(url, user, pass);
+			connect = DriverManager.getConnection(url5, user1, pass1);
+
 			//state = connect.createStatement();
 		}catch(Exception e){
 			System.out.println("Error -"+e.getMessage());

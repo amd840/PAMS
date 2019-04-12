@@ -1,5 +1,6 @@
 package sample;
 
+import data_types.Clinics;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -56,40 +57,58 @@ public class Guest extends Application {
         TableBox.setAlignment(Pos.CENTER);
 
 
-        TableColumn columnId = new TableColumn("U_ID");
+        TableColumn columnId = new TableColumn("C_ID");
         columnId.setStyle("-fx-alignment: CENTER;");
-        columnId.setCellValueFactory(new PropertyValueFactory<>("U_ID"));
-        TableColumn columnUser = new TableColumn("UserName");
+        columnId.setCellValueFactory(new PropertyValueFactory<>("C_ID"));
+        TableColumn columnUser = new TableColumn("_Profile");
         columnUser.setStyle("-fx-alignment: CENTER;");
-        columnUser.setCellValueFactory(new PropertyValueFactory<>("UserName"));
+        columnUser.setCellValueFactory(new PropertyValueFactory<>("_Profile"));
 
-        TableColumn columnFN = new TableColumn("FName");
-        columnFN.setCellValueFactory(new PropertyValueFactory<>("FName"));
+        TableColumn columnFN = new TableColumn("Services");
+        columnFN.setCellValueFactory(new PropertyValueFactory<>("Services"));
         columnFN.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnLN = new TableColumn("LName");
-        columnLN.setCellValueFactory(new PropertyValueFactory<>("LName"));
+        TableColumn columnLN = new TableColumn("Location");
+        columnLN.setCellValueFactory(new PropertyValueFactory<>("Location"));
         columnLN.setStyle("-fx-alignment: CENTER;");
 
-        TableColumn columnPW = new TableColumn("Hashed_PW");
-        columnPW.setCellValueFactory(new PropertyValueFactory<>("Hashed_PW"));
+        TableColumn columnPW = new TableColumn("EMail");
+        columnPW.setCellValueFactory(new PropertyValueFactory<>("EMail"));
         columnPW.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnEmail = new TableColumn("EMail");
-        columnEmail.setCellValueFactory(new PropertyValueFactory<>("EMail"));
+        TableColumn columnEmail = new TableColumn("Rating");
+        columnEmail.setCellValueFactory(new PropertyValueFactory<>("Rating"));
         columnEmail.setStyle("-fx-alignment: CENTER;");
 
 
-        TableColumn columnDate = new TableColumn("Reg_Date");
-        columnDate.setCellValueFactory(new PropertyValueFactory<>("Reg_Date"));
+        TableColumn columnDate = new TableColumn("Clinic_ManID");
+        columnDate.setCellValueFactory(new PropertyValueFactory<>("Clinic_ManID"));
         columnDate.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnType = new TableColumn("Type_ID");
-        columnType.setCellValueFactory(new PropertyValueFactory<>("Type_ID"));
-        columnType.setStyle("-fx-alignment: CENTER;");
+
 
 
         TableColumn columnState = new TableColumn("Status_ID");
         columnState.setCellValueFactory(new PropertyValueFactory<>("Status_ID"));
         columnState.setStyle("-fx-alignment: CENTER;");
         ArrayList<Users> x1 = new ArrayList<>();
+        /* x1 = Connecter.getUser();
+
+        Users[] x = new Users[x1.size()];
+        for(int i=0 ; i<x1.size();i++)
+            x[i]=x1.get(i);
+
+        if (x != null)
+            tableView.getItems().addAll(x);
+*/
+        //TextField[] T = new TextField[8];
+        /*for (int i = 0; i < T.length; i++)
+            T[i] = new TextField();
+           */
+        //Add Butttons
+        Button btn1 = new Button("Submit");
+        // Button btn2 = new Button("search");
+        // Button btn3 = new Button("reset");
+
+        //Add Columns and set their width
+        tableView.getColumns().addAll(columnId,columnUser,columnFN,columnLN,columnPW,columnEmail,columnDate, columnState);
 
        //add element in the table
 
@@ -109,12 +128,10 @@ public class Guest extends Application {
             T[i] = new TextField();
            */
         //Add Butttons
-        Button btn1 = new Button("Register");
         // Button btn2 = new Button("search");
         // Button btn3 = new Button("reset");
 
         //Add Columns and set their width
-        tableView.getColumns().addAll(columnId,columnUser,columnFN,columnLN,columnPW,columnEmail,columnDate, columnType, columnState);
         //columnCourse.setPrefWidth(100);
         //columnCRN.setPrefWidth(75);
         //columnDay.setPrefWidth(75);
@@ -135,12 +152,11 @@ public class Guest extends Application {
         GridPane grid3 = new GridPane();
 
 
-        grid.add(btnB, 0, 0);
-        grid.add(Title, 0, 1);
+        grid.add(Title, 0, 0);
 
         //grid.add(Term, 0, 2);
-        grid.add(TableBox, 0, 2);
-        grid.add(grid2, 0, 3);
+        grid.add(TableBox, 0, 1);
+        //grid.add(grid2, 0, 2);
 
         grid3.setVgap(10);
 
@@ -157,7 +173,7 @@ public class Guest extends Application {
         //grid3.add(btn1, 0, 2);
 
 
-        grid.add(btn1, 0, 5);
+        grid.add(btn1, 0, 2);
         grid.setPadding(new Insets(10, 10, 10, 10));
 
         //Set Back Action
@@ -192,6 +208,8 @@ public class Guest extends Application {
             //Users user = Main.TheUser;
 
             DataBase admin = new DataBase();
+            ArrayList<Clinics> cl = new ArrayList<>();
+            //cl = admin.ClinicAdd
             Users user = admin.U_Login("a201","444");
             tableView.getItems().addAll(user);
 
@@ -277,7 +295,7 @@ public class Guest extends Application {
 
         });*/
 
-        primaryStage.setTitle("ADD and DROP SYSTEM");
+        primaryStage.setTitle("Guest");
         primaryStage.setScene(new Scene(grid, 550, 450));
         primaryStage.show();
 
