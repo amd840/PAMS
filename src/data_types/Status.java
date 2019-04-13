@@ -63,9 +63,14 @@ public class Status {
 	return false;
 	}
     
-    public static void toStringStatus(Connection connect) throws Exception{
-        PreparedStatement statement1 = connect.prepareStatement("SELECT * FROM Status;");
-        ResultSet Result =statement1.executeQuery();
+    public static void toStringStatus(Connection connect,String	type) throws Exception{
+    	PreparedStatement statement;
+    	if(type == null)
+           	statement = connect.prepareStatement("SELECT * FROM Status;");
+    	else
+    		statement = connect.prepareStatement("SELECT * FROM Status WHERE Status_Type = 'General'"
+    				+ " OR Status_Type LIKE '%"+type+"%';");
+        ResultSet Result =statement.executeQuery();
 
         if (!Result.next())
             throw new Exception("There is no input");
@@ -80,6 +85,16 @@ public class Status {
             
             System.out.println("");
         }while(Result.next());
+    }
+    
+    
+    public static ArrayList<Status> getAllArrayList(Connection connect) throws Exception{
+    	ArrayList<Status> al = new ArrayList<Status>();
+    	ResultSet r = connect.prepareStatement("SELECT * From Status;").executeQuery();
+    	
+    	while(r.next())
+    		al.add(new Status(r.getInt("Status_ID"), r.getString("Status_Name"), r.getString("Status_Type"), r.getString("Description")));
+    	return al;
     }
 }
 

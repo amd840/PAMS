@@ -202,9 +202,15 @@ public class Users {
 		} 
     }
     
-    public static void toStringClinicAdminUsers(Connection connect) throws Exception{
-        PreparedStatement statement1 = connect.prepareStatement("SELECT U_ID,UserName,FName,LName,Email From Users WHERE Type_ID = 1;");
-        ResultSet Result = statement1.executeQuery();
+    public static void toStringUsers(Connection connect,int Type) throws Exception{
+    	PreparedStatement statement;
+    	if(Type < 0 || Type > 3){
+    		statement = connect.prepareStatement("SELECT * From Users;");
+    	}else{
+    		statement = connect.prepareStatement("SELECT * From Users WHERE Type_ID = "+Type+";");
+    	}
+        
+        ResultSet Result = statement.executeQuery();
 
         System.out.println("U_ID\t\tUserName\tName\t\t\t\tEMail");
         if (!Result.next())
@@ -225,7 +231,27 @@ public class Users {
             System.out.println(Result.getString("EMail"));
         }while(Result.next());
         System.out.println("Done");
-        
+    }
+    
+    public static ArrayList<Users> getAllArrayList(Connection connect) throws Exception{
+    	ArrayList<Users> al = new ArrayList<Users>();
+    	Users temp = new Users();
+    	
+    	ResultSet r = connect.prepareStatement("SELECT * From Users;").executeQuery();
+    	while(r.next()){
+			temp.setU_ID(r.getInt("U_ID"));
+			temp.setUserName(r.getString("UserName"));
+			temp.setFName(r.getString("FName"));
+			temp.setLName(r.getString("LName"));
+			temp.setHashed_PW(r.getString("Hashed_PW"));
+			temp.setEMail(r.getString("EMail"));
+			temp.setReg_Date(r.getDate("Reg_Date"));
+			temp.setType_ID(r.getInt("Type_ID"));
+			temp.setStatus_ID(r.getInt("Status_ID"));
+			al.add(temp);
+			temp = new Users();
+    	}
+    	return al;
     }
     
 }

@@ -1,5 +1,13 @@
 package data_types;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class Dentists {
     private int D_ID,
     Clinic_Num,
@@ -7,24 +15,24 @@ public class Dentists {
     Years_Active,   
     Specialty_ID,
     Clinic_ID;
-    private String Profile,
+    private String _Profile,
     Clinic_Office,
     Website,  
     FName,
     LName,
     EMail;
-    private double Rating;
+    private BigDecimal Rating;
 
-    public Dentists(int D_ID, String FName, String LName, String Profile, int Years_Active, String Website, String EMail, double Rating, int Specialty_ID, int Clinic_ID, String Clinic_Office, int Clinic_Num, int Status_ID) {
+    public Dentists(int D_ID, String FName, String LName, String Profile, int Years_Active, String Website, String EMail, BigDecimal Rating, int Specialty_ID, int Clinic_ID, String Clinic_Office, int Clinic_Num, int Status_ID) {
         if(Meth.var_valid(FName,24) && Meth.var_valid(LName,24) && Meth.var_valid(EMail,64)){
 			this.D_ID = D_ID;
 			this.FName = FName;
 			this.LName = LName;
-			this.Profile = Profile;
+			this._Profile = Profile;
 			this.Years_Active = Years_Active;
 			this.Website = Website;
 			this.EMail = EMail;
-			this.Rating = Meth.round(Rating,2);
+			this.Rating = Rating;
 			this.Specialty_ID = Specialty_ID;
 			this.Clinic_ID = Clinic_ID;
 			this.Clinic_Office = Clinic_Office;
@@ -41,11 +49,11 @@ public class Dentists {
 	    	this.D_ID = D_ID;
 			this.FName = FName;
 			this.LName = LName;
-	        this.Profile = Profile;
+	        this._Profile = Profile;
 	        this.Years_Active = -1;
 	        this.Website = null;
 	        this.EMail = null;
-	        this.Rating = -1;
+	        this.Rating = null;
 	        this.Specialty_ID = Specialty_ID;
 	        this.Clinic_ID = Clinic_ID;
 	        this.Clinic_Office = null;
@@ -55,6 +63,22 @@ public class Dentists {
 		else{
 			System.out.println("Error... input invalid");
 		}
+	}
+    
+    public Dentists() {
+	    	this.D_ID = -1;
+			this.FName = null;
+			this.LName = null;
+	        this._Profile = null;
+	        this.Years_Active = -1;
+	        this.Website = null;
+	        this.EMail = null;
+	        this.Rating = null;
+	        this.Specialty_ID = -1;
+	        this.Clinic_ID = -1;
+	        this.Clinic_Office = null;
+	        this.Clinic_Num = -1;
+	        this.Status_ID = -1;
 	}
     
     public int getClinic_ID() {
@@ -85,11 +109,11 @@ public class Dentists {
 		return LName;
 	}
     
-    public String getProfile() {
-		return Profile;
+    public String get_Profile() {
+		return _Profile;
 	}
     
-    public double getRating() {
+    public BigDecimal getRating() {
 		return Rating;
 	}
     
@@ -149,12 +173,12 @@ public class Dentists {
 		return false;
 	}
     
-    public void setProfile(String profile) {
-		Profile = profile;
+    public void set_Profile(String profile) {
+		_Profile = profile;
 	}
     
-    public void setRating(double rating) {
-		Rating = Meth.round(rating,2);
+    public void setRating(BigDecimal rating) {
+		Rating = rating;
 	}
     
     public void setSpecialty_ID(int specialty_ID) {
@@ -172,6 +196,42 @@ public class Dentists {
     public void setYears_Active(int years_Active) {
 		Years_Active = years_Active;
 	}
+    
+    public boolean addToDB(Connection connection){
+    	PreparedStatement add;
+		try {
+			add = connection.prepareStatement("Select D_ID From Dentists WHERE D_ID = "+D_ID+";");
+			ResultSet r = add.executeQuery();
+			if(r.next()){
+				System.out.println("D_ID already taken.");
+				return false;
+			}
+			add = connection.prepareStatement("Select EMail From Dentists WHERE EMail = '"+EMail+"';");
+			r = add.executeQuery();
+			if(r.next()){
+				System.out.println("EMail already taken.");
+				return false;
+			}
+			add = connection.prepareStatement("INSERT INTO Dentists () values ("+D_ID+",'"+FName+"','"+LName+"','"+_Profile+"',"+Years_Active+",'"+Website+"','"+EMail+"',"+Rating+"," +Specialty_ID+"," +Clinic_ID+",'" +Clinic_Office+"'," +Clinic_Num+","+Status_ID+");");
+			add.executeUpdate();
+
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		} 
+    }
+    
+    public static ArrayList<Dentists> getAllArrayList(Connection connect) throws Exception{
+    	ArrayList<Dentists> al = new ArrayList<Dentists>();
+    	ResultSet r = connect.prepareStatement("SELECT * From Dentists;").executeQuery();
+    	
+    	while(r.next())
+    		al.add(new Dentists(r.getInt("D_ID"), r.getString("FName"), r.getString("LName"), r.getString("Profile"), r.getInt("Years_Active"), r.getString("Website"), r.getString("EMail"), r.getBigDecimal("Rating"), r.getInt("Specialty_ID"), r.getInt("Clinic_ID"), r.getString("Clinic_Office"), r.getInt("Clinic_Num"), r.getInt("Status_ID")));
+    	return al;
+    }
+
 }
 
 

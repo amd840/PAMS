@@ -1,5 +1,9 @@
 package data_types;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
 public class User_Types {
 	private int Type_ID;
 	private String Entitlement;
@@ -25,7 +29,16 @@ public class User_Types {
 		Type_ID = type_ID;
 	}
 	
-	
+    public static ArrayList<User_Types> getAllArrayList(Connection connect) throws Exception{
+    	ArrayList<User_Types> al = new ArrayList<User_Types>();
+    	ResultSet r = connect.prepareStatement("SELECT * From User_types;").executeQuery();
+    	
+    	while(r.next())
+    		al.add(new User_Types(r.getInt("Type_ID"),r.getString("Entitlement")));
+    	return al;
+    }
+    
+    
 }
 
 

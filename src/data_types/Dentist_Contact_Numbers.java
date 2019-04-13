@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Dentist_Contact_Numbers {
 	private int Dentist_ID,
@@ -104,6 +105,15 @@ public class Dentist_Contact_Numbers {
 			e.printStackTrace();
 			return false;
 		} 
+    }
+    
+    public static ArrayList<Dentist_Contact_Numbers> getAllArrayList(Connection connect) throws Exception{
+    	ArrayList<Dentist_Contact_Numbers> al = new ArrayList<Dentist_Contact_Numbers>();
+    	ResultSet r = connect.prepareStatement("SELECT * From Dentist_Contact_Numbers;").executeQuery();
+    	
+    	while(r.next())
+    		al.add(new Dentist_Contact_Numbers(r.getString("Number"), r.getInt("Dentist_ID"), r.getString("Type"), r.getInt("_Order")));
+    	return al;
     }
 }
  

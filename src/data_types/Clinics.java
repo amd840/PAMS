@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.math.BigDecimal;
 
 public class Clinics {
@@ -61,6 +62,28 @@ public class Clinics {
 		    	this.Clinic_ManID = -1;
 		    	this.Status_ID = -1;
 		}
+	    
+	    public Clinics(ResultSet r) {
+				try {
+			    	this.C_ID = r.getInt("C_ID");
+			    	this._Profile = r.getString("_Profile");
+			    	this.Services = r.getString("Services");
+			    	this.Location = r.getString("Location");
+			    	this.Website = r.getString("Website");
+			    	this.EMail = r.getString("EMail");
+			    	this.Rating = r.getBigDecimal("Rating");
+			    	this.Clinic_ManID = r.getInt("Clinic_ManID");
+			    	this.Status_ID = r.getInt("Status_ID");
+			    	
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		}
+	    
 	    
 	    public int getC_ID() {
 			return C_ID;
@@ -188,9 +211,26 @@ public class Clinics {
 	            
 	            System.out.println("Rating: " + Result.getBigDecimal("Rating"));
 	            
+	            System.out.println("Clinic_ManID: " + Result.getInt("Clinic_ManID"));
+	            
+	            System.out.println("Status_ID: " + Result.getInt("Status_ID"));
+	            
 	        }while(Result.next());
 	        System.out.println("Done");
 	        
+	    }
+	    
+	    public String toString() {
+	    return "C_ID: " + C_ID + "\nProfile: " + _Profile + "\nLocation: " + Location + "\nE-Mail: " + EMail + "\nWebsite: " + Website + "\nRating: " + Rating + "\nClinic_Admin_ID: " + Clinic_ManID + "Status_ID: " + Status_ID;
+	    }
+	    
+	    public static ArrayList<Clinics> getAllArrayList(Connection connect) throws Exception{
+	    	ArrayList<Clinics> al = new ArrayList<Clinics>();
+	    	ResultSet r = connect.prepareStatement("SELECT * From Clinics;").executeQuery();
+	    	
+	    	while(r.next())
+	    		al.add(new Clinics(r.getInt("C_ID"), r.getString("_Profile"), r.getString("Services"), r.getString("Location"), r.getString("Website"), r.getString("EMail"), r.getBigDecimal("Rating"), r.getInt("Clinic_ManID"), r.getInt("Status_ID")));
+	    	return al;
 	    }
 }
 

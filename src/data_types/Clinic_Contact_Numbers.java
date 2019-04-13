@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Clinic_Contact_Numbers {
 	private int  Clinic_ID, 
@@ -88,15 +89,38 @@ public class Clinic_Contact_Numbers {
 				System.out.println("Clinic_ID/Number combination already exists.");
 				return false;
 			}
-			add = connection.prepareStatement("INSERT INTO Clinic_Contact_Numbers () values ('"+Number+"','"+Clinic_ID+"','"+Type+"',"+_Order+");");
+			add = connection.prepareStatement("INSERT INTO Clinic_Contact_Numbers () values ('"+Number+"',"+Clinic_ID+",'"+Type+"',"+_Order+");");
 			add.executeUpdate();
 			return true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
-		} 
+		}
     }
+    
+    public static void toStringClinic(Connection connect,int C_ID) throws SQLException{
+    	PreparedStatement add;
+    	add = connect.prepareStatement("Select * From Clinic_Contact_Numbers WHERE Clinic_ID = "+C_ID+";");
+    	ResultSet r = add.executeQuery();
+    	if(r.next()){
+    		do{
+    		System.out.println("Number: "+r.getString("Number")+"\t\tClinic_ID: "+r.getInt("Clinic_ID")+"\t\tType: "+r.getString("Type")+"\t\tOrder: "+r.getInt("_Order"));
+    		}while(r.next());
+    	}else{
+    		System.out.println("No existing contacts!");
+    	}
+    }
+    
+    public static ArrayList<Clinic_Contact_Numbers> getAllArrayList(Connection connect) throws Exception{
+    	ArrayList<Clinic_Contact_Numbers> al = new ArrayList<Clinic_Contact_Numbers>();
+    	ResultSet r = connect.prepareStatement("SELECT * From Clinic_Contact_Numbers;").executeQuery();
+    	
+    	while(r.next())
+    		al.add(new Clinic_Contact_Numbers(r.getString("Number"), r.getInt("Clinic_ID"), r.getString("Type"), r.getInt("_Order")));
+    	return al;
+    }
+    
 }
 
 /* CREATE table Clinic_Contact_Numbers(

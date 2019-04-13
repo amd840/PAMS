@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class User_Contact_Numbers {
 	private int U_ID,
@@ -90,7 +91,7 @@ public class User_Contact_Numbers {
     public boolean addToDB(Connection connection){
     	PreparedStatement add;
 		try {
-			add = connection.prepareStatement("Select U_ID From User_Contact_Numbers WHERE U_ID = "+U_ID+" AND Number = '" + Number + "';");
+			add = connection.prepareStatement("Select U_ID From User_Contact_Numbers WHERE U_ID = "+U_ID+" AND _Order = " + _Order + ";");
 			ResultSet r = add.executeQuery();
 			if(r.next()){
 				System.out.println("U_ID/Number combination already exists.");
@@ -104,6 +105,16 @@ public class User_Contact_Numbers {
 			e.printStackTrace();
 			return false;
 		} 
+    }
+    
+    
+    public static ArrayList<User_Contact_Numbers> getAllArrayList(Connection connect) throws Exception{
+    	ArrayList<User_Contact_Numbers> al = new ArrayList<User_Contact_Numbers>();
+    	ResultSet r = connect.prepareStatement("SELECT * From User_Contact_Numbers;").executeQuery();
+    	
+    	while(r.next())
+    		al.add(new User_Contact_Numbers(r.getString("Number"), r.getInt("U_ID"), r.getString("Type"), r.getInt("_Order")));
+    	return al;
     }
 }
 

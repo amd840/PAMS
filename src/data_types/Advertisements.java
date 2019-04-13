@@ -2,7 +2,10 @@ package data_types;
 import java.math.BigDecimal;
 import data_types.Meth;
 import java.math.RoundingMode;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class Advertisements{
 	private int Ad_ID, 
@@ -10,14 +13,14 @@ public class Advertisements{
 	private Date Start_Date, 
 	End_Date;
 	private String Content;
-	private double Fees;
+	private BigDecimal Fees;
 	
-	public Advertisements(int Ad_ID, Date Start_Date, Date End_Date, String Content, double Fees) {
+	public Advertisements(int Ad_ID, Date Start_Date, Date End_Date, String Content, BigDecimal Fees) {
 		this.Ad_ID = Ad_ID;
 		this.Start_Date = Start_Date;
 		this.End_Date = End_Date;
 		this.Content = Content;
-		this.Fees = Meth.round(Fees,2);
+		this.Fees = Fees;
 	}
 	
 	public int getAd_ID() {
@@ -32,7 +35,7 @@ public class Advertisements{
 		return End_Date;
 	}
 	
-	public double getFees() {
+	public BigDecimal getFees() {
 		return Fees;
 	}
 	
@@ -56,8 +59,8 @@ public class Advertisements{
 		End_Date = end_Date;
 	}
 	
-	public void setFees(double fees) {
-		Fees = Meth.round(fees,2);
+	public void setFees(BigDecimal fees) {
+		Fees = fees;
 	}
 	
 	public void setStart_Date(Date start_Date) {
@@ -67,6 +70,15 @@ public class Advertisements{
 	public void setSysAdmin_ID(int sysAdmin_ID) {
 		this.sysAdmin_ID = sysAdmin_ID;
 	}
+	
+    public static ArrayList<Advertisements> getAllArrayList(Connection connect) throws Exception{
+    	ArrayList<Advertisements> al = new ArrayList<Advertisements>();
+    	ResultSet r = connect.prepareStatement("SELECT * From Advertisements;").executeQuery();
+    	
+    	while(r.next())
+    		al.add(new Advertisements(r.getInt ("Ad_ID"), r.getDate ("Start_Date"), r.getDate ("End_Date"), r.getString ("Content"), r.getBigDecimal ("Fees")));
+    	return al;
+    }
 	
 }
 

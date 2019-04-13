@@ -1,5 +1,8 @@
 package data_types;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class Appointments {
 	private int Apm_ID, 
@@ -93,6 +96,15 @@ public class Appointments {
 	public void setStatus_ID(int status_ID) {
 		Status_ID = status_ID;
 	}
+	
+    public static ArrayList<Appointments> getAllArrayList(Connection connect) throws Exception{
+    	ArrayList<Appointments> al = new ArrayList<Appointments>();
+    	ResultSet r = connect.prepareStatement("SELECT * From Appointments;").executeQuery();
+    	
+    	while(r.next())
+    		al.add(new Appointments(r.getInt("Apm_ID"), r.getDate("Apm_Date"), r.getString("Apm_Type"), r.getInt("Patient_ID"), r.getInt("Recept_ID"), r.getInt("Dentist_ID"), r.getInt("Status_ID")));
+    	return al;
+    }
 }
 
 /* CREATE table Appointments(

@@ -1,6 +1,9 @@
 package data_types;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class Reviews {
     private int Apm_ID,
@@ -64,6 +67,15 @@ public class Reviews {
     public void setReview(String review) {
 		Review = review;
 	}
+    
+    public static ArrayList<Reviews> getAllArrayList(Connection connect) throws Exception{
+    	ArrayList<Reviews> al = new ArrayList<Reviews>();
+    	ResultSet r = connect.prepareStatement("SELECT * From Reviews;").executeQuery();
+    	
+    	while(r.next())
+    	al.add(new Reviews(r.getInt("Apm_ID"), r.getDate("Rev_Date"), r.getInt("Dent_Rating"), r.getInt("Clinic_Rating"), r.getString("Review")));
+    	return al;
+    }
 }
 
 

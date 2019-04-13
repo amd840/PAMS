@@ -1,5 +1,9 @@
 package data_types;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
 public class Specialties {
     private int Specialty_ID;
     private String Spec_Name,
@@ -43,6 +47,16 @@ public class Specialties {
     public void setSpecialty_ID(int specialty_ID) {
 		Specialty_ID = specialty_ID;
 	}
+    
+    public static ArrayList<Specialties> getAllArrayList(Connection connect) throws Exception{
+    	ArrayList<Specialties> al = new ArrayList<Specialties>();
+    	ResultSet r = connect.prepareStatement("SELECT * From Specialties;").executeQuery();
+    	
+    	while(r.next())
+    		al.add(new Specialties(r.getInt("Specialty_ID"), r.getString("Spec_Name"), r.getString("Description")));
+    	return al;
+    }
+    
 }
 
 

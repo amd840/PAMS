@@ -1,5 +1,8 @@
 package data_types;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class News {
     private int News_ID,
@@ -55,6 +58,15 @@ public class News {
     public void setSysAdmin_ID(int sysAdmin_ID) {
 		SysAdmin_ID = sysAdmin_ID;
 	}
+    
+    public static ArrayList<News> getAllArrayList(Connection connect) throws Exception{
+    	ArrayList<News> al = new ArrayList<News>();
+    	ResultSet r = connect.prepareStatement("SELECT * From News;").executeQuery();
+    	
+    	while(r.next())
+    		al.add(new News(r.getInt("News_ID"), r.getDate("Pub_Date"), r.getDate("End_Date"), r.getString("Content"), r.getInt("SysAdmin_ID")));
+    	return al;
+    }
 }
 
 
