@@ -196,7 +196,9 @@ public class DataBase {
         return arrayList;
 
 	}
-    public ArrayList<Clinics> ClinicAdd(Connection connect, Scanner kb){
+
+
+    /*public ArrayList<Clinics> ClinicAdd(Connection connect, Scanner kb){
         boolean main_loop = true;
         boolean pass = true;
         Pattern p1 = Pattern.compile("[^0-9]");
@@ -295,7 +297,7 @@ public class DataBase {
             }
         }
         return null;
-    }
+    }*/
     public static boolean Y_N(Scanner kb){
         while(true){
             String k = kb.next();
@@ -307,6 +309,27 @@ public class DataBase {
                 System.out.println("Wrong Input.");
             }
         }
+    }
+    public ArrayList<Clinics> getClinics()throws Exception{
+        PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Clinics ");
+        ResultSet Result =statement1.executeQuery();
+        ArrayList<Clinics> clinicsArrayList = new ArrayList<>();
+
+        while(Result.next()){
+            Clinics clinic = new Clinics();
+
+            clinic.setC_ID(Result.getInt("C_ID"));
+            clinic.setEMail(Result.getString("EMail"));
+            clinic.set_Profile(Result.getString("Profile"));
+            clinic.setLocation(Result.getString("Location"));
+            clinic.setRating(Result.getDouble("Rating"));
+            clinic.setServices(Result.getString("Services"));
+            clinic.setClinic_ManID(Result.getInt("Clinic_ManID"));
+            clinic.setWebsite(Result.getString("Website"));
+            clinic.setStatus_ID(Result.getInt("Status_ID"));
+            clinicsArrayList.add(clinic);
+        }
+        return clinicsArrayList;
     }
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -337,6 +360,30 @@ public class DataBase {
 
         }
         return u;
+    }
+    public void ClinicUpdate(Clinics clinic) throws Exception{
+
+        PreparedStatement add = connection.prepareStatement("UPDATE `Clinics` SET `C_ID`="+clinic.getC_ID()+",`Profile`='"+clinic.getProfile()+"',`Services`='"+clinic.getServices()+"',`Location`='"+clinic.getLocation()+"',`Website`='"+clinic.getWebsite()+"',`EMail`='"+clinic.getEMail()+"',`Rating`='"+clinic.getRating()+"',`Clinic_ManID`="+clinic.getClinic_ManID()+",`Status_ID`="+clinic.getStatus_ID()+" WHERE C_ID = "+clinic.getC_ID());
+        add.executeUpdate();
+
+    }
+    public void clinicUpdate(Clinics clinic,String values,String value) throws Exception{
+
+        PreparedStatement add = connection.prepareStatement("UPDATE `Clinics` SET "+values+" = '"+value+"' WHERE C_ID = "+clinic.getC_ID());
+        add.executeUpdate();
+
+    }
+    public void clinicUpdate(Clinics clinic,String values,int value) throws Exception{
+
+        PreparedStatement add = connection.prepareStatement("UPDATE `Clinics` SET "+values+" = "+value+" WHERE C_ID = "+clinic.getC_ID());
+        add.executeUpdate();
+
+    }
+    public void addClinic(Clinics clinic) throws Exception{
+
+        PreparedStatement add = connection.prepareStatement("insert into `Clinics`(`C_ID`, `Profile`, `Services`, `Location`, `Website`, `EMail`, `Rating`, `Clinic_ManID`, `Status_ID`) VALUES ("+clinic.getC_ID()+",'"+clinic.getProfile()+"','"+clinic.getServices()+"','"+clinic.getLocation()+"','"+clinic.getWebsite()+"','"+clinic.getEMail()+"','"+clinic.getRating()+"', "+clinic.getClinic_ManID()+" ,"+clinic.getStatus_ID()+")");
+        add.executeUpdate();
+
     }
     ///// signup... it checks if the username or email is used before or not... if they are unique... user is created... true is returned if the signuo is sucessful... if it failed, false will be returned.
     ///// note: a method to create an apropriate ID for a new user is needed before using this method.

@@ -1,23 +1,11 @@
 package sample;
 
 
-
-import data_types.Clinics;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.scene.control.TableColumn.*;
-import javafx.scene.control.TextField;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TableColumn;
-
-
-
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -31,11 +19,9 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
 
 
-public class ClinicAdmin extends Application {
+public class CARec extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -88,221 +74,43 @@ public class ClinicAdmin extends Application {
 
         //Add Table of Courses Add and Drop
         HBox TableBox = new HBox();
-        TableView<Clinics> tableView = new TableView<Clinics>();
+        TableView<Object> tableView = new TableView<Object>();
         TableBox.getChildren().addAll(tableView);
         TableBox.setAlignment(Pos.CENTER);
 
 
-        TableColumn<Clinics,String> columnId = new TableColumn<>("C_ID");
+        TableColumn columnId = new TableColumn("C_ID");
         columnId.setStyle("-fx-alignment: CENTER;");
         columnId.setCellValueFactory(new PropertyValueFactory<>("C_ID"));
-        //columnId.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        columnId.setOnEditCommit((CellEditEvent<Clinics, String > t) -> {
-
-                    ((Clinics) t.getTableView()
-                            .getItems()
-                            .get(t.getTablePosition().getRow()))
-                            .setC_ID(Integer.valueOf((t.getNewValue())));
-
-                    try {
-                        DataBase data = new DataBase();
-                        //data.clinicUpdate(t.getRowValue(),"C_ID",Integer.parseInt(t.getNewValue()));
-                    }catch (Exception e){
-
-                    }
-
-                }
-
-
-
-
-        );
-
-
-
-
-
-        TableColumn<Clinics,String> columnUser = new TableColumn<>("Profile");
+        TableColumn columnUser = new TableColumn("_Profile");
         columnUser.setStyle("-fx-alignment: CENTER;");
-        columnUser.setCellValueFactory(new PropertyValueFactory<>("Profile"));
-        columnUser.setCellFactory(TextFieldTableCell.forTableColumn());
+        columnUser.setCellValueFactory(new PropertyValueFactory<>("_Profile"));
 
-        columnUser.setOnEditCommit((CellEditEvent<Clinics, String> t) -> {
-
-                    ((Clinics) t.getTableView()
-                            .getItems()
-                            .get(t.getTablePosition().getRow()))
-                            .set_Profile((t.getNewValue()));
-
-                    try {
-                        DataBase data = new DataBase();
-                        data.clinicUpdate(t.getRowValue(),"Profile",t.getNewValue());
-                    }catch (Exception e){
-
-                    }
-
-                }
-
-
-
-        );
-
-
-        TableColumn<Clinics,String> columnFN = new TableColumn<>("Services");
+        TableColumn columnFN = new TableColumn("Services");
         columnFN.setCellValueFactory(new PropertyValueFactory<>("Services"));
         columnFN.setStyle("-fx-alignment: CENTER;");
-        columnFN.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        columnFN.setOnEditCommit((CellEditEvent<Clinics, String> t) -> {
-
-                    ((Clinics) t.getTableView()
-                            .getItems()
-                            .get(t.getTablePosition().getRow()))
-                            .setServices((t.getNewValue()));
-
-                    try {
-                        DataBase data = new DataBase();
-                        data.clinicUpdate(t.getRowValue(),"Services",t.getNewValue());
-                    }catch (Exception e){
-
-                    }
-
-                }
-
-
-
-        );
-
-        TableColumn<Clinics,String> columnLN = new TableColumn<>("Location");
+        TableColumn columnLN = new TableColumn("Location");
         columnLN.setCellValueFactory(new PropertyValueFactory<>("Location"));
         columnLN.setStyle("-fx-alignment: CENTER;");
-        columnLN.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        columnLN.setOnEditCommit((CellEditEvent<Clinics, String> t) -> {
-
-                    ((Clinics) t.getTableView()
-                            .getItems()
-                            .get(t.getTablePosition().getRow()))
-                            .setLocation((t.getNewValue()));
-
-                    try {
-                        DataBase data = new DataBase();
-                        data.clinicUpdate(t.getRowValue(),"Location",t.getNewValue());
-                    }catch (Exception e){
-
-                    }
-
-                }
-
-
-
-        );
-
-        TableColumn<Clinics,String> columnPW = new TableColumn<>("EMail");
+        TableColumn columnPW = new TableColumn("EMail");
         columnPW.setCellValueFactory(new PropertyValueFactory<>("EMail"));
         columnPW.setStyle("-fx-alignment: CENTER;");
-
-        columnPW.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        columnPW.setOnEditCommit((CellEditEvent<Clinics, String> t) -> {
-
-                    ((Clinics) t.getTableView()
-                            .getItems()
-                            .get(t.getTablePosition().getRow()))
-                            .setEMail((t.getNewValue()));
-
-                    try {
-                        DataBase data = new DataBase();
-                        data.clinicUpdate(t.getRowValue(),"EMail",t.getNewValue());
-                    }catch (Exception e){
-
-                    }
-
-                }
-
-
-
-        );
-
-
-        TableColumn<Clinics,String> columnEmail = new TableColumn<>("Rating");
+        TableColumn columnEmail = new TableColumn("Rating");
         columnEmail.setCellValueFactory(new PropertyValueFactory<>("Rating"));
         columnEmail.setStyle("-fx-alignment: CENTER;");
 
-        /*columnEmail.setCellFactory(TextFieldTableCell.forTableColumn());
 
-        columnEmail.setOnEditCommit((CellEditEvent<Clinics, Double> t) -> {
-
-                    ((Clinics) t.getTableView()
-                            .getItems()
-                            .get(t.getTablePosition().getRow()))
-                            .setRating(Double.parseDouble(String.valueOf(t.getNewValue())));
-
-                    try {
-                        DataBase data = new DataBase();
-                        data.clinicUpdate(t.getRowValue(),"Rating",t.getNewValue());
-                    }catch (Exception e){
-
-                    }
-
-                }
-
-
-
-        );*/
-
-
-        TableColumn<Clinics,String> columnDate = new TableColumn<>("Clinic_ManID");
+        TableColumn columnDate = new TableColumn("Clinic_ManID");
         columnDate.setCellValueFactory(new PropertyValueFactory<>("Clinic_ManID"));
         columnDate.setStyle("-fx-alignment: CENTER;");
-        columnUser.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        columnUser.setOnEditCommit((CellEditEvent<Clinics, String> t) -> {
-
-                    ((Clinics) t.getTableView()
-                            .getItems()
-                            .get(t.getTablePosition().getRow()))
-                            .setClinic_ManID(Integer.parseInt((t.getNewValue())));
-
-                    try {
-                        DataBase data = new DataBase();
-                        data.clinicUpdate(t.getRowValue(),"Clinic_ManID",Integer.parseInt(t.getNewValue()));
-                    }catch (Exception e){
-
-                    }
-
-                }
 
 
 
-        );
-
-
-
-        TableColumn<Clinics,String> columnState = new TableColumn<>("Status_ID");
+        TableColumn columnState = new TableColumn("Status_ID");
         columnState.setCellValueFactory(new PropertyValueFactory<>("Status_ID"));
         columnState.setStyle("-fx-alignment: CENTER;");
-
-
         ArrayList<Users> x1 = new ArrayList<>();
-
-        tableView.setEditable(true);
-        add.setOnAction(ActionEvent ->{
-            Clinics newclinic = new Clinics(Integer.parseInt(tid.getText()),tprofile.getText(),tservices.getText(),tlocation.getText(),twebsite.getText(),temail.getText(),Double.parseDouble(trating.getText()),Integer.parseInt(tmanid.getText()),Integer.parseInt(tstatus.getText()));
-            tableView.getItems().add(newclinic);
-            try{
-                DataBase db = new DataBase();
-                db.addClinic(newclinic);
-            }catch (Exception e){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText(e.getMessage());
-                alert.show();
-                System.out.print(e.getMessage());
-
-            }
-            System.out.print("work");
-        });
         /* x1 = Connecter.getUser();
 
         Users[] x = new Users[x1.size()];
@@ -318,20 +126,18 @@ public class ClinicAdmin extends Application {
            */
         //Add Butttons
         Button btn1 = new Button("Submit");
-       // Button btn2 = new Button("search");
-       // Button btn3 = new Button("reset");
+        // Button btn2 = new Button("search");
+        // Button btn3 = new Button("reset");
 
         //Add Columns and set their width
-        tableView.getColumns().addAll(columnId, columnUser,columnFN,columnLN,columnPW,columnEmail,columnDate, columnState);
-        //tableView.getColumns().addAll((Collection<? extends TableColumn<Object, ?>>) columnUser);
-
+        tableView.getColumns().addAll(columnId,columnUser,columnFN,columnLN,columnPW,columnEmail,columnDate, columnState);
         //columnCourse.setPrefWidth(100);
         //columnCRN.setPrefWidth(75);
         //columnDay.setPrefWidth(75);
         //columnCredit.setPrefWidth(100);
-       // columnState.setPrefWidth(150);
+        // columnState.setPrefWidth(150);
 
-        tableView.setPrefSize(550, 250);
+        tableView.setPrefSize(640, 250);
 
 
         //Adding the Main Drid for Coordinate the Page
@@ -426,9 +232,8 @@ public class ClinicAdmin extends Application {
             //Users user = Main.TheUser;
 
             DataBase admin = new DataBase();
-            ArrayList<Clinics> arrlist = admin.getClinics();
-            //Users user = admin.U_Login("a201","444");
-            tableView.getItems().addAll(arrlist);
+            Users user = admin.U_Login("a201","444");
+            tableView.getItems().addAll(user);
 
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -513,7 +318,7 @@ public class ClinicAdmin extends Application {
         });*/
 
         primaryStage.setTitle("Clinics");
-        primaryStage.setScene(new Scene(MainGrid, 900, 450));
+        primaryStage.setScene(new Scene(MainGrid, 1000, 450));
         primaryStage.show();
 
     }

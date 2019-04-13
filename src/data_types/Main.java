@@ -509,7 +509,7 @@ public class Main {
 					hasContact = Y_N(kb);
 				}
 				
-				c.setRating(new BigDecimal(0));
+				c.setRating(new Double(0));
 				PreparedStatement ps1 = connect.prepareStatement("SELECT MAX(C_ID) From Clinics;");
 				ResultSet rs1 = ps1.executeQuery();
 				
@@ -744,7 +744,7 @@ public class Main {
 		
 	}
 
-	public static void AddDentist(Connection connect,int u_type,Scanner kb,Users currentUser){
+	/*public static void AddDentist(Connection connect,int u_type,Scanner kb,Users currentUser){
 		boolean main_loop = true;
 		boolean pass = true;
 		Dentists d = new Dentists();
@@ -852,6 +852,6 @@ public class Main {
 				main_loop = Y_N(kb);
 			}
 		}
-	}
+	}*/
 
 }

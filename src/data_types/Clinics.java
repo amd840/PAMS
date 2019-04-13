@@ -17,9 +17,9 @@ public class Clinics {
 	    Website,
 	    EMail;
 
-	    private BigDecimal Rating;
+	    private double Rating;
 	    
-	    public Clinics(int C_ID, String Profile, String Services, String Location, String Website, String EMail, BigDecimal Rating, int Clinic_ManID, int Status_ID) {
+	    public Clinics(int C_ID, String Profile, String Services, String Location, String Website, String EMail, double Rating, int Clinic_ManID, int Status_ID) {
 	    	if(Meth.var_valid(EMail,64)){
 		    	this.C_ID = C_ID;
 		    	this._Profile = Profile;
@@ -43,7 +43,7 @@ public class Clinics {
 		    	this.Location = Location;
 		    	this.Website = null;
 		    	this.EMail = EMail;
-		    	this.Rating = null;
+		    	this.Rating = 0;
 		    	this.Clinic_ManID = Clinic_ManID;
 		    	this.Status_ID = Status_ID;
 	    	}else{
@@ -58,7 +58,7 @@ public class Clinics {
 		    	this.Location = null;
 		    	this.Website = null;
 		    	this.EMail = null;
-		    	this.Rating = null;
+		    	this.Rating = 0;
 		    	this.Clinic_ManID = -1;
 		    	this.Status_ID = -1;
 		}
@@ -71,7 +71,7 @@ public class Clinics {
 			    	this.Location = r.getString("Location");
 			    	this.Website = r.getString("Website");
 			    	this.EMail = r.getString("EMail");
-			    	this.Rating = r.getBigDecimal("Rating");
+			    	this.Rating = r.getDouble("Rating");
 			    	this.Clinic_ManID = r.getInt("Clinic_ManID");
 			    	this.Status_ID = r.getInt("Status_ID");
 			    	
@@ -85,7 +85,7 @@ public class Clinics {
 		}
 	    
 	    
-	    public int getC_ID() {
+	    public Integer getC_ID() {
 			return C_ID;
 		}
 	    
@@ -101,11 +101,11 @@ public class Clinics {
 			return Location;
 		}
 	    
-	    public String get_Profile() {
+	    public String getProfile() {
 			return _Profile;
 		}
 	    
-	    public BigDecimal getRating() {
+	    public double getRating() {
 			return Rating;
 		}
 	    
@@ -121,7 +121,7 @@ public class Clinics {
 			return Website;
 		}
 	    
-	    public void setC_ID(int c_ID) {
+	    public void setC_ID(Integer c_ID) {
 			C_ID = c_ID;
 		}
 	    
@@ -145,7 +145,7 @@ public class Clinics {
 			_Profile = profile;
 		}
 	    
-	    public void setRating(BigDecimal rating) {
+	    public void setRating(double rating) {
 			Rating = rating;
 		}
 	    
@@ -229,7 +229,7 @@ public class Clinics {
 	    	ResultSet r = connect.prepareStatement("SELECT * From Clinics;").executeQuery();
 	    	
 	    	while(r.next())
-	    		al.add(new Clinics(r.getInt("C_ID"), r.getString("_Profile"), r.getString("Services"), r.getString("Location"), r.getString("Website"), r.getString("EMail"), r.getBigDecimal("Rating"), r.getInt("Clinic_ManID"), r.getInt("Status_ID")));
+	    		al.add(new Clinics(r.getInt("C_ID"), r.getString("_Profile"), r.getString("Services"), r.getString("Location"), r.getString("Website"), r.getString("EMail"), r.getDouble("Rating"), r.getInt("Clinic_ManID"), r.getInt("Status_ID")));
 	    	return al;
 	    }
 }

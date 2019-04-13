@@ -1,0 +1,403 @@
+CREATE SCHEMA ICS_324_Project;
+USE ICS_324_Project;
+
+
+CREATE table User_Types(
+
+    Type_ID         INT             NOT NULL,
+
+    Entitlement     TEXT,
+
+    
+    PRIMARY KEY (Type_ID)
+
+    );
+
+
+
+
+CREATE table Reviews(
+
+    Apm_ID          INT             NOT NULL,
+
+    Rev_Date        DATETIME        NOT NULL,
+
+    Dent_Rating     INT             NOT NULL,
+
+    Clinic_Rating   INT             NOT NULL,
+
+    Review          TEXT,
+
+    
+
+    PRIMARY KEY (Apm_ID)
+
+    );
+
+
+
+
+CREATE table Status(
+
+    Status_ID       INT             NOT NULL,
+
+    Status_Name     VARCHAR(64)     NOT NULL,
+
+    Status_Type     VARCHAR(64)     NOT NULL,
+
+    Description     TEXT            NOT NULL,
+
+    
+
+    PRIMARY KEY (Status_ID),
+
+    UNIQUE (Status_Name)
+
+    );
+
+
+
+
+CREATE table Users(
+
+    U_ID            INT             NOT NULL,
+
+    UserName        VARCHAR(32)     NOT NULL,
+
+    FName           VARCHAR(24)     NOT NULL,
+
+    LName           VARCHAR(24)     NOT NULL,
+
+    Hashed_PW       VARCHAR(64)     NOT NULL,
+
+    EMail           VARCHAR(64)     NOT NULL,
+
+    Reg_Date        DATETIME        NOT NULL,
+
+    Type_ID         INT             NOT NULL,
+
+    Status_ID       INT             NOT NULL,
+
+    
+
+    PRIMARY KEY (U_ID),
+
+    FOREIGN KEY (Type_ID)
+ 
+        REFERENCES User_Types (Type_ID),
+
+    FOREIGN KEY (Status_ID)
+
+        REFERENCES Status (Status_ID),
+
+    UNIQUE (UserName),
+
+    UNIQUE (EMail)
+
+    );
+
+
+
+
+
+CREATE table User_Contact_Numbers(
+ 
+   Number          VARCHAR(16)     NOT NULL,
+
+    U_ID            INT             NOT NULL,
+
+    Type            VARCHAR(32),
+
+    _Order          INT             NOT NULL,
+
+
+    
+PRIMARY KEY (_Order, U_ID),
+
+    FOREIGN KEY (U_ID)
+
+        REFERENCES Users (U_ID)
+
+    );
+
+
+
+
+
+CREATE table News(
+
+    News_ID         INT             NOT NULL,
+
+    Pub_Date        DATETIME        NOT NULL,
+
+    End_Date        DATETIME        NOT NULL,
+
+    Content         TEXT            NOT NULL,
+
+    SysAdmin_ID     INT             NOT NULL,
+
+    
+
+    PRIMARY KEY (News_ID),
+
+    FOREIGN KEY (SysAdmin_ID)
+
+        REFERENCES Users (U_ID)
+
+    );
+
+
+
+
+
+CREATE table Advertisements(
+
+    Ad_ID           INT             NOT NULL,
+
+    Start_Date      DATETIME        NOT NULL,
+
+    End_Date        DATETIME        NOT NULL,
+
+    Content         TEXT            NOT NULL,
+
+    Fees            DECIMAL(11,2)   NOT NULL,
+
+    SysAdmin_ID     INT             NOT NULL,
+
+    
+
+    PRIMARY KEY (Ad_ID),
+
+    FOREIGN KEY (SysAdmin_ID)
+
+        REFERENCES Users (U_ID)
+
+    );
+
+
+
+
+
+CREATE table Clinics(
+
+    C_ID            INT             NOT NULL,
+
+    _Profile        TEXT            NOT NULL,
+
+    Services        TEXT            NOT NULL,
+
+    Location        TEXT            NOT NULL,
+
+    Website         TEXT,
+
+    EMail           VARCHAR(64)     NOT NULL,
+
+    Rating          DECIMAL(4,2),
+
+    Clinic_ManID    INT             NOT NULL,
+
+    Status_ID       INT             NOT NULL,
+
+    
+
+    PRIMARY KEY (C_ID),
+
+    FOREIGN KEY (Clinic_ManID)
+ 
+        REFERENCES Users (U_ID),
+
+    FOREIGN KEY (Status_ID)
+
+        REFERENCES Status (Status_ID),
+
+    UNIQUE (EMail)
+
+    );
+
+
+
+
+
+CREATE table Clinic_Contact_Numbers(
+
+    Number          VARCHAR(16)     NOT NULL,
+
+    Clinic_ID       INT             NOT NULL,
+
+    Type            VARCHAR(32),
+
+    _Order          INT             NOT NULL,
+
+    
+
+    PRIMARY KEY (_Order, Clinic_ID),
+
+    FOREIGN KEY (Clinic_ID)
+
+        REFERENCES Clinics (C_ID)
+
+    );
+
+
+
+
+CREATE table Dentists(
+
+    D_ID            INT             NOT NULL,
+
+    FName           VARCHAR(24)     NOT NULL,
+
+    LName           VARCHAR(24)     NOT NULL,
+
+    _Profile        TEXT            NOT NULL,
+
+    Years_Active    INT,
+
+    Website         TEXT,
+
+    EMail           VARCHAR(64),
+
+    Rating          DECIMAL(4,2),
+
+    Specialty_ID    INT             NOT NULL,
+
+    Clinic_ID       INT             NOT NULL,
+
+    Clinic_Office   TEXT,
+
+    Clinic_Num      INT,
+
+    Status_ID       INT             NOT NULL,
+
+    
+
+    PRIMARY KEY (D_ID),
+
+    FOREIGN KEY (Clinic_ID)
+
+        REFERENCES Clinics (C_ID),
+
+    FOREIGN KEY (Specialty_ID)
+
+        REFERENCES Specialties (Specialty_ID),
+
+    FOREIGN KEY (Status_ID)
+
+        REFERENCES Status (Status_ID),
+
+    UNIQUE (EMail)
+
+    );
+
+
+
+
+
+CREATE table Dentist_Contact_Numbers(
+
+    Number          VARCHAR(16)     NOT NULL,
+
+    Dentist_ID      INT             NOT NULL,
+
+    Type            VARCHAR(32),
+
+    _Order          INT             NOT NULL,
+
+    
+
+    PRIMARY KEY (_Order, Dentist_ID),
+
+    FOREIGN KEY (Dentist_ID)
+
+        REFERENCES Dentists (D_ID)
+
+    );
+
+
+
+
+
+CREATE table Specialties(
+
+    Specialty_ID    INT             NOT NULL,
+
+    Spec_Name       VARCHAR(64)     NOT NULL,
+
+    Description     TEXT            NOT NULL,
+
+    
+
+    PRIMARY KEY (Specialty_ID),
+
+    UNIQUE (Spec_Name)
+
+    );
+
+
+
+
+
+CREATE table Appointments(
+
+    Apm_ID          INT             NOT NULL,
+
+    Apm_Date        DATETIME        NOT NULL,
+
+    Apm_Type        VARCHAR(64),
+
+    Patient_ID      INT             NOT NULL,
+
+    Recept_ID       INT             NOT NULL,
+
+    Dentist_ID      INT             NOT NULL,
+
+    Status_ID       INT             NOT NULL,
+
+    
+
+    PRIMARY KEY (Apm_ID),
+
+    FOREIGN KEY (Dentist_ID)
+
+        REFERENCES Dentists (D_ID),
+
+    FOREIGN KEY (Patient_ID)
+
+        REFERENCES Users (U_ID),
+
+    FOREIGN KEY (Recept_ID)
+
+        REFERENCES Users (U_ID),
+
+    FOREIGN KEY (Status_ID)
+
+        REFERENCES Status (Status_ID),
+
+    UNIQUE(Dentist_ID,Apm_Date),
+
+    UNIQUE(Patient_ID,Apm_Date)
+
+    );
+
+
+INSERT INTO User_Types () values (0,'System Admin'),
+	(1,'Clinic Admin'),
+	(2,'Clinic Receptionist'),
+	(3,'Customer');
+
+INSERT INTO Status () values (0,'active','General','This account/clinic/doctor/appointment is active and in good standing. if appointment is active, then it is yet to occur'),
+	(1,'suspended','Users/Clinics/Doctors','the user/clinic/doctor is suspended from using this service. Contact Admin for more info.'),
+	(2,'deactivated','Users','the user manually deactivated his account. Can be reactivated by logging in'),
+	(3,'inactive','Clinics','this clinic is no longer subscribed to our service.'),
+	(4,'retired','Doctors','doctor no longer works at any subscribed clinic.'),
+	(5,'finished','Appointments','appointment is finished and ready to be reviewed'),
+	(6,'complete','Appointments','appointment is finished and rated sucsessfully'),
+	(7,'cancelled','Appointments','appointment is cancelled either due to prior cancellation of the user, or due to user failing to come on time.'),
+	(8,'pending','Appointments','appointment added by a client and needs confirmation from clinic receptionist.');
+
+INSERT INTO Specialties () values (0,'Endodontist','Root canal specialist:- Inside our teeth are tiny cavern-like passages called canals that contain sensitive living tissue (pulp), blood vessels, and nerves. Endodontists specialize in diagnosing and treating issues within our tooth. For example, if your tooth’s pulp becomes infected you may need a root canal. If your dentist believes a root canal is necessary, they may recommend you visit an endodontist for treatment.'),
+	(1,'Oral and Maxillofacial Surgeon','Oral surgery specialist:- This specialist focuses on treating problems related to the hard and soft tissues of the face, mouth, and jaw. You don’t need an oral surgeon for every type of oral surgery. Oral and maxillofacial surgeons specialize in treatments that require complex procedures or deep levels of sedation – beyond nitrous oxide or laughing gas. In fact, oral surgeons are the only health care professionals besides anesthesiologists who can administer all levels of sedation. Procedures performed by oral surgeons include tooth extractions, corrective jaw surgery, and cleft lip or cleft palate surgery.'),
+	(2,'Orthodontist','Alignment specialist:- Orthodontics is about correcting teeth and jaws that are out of position. You may see an orthodontist if your jaw isn’t aligned properly leading to an overbite, underbite or crossbite. You may see an orthodontist if your teeth are crooked or misaligned. In these situations, an orthodontist may use braces, clear aligners, palatal expanders, or headgear as part of your treatment plan. Your child’s pediatric dentist may recommend a consultation from an orthodontist. Whether you’re seeking orthodontic treatment for yourself or your child, be sure your plan covers it. Also, make sure your plan doesn’t require a referral from your primary care dentist.'),
+	(3,'Pediatric Dentist','Kid dental specialist:- Pediatric dentists are to a child’s oral health like pediatricians are to their overall health. They’re dentists who specialize in the oral development and care of children from infancy through their teens. Pediatric dentists help your child stay on the path to a lifelong, healthy smile. They provide routine exams and cleanings, habit counseling (stop thumb sucking), fillings for cavities, and diagnosis of oral conditions associated with other diseases like childhood diabetes. Pediatric dentists monitor the development of your child’s smile and recommend specialists care when needed, like orthodontics.'),
+	(4,'Periodontist','Gum specialist:- Periodontal dentistry focuses on the prevention, diagnosis, and treatment of diseases that affect the gums, and other structures that support the teeth. Think of them as the gum disease experts of dentistry. Periodontists recognize and treat the early stages of gum disease, perform minor surgery to resolve severe gum disease, and restore the appearance of your smile. If you’re diagnosed with gum disease, your dentist may refer you to a periodontist.'),
+	(5,'Prosthodontist','Replacement specialist:- Prosthodontists focus on restoring and replacing lost or damaged teeth. Prosthodontists have a unique understanding of everything that goes into a beautiful, functional, and natural-looking smile. Prosthodontists specialize in porcelain veneers, crowns, dental implants, fixed bridges, dentures, and reconstructive dentistry.  If you need a dental treatment related to replacing or repairing teeth, your dentist may recommend you visit a prosthodontist.');
