@@ -10,10 +10,10 @@ public class Appointments {
 	Recept_ID, 
 	Dentist_ID, 
 	Status_ID;
-	private Date Apm_Date;
+	private String Apm_Date;
 	private String Apm_Type;
 	
-	public Appointments(int Apm_ID, Date Apm_Date, String Apm_Type, int Patient_ID, int Recept_ID, int Dentist_ID, int Status_ID) {
+	public Appointments(int Apm_ID, String Apm_Date, String Apm_Type, int Patient_ID, int Recept_ID, int Dentist_ID, int Status_ID) {
 		if(Meth.var_valid(Apm_Type,64)){
 			this.Apm_ID = Apm_ID;
 			this.Apm_Date = Apm_Date;
@@ -27,7 +27,7 @@ public class Appointments {
 		}
 	}
 	
-	public Appointments(int Apm_ID, Date Apm_Date, int Patient_ID, int Recept_ID, int Dentist_ID, int Status_ID) {
+	public Appointments(int Apm_ID, String Apm_Date, int Patient_ID, int Recept_ID, int Dentist_ID, int Status_ID) {
 		this.Apm_ID = Apm_ID;
 		this.Apm_Date = Apm_Date;
 		this.Apm_Type = null;
@@ -37,7 +37,7 @@ public class Appointments {
 		this.Status_ID = Status_ID;
 	}
 	
-	public Date getApm_Date() {
+	public String getApm_Date() {
 		return Apm_Date;
 	}
 	
@@ -65,7 +65,7 @@ public class Appointments {
 		return Status_ID;
 	}
 	
-	public void setApm_Date(Date apm_Date) {
+	public void setApm_Date(String apm_Date) {
 		Apm_Date = apm_Date;
 	}
 	
@@ -102,7 +102,7 @@ public class Appointments {
     	ResultSet r = connect.prepareStatement("SELECT * From Appointments;").executeQuery();
     	
     	while(r.next())
-    		al.add(new Appointments(r.getInt("Apm_ID"), r.getDate("Apm_Date"), r.getString("Apm_Type"), r.getInt("Patient_ID"), r.getInt("Recept_ID"), r.getInt("Dentist_ID"), r.getInt("Status_ID")));
+    		al.add(new Appointments(r.getInt("Apm_ID"), r.getString("Apm_Date"), r.getString("Apm_Type"), r.getInt("Patient_ID"), r.getInt("Recept_ID"), r.getInt("Dentist_ID"), r.getInt("Status_ID")));
     	return al;
     }
 }

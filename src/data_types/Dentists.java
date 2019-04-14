@@ -21,9 +21,9 @@ public class Dentists {
     FName,
     LName,
     EMail;
-    private BigDecimal Rating;
+    private double Rating;
 
-    public Dentists(int D_ID, String FName, String LName, String Profile, int Years_Active, String Website, String EMail, BigDecimal Rating, int Specialty_ID, int Clinic_ID, String Clinic_Office, int Clinic_Num, int Status_ID) {
+    public Dentists(int D_ID, String FName, String LName, String Profile, int Years_Active, String Website, String EMail, double Rating, int Specialty_ID, int Clinic_ID, String Clinic_Office, int Clinic_Num, int Status_ID) {
         if(Meth.var_valid(FName,24) && Meth.var_valid(LName,24) && Meth.var_valid(EMail,64)){
 			this.D_ID = D_ID;
 			this.FName = FName;
@@ -53,7 +53,7 @@ public class Dentists {
 	        this.Years_Active = -1;
 	        this.Website = null;
 	        this.EMail = null;
-	        this.Rating = null;
+	        this.Rating = 0;
 	        this.Specialty_ID = Specialty_ID;
 	        this.Clinic_ID = Clinic_ID;
 	        this.Clinic_Office = null;
@@ -73,7 +73,7 @@ public class Dentists {
 	        this.Years_Active = -1;
 	        this.Website = null;
 	        this.EMail = null;
-	        this.Rating = null;
+	        this.Rating = 0;
 	        this.Specialty_ID = -1;
 	        this.Clinic_ID = -1;
 	        this.Clinic_Office = null;
@@ -113,7 +113,7 @@ public class Dentists {
 		return _Profile;
 	}
     
-    public BigDecimal getRating() {
+    public double getRating() {
 		return Rating;
 	}
     
@@ -177,7 +177,7 @@ public class Dentists {
 		_Profile = profile;
 	}
     
-    public void setRating(BigDecimal rating) {
+    public void setRating(double rating) {
 		Rating = rating;
 	}
     
@@ -228,7 +228,7 @@ public class Dentists {
     	ResultSet r = connect.prepareStatement("SELECT * From Dentists;").executeQuery();
     	
     	while(r.next())
-    		al.add(new Dentists(r.getInt("D_ID"), r.getString("FName"), r.getString("LName"), r.getString("Profile"), r.getInt("Years_Active"), r.getString("Website"), r.getString("EMail"), r.getBigDecimal("Rating"), r.getInt("Specialty_ID"), r.getInt("Clinic_ID"), r.getString("Clinic_Office"), r.getInt("Clinic_Num"), r.getInt("Status_ID")));
+    		al.add(new Dentists(r.getInt("D_ID"), r.getString("FName"), r.getString("LName"), r.getString("Profile"), r.getInt("Years_Active"), r.getString("Website"), r.getString("EMail"), r.getDouble("Rating"), r.getInt("Specialty_ID"), r.getInt("Clinic_ID"), r.getString("Clinic_Office"), r.getInt("Clinic_Num"), r.getInt("Status_ID")));
     	return al;
     }
 

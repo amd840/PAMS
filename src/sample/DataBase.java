@@ -1,6 +1,5 @@
 package sample;
-import data_types.Advertisements;
-import data_types.Clinic_Contact_Numbers;
+import data_types.*;
 import data_types.Clinics;
 
 import java.math.BigDecimal;
@@ -165,6 +164,38 @@ public class DataBase {
             //Users users = new Users(Result.getString("UserName"),Result.getString("Hashed_PW"),Result.getString("EMail"),Result.getString("FName"),Result.getString("LName"),Result.getString("Reg_Date"),id,1,0);
             Advertisements advert = new Advertisements(Integer.parseInt(Result.getString("Ad_ID")),Result.getString("Start_Date"),Result.getString("End_Date"),Result.getString("Content"),Result.getDouble("Fees"),Result.getInt("SysAdmin_ID"));
             arrayList.add(advert);
+
+            /*
+            arrayList.add(Result.getString("U_ID"));
+
+            arrayList.add(Result.getString("UserName"));
+            arrayList.add(Result.getString("FName + LName"));
+
+            arrayList.add(Result.getString("Hashed_PW"));
+            arrayList.add(Result.getString("EMail"));
+            arrayList.add(Result.getString("Reg_Date"));
+            arrayList.add(Result.getString("Type_ID"));
+            */
+
+
+        }
+        System.out.println("Done");
+        return arrayList;
+
+    }
+
+    public ArrayList<Appointments> getAppointments(Users RA) throws Exception{
+        PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Appointments WHERE Recept_ID ="+RA.getU_ID()+";");
+        ResultSet Result = statement1.executeQuery();
+
+        ArrayList<Appointments> arrayList = new ArrayList<Appointments>();
+
+        //if (!Result.next())
+        //   throw new Exception("There is no Advertisements");
+        while(Result.next()){
+
+            Appointments appointment = new Appointments(Result.getInt("Apm_ID"),Result.getString("Apm_Date"),Result.getString("Apm_Type"),Result.getInt("Patient_ID"),Result.getInt("Recept_ID"),Result.getInt("Dentist_ID"),Result.getInt("Status_ID"));
+            arrayList.add(appointment);
 
             /*
             arrayList.add(Result.getString("U_ID"));
@@ -387,6 +418,32 @@ public class DataBase {
             clinicsArrayList.add(clinic);
         }
         return clinicsArrayList;
+    }
+    public ArrayList<Dentists> getDentists()throws Exception{
+        PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Dentists ");
+        ResultSet Result =statement1.executeQuery();
+        ArrayList<Dentists> dentistsArrayList = new ArrayList<>();
+
+        while(Result.next()){
+            Dentists dentists = new Dentists();
+
+            dentists.setD_ID(Result.getInt("D_ID"));
+            dentists.setEMail(Result.getString("EMail"));
+            dentists.set_Profile(Result.getString("_Profile"));
+            dentists.setYears_Active(Result.getInt("Years_Active"));
+            dentists.setRating(Result.getDouble("Rating"));
+            dentists.setFName(Result.getString("FName"));
+            dentists.setLName(Result.getString("LName"));
+            dentists.setWebsite(Result.getString("Website"));
+            dentists.setClinic_Office(Result.getString("Clinic_Office"));
+            dentists.setClinic_ID(Result.getInt("Clinic_ID"));
+            dentists.setClinic_Num(Result.getInt("Clinic_Num"));
+            dentists.setSpecialty_ID(Result.getInt("Specialty_ID"));
+            dentists.setStatus_ID(Result.getInt("Status_ID"));
+
+            dentistsArrayList.add(dentists);
+        }
+        return dentistsArrayList;
     }
     public Clinics getClinic(Users admin)throws Exception{
         PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Clinics where Clinic_ManID = "+admin.getU_ID());

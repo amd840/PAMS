@@ -154,7 +154,7 @@ public class ad extends Application {
         //grid3.add(btn1, 0, 2);
 
 
-        grid.add(btn1, 0, 5);
+        //grid.add(btn1, 0, 5);
         grid.setPadding(new Insets(10, 10, 10, 10));
 
         //Set Back Action

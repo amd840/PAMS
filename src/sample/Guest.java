@@ -1,6 +1,7 @@
 package sample;
 
 import data_types.Clinics;
+import data_types.Dentists;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -57,31 +58,52 @@ public class Guest extends Application {
         TableBox.setAlignment(Pos.CENTER);
 
 
-        TableColumn columnId = new TableColumn("C_ID");
+        TableColumn columnId = new TableColumn("D_ID");
         columnId.setStyle("-fx-alignment: CENTER;");
-        columnId.setCellValueFactory(new PropertyValueFactory<>("C_ID"));
+        columnId.setCellValueFactory(new PropertyValueFactory<>("D_ID"));
         TableColumn columnUser = new TableColumn("_Profile");
         columnUser.setStyle("-fx-alignment: CENTER;");
         columnUser.setCellValueFactory(new PropertyValueFactory<>("_Profile"));
 
-        TableColumn columnFN = new TableColumn("Services");
-        columnFN.setCellValueFactory(new PropertyValueFactory<>("Services"));
+        TableColumn columnFN = new TableColumn("FName");
+        columnFN.setCellValueFactory(new PropertyValueFactory<>("FName"));
         columnFN.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnLN = new TableColumn("Location");
-        columnLN.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        TableColumn columnLN = new TableColumn("LName");
+        columnLN.setCellValueFactory(new PropertyValueFactory<>("LName"));
         columnLN.setStyle("-fx-alignment: CENTER;");
 
-        TableColumn columnPW = new TableColumn("EMail");
-        columnPW.setCellValueFactory(new PropertyValueFactory<>("EMail"));
-        columnPW.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnEmail = new TableColumn("Rating");
-        columnEmail.setCellValueFactory(new PropertyValueFactory<>("Rating"));
+        TableColumn columnY = new TableColumn("Years_Active");
+        columnY.setCellValueFactory(new PropertyValueFactory<>("Years_Active"));
+        columnY.setStyle("-fx-alignment: CENTER;");
+
+        TableColumn columnrate = new TableColumn("Rating");
+        columnrate.setCellValueFactory(new PropertyValueFactory<>("Rating"));
+        columnrate.setStyle("-fx-alignment: CENTER;");
+        TableColumn columnEmail = new TableColumn("EMail");
+        columnEmail.setCellValueFactory(new PropertyValueFactory<>("EMail"));
         columnEmail.setStyle("-fx-alignment: CENTER;");
 
+        TableColumn columnweb = new TableColumn("Website");
+        columnweb.setCellValueFactory(new PropertyValueFactory<>("Website"));
+        columnweb.setStyle("-fx-alignment: CENTER;");
 
-        TableColumn columnDate = new TableColumn("Clinic_ManID");
-        columnDate.setCellValueFactory(new PropertyValueFactory<>("Clinic_ManID"));
-        columnDate.setStyle("-fx-alignment: CENTER;");
+        TableColumn columnSpecialty_ID = new TableColumn("Specialty_ID");
+        columnSpecialty_ID.setCellValueFactory(new PropertyValueFactory<>("Specialty_ID"));
+        columnSpecialty_ID.setStyle("-fx-alignment: CENTER;");
+
+
+        TableColumn columnClinic_ID = new TableColumn("Clinic_ID");
+        columnClinic_ID.setCellValueFactory(new PropertyValueFactory<>("Clinic_ID"));
+        columnClinic_ID.setStyle("-fx-alignment: CENTER;");
+
+
+        TableColumn columnClinic_Office = new TableColumn("Clinic_Office");
+        columnClinic_Office.setCellValueFactory(new PropertyValueFactory<>("Clinic_Office"));
+        columnClinic_Office.setStyle("-fx-alignment: CENTER;");
+
+        TableColumn columnClinic_Num = new TableColumn("Clinic_Num");
+        columnClinic_Num.setCellValueFactory(new PropertyValueFactory<>("Clinic_Num"));
+        columnClinic_Num.setStyle("-fx-alignment: CENTER;");
 
 
 
@@ -108,7 +130,7 @@ public class Guest extends Application {
         // Button btn3 = new Button("reset");
 
         //Add Columns and set their width
-        tableView.getColumns().addAll(columnId,columnUser,columnFN,columnLN,columnPW,columnEmail,columnDate, columnState);
+        tableView.getColumns().addAll(columnId,columnFN,columnLN,columnUser,columnY,columnweb,columnEmail,columnrate,columnSpecialty_ID,columnClinic_ID,columnClinic_Office,columnClinic_Num, columnState);
 
        //add element in the table
 
@@ -208,10 +230,11 @@ public class Guest extends Application {
             //Users user = Main.TheUser;
 
             DataBase admin = new DataBase();
-            ArrayList<Clinics> cl = new ArrayList<>();
+            ArrayList<Dentists> dentists = new ArrayList<>();
             //cl = admin.ClinicAdd
-            Users user = admin.U_Login("a201","444");
-            tableView.getItems().addAll(user);
+            dentists=admin.getDentists();
+            //Users user = admin.U_Login("a201","444");
+            tableView.getItems().addAll(dentists);
 
         }catch (Exception e){
             System.out.println(e.getMessage());

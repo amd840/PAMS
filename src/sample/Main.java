@@ -116,10 +116,14 @@ public class Main extends Application {
                 pref.put("User",user.getU_ID()+"");
                 System.out.println(pref.get("User","root"));
 
-                if (user.getType_ID()==3) {
+                if (user.getType_ID()==2) {
                     ClinicAdmin clinicAdmin = new ClinicAdmin();
                     clinicAdmin.start(primaryStage);
+                }else if (user.getType_ID()==1) {
+                    Admins admin = new Admins();
+                    admin.start(primaryStage);
                 }
+
             } catch (Exception e) {
                 Alert at = new Alert(Alert.AlertType.ERROR);
                 at.setContentText(e.getMessage());

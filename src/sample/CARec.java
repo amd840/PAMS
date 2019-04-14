@@ -73,7 +73,7 @@ public class CARec extends Application {
 
         TextField tstatus = new TextField();
 
-        Button add = new Button("Add receptionest Admin");
+        Button add = new Button("Add receptionest");
 
 
         // ...

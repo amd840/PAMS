@@ -2,7 +2,6 @@ package sample;
 
 
 
-import data_types.Clinics;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.application.Application;
@@ -318,7 +317,7 @@ public class Admins extends Application {
             T[i] = new TextField();
            */
         //Add Butttons
-        Button btn1 = new Button("Submit");
+        Button btn1 = new Button("Clinics");
         // Button btn2 = new Button("search");
         // Button btn3 = new Button("reset");
 
@@ -440,11 +439,20 @@ public class Admins extends Application {
 
 
         //reset CRN Text Field
-        /*btn3.setOnAction((ActionEvent e) -> {
-            for (int i = 0; i < T.length; i++)
-                T[i].clear();
+        btn1.setOnAction((ActionEvent e) -> {
+            Clinics st = new Clinics();
+            try {
+                st.start(primaryStage);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText(e1.getMessage());
+                alert.show();
+            }
+
+
         });
-*/
+
         //Set the message that will show the errors
         Alert message = new Alert(Alert.AlertType.INFORMATION);
         message.setHeaderText(null);

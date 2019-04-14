@@ -238,6 +238,22 @@ public class ClinicAdmin extends Application {
                 e1.printStackTrace();
             }
         });
+        receptionist.setOnAction((ActionEvent e) -> {
+            CARec rec = new CARec();
+            try {
+                rec.start(primaryStage);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
+        advertisement.setOnAction((ActionEvent e) -> {
+            ad advert = new ad();
+            try {
+                advert.start(primaryStage);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
 
         //Set the message that will show the errors
         Alert message = new Alert(Alert.AlertType.INFORMATION);

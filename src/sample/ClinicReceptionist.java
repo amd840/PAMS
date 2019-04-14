@@ -1,5 +1,7 @@
 package sample;
 
+import data_types.Advertisements;
+import data_types.Appointments;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -8,10 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -23,6 +22,7 @@ import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.prefs.Preferences;
 
 public class ClinicReceptionist  extends Application {
 
@@ -56,34 +56,28 @@ public class ClinicReceptionist  extends Application {
         TableBox.setAlignment(Pos.CENTER);
 
 
-        TableColumn columnId = new TableColumn("U_ID");
+        TableColumn columnId = new TableColumn("Apm_ID");
         columnId.setStyle("-fx-alignment: CENTER;");
-        columnId.setCellValueFactory(new PropertyValueFactory<>("U_ID"));
-        TableColumn columnUser = new TableColumn("UserName");
-        columnUser.setStyle("-fx-alignment: CENTER;");
-        columnUser.setCellValueFactory(new PropertyValueFactory<>("UserName"));
+        columnId.setCellValueFactory(new PropertyValueFactory<>("Apm_ID"));
 
-        TableColumn columnFN = new TableColumn("FName");
-        columnFN.setCellValueFactory(new PropertyValueFactory<>("FName"));
-        columnFN.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnLN = new TableColumn("LName");
-        columnLN.setCellValueFactory(new PropertyValueFactory<>("LName"));
-        columnLN.setStyle("-fx-alignment: CENTER;");
-
-        TableColumn columnPW = new TableColumn("Hashed_PW");
-        columnPW.setCellValueFactory(new PropertyValueFactory<>("Hashed_PW"));
-        columnPW.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnEmail = new TableColumn("EMail");
-        columnEmail.setCellValueFactory(new PropertyValueFactory<>("EMail"));
-        columnEmail.setStyle("-fx-alignment: CENTER;");
-
-
-        TableColumn columnDate = new TableColumn("Reg_Date");
-        columnDate.setCellValueFactory(new PropertyValueFactory<>("Reg_Date"));
+        TableColumn columnDate = new TableColumn("Apm_Date");
         columnDate.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnType = new TableColumn("Type_ID");
-        columnType.setCellValueFactory(new PropertyValueFactory<>("Type_ID"));
+        columnDate.setCellValueFactory(new PropertyValueFactory<>("Apm_Date"));
+
+        TableColumn columnType = new TableColumn("Apm_Type");
+        columnType.setCellValueFactory(new PropertyValueFactory<>("Apm_Type"));
         columnType.setStyle("-fx-alignment: CENTER;");
+        TableColumn columnPatient_ID = new TableColumn("Patient_ID");
+        columnPatient_ID.setCellValueFactory(new PropertyValueFactory<>("Patient_ID"));
+        columnPatient_ID.setStyle("-fx-alignment: CENTER;");
+
+        TableColumn columnRecept_ID = new TableColumn("Recept_ID");
+        columnRecept_ID.setCellValueFactory(new PropertyValueFactory<>("Recept_ID"));
+        columnRecept_ID.setStyle("-fx-alignment: CENTER;");
+        TableColumn columnDentist_ID = new TableColumn("Dentist_ID");
+        columnDentist_ID.setCellValueFactory(new PropertyValueFactory<>("Dentist_ID"));
+        columnDentist_ID.setStyle("-fx-alignment: CENTER;");
+
 
 
         TableColumn columnState = new TableColumn("Status_ID");
@@ -114,7 +108,7 @@ public class ClinicReceptionist  extends Application {
         // Button btn3 = new Button("reset");
 
         //Add Columns and set their width
-        tableView.getColumns().addAll(columnId,columnUser,columnFN,columnLN,columnPW,columnEmail,columnDate, columnType, columnState);
+        tableView.getColumns().addAll(columnId,columnDate, columnType,columnPatient_ID,columnRecept_ID,columnDentist_ID, columnState);
         //columnCourse.setPrefWidth(100);
         //columnCRN.setPrefWidth(75);
         //columnDay.setPrefWidth(75);
@@ -135,7 +129,7 @@ public class ClinicReceptionist  extends Application {
         GridPane grid3 = new GridPane();
 
 
-        grid.add(btnB, 0, 0);
+        //grid.add(btnB, 0, 0);
         grid.add(Title, 0, 1);
 
         //grid.add(Term, 0, 2);
@@ -157,9 +151,68 @@ public class ClinicReceptionist  extends Application {
         //grid3.add(btn1, 0, 2);
 
 
-        grid.add(btn1, 0, 5);
+        //grid.add(btn1, 0, 5);
         grid.setPadding(new Insets(10, 10, 10, 10));
 
+        /*FlowPane adding = new FlowPane();
+        //componant
+        Label id = new Label("Ad ID");
+        Label date = new Label("Apm_Date");
+        Label type = new Label("Apm_Type");
+        Label patient = new Label("Patient_ID");
+        Label recept = new Label("Recept_ID");
+        Label dentist = new Label("Dentist_ID");
+
+        Label Statusid = new Label("Status_ID");
+
+        // Label regdate = new Label("Reg_Date");
+        //Label status = new Label("Status ID");
+
+        TextField tid = new TextField();
+        tid.setMaxWidth(50);
+        TextField tdate = new TextField();
+        tstart_date.setMaxWidth(60);
+
+        TextField ttype = new TextField();
+        tend_date.setMaxWidth(60);
+
+        TextField tpatient = new TextField();
+        tcontent.setMaxWidth(100);
+
+        TextField trecept = new TextField();
+        tfees.setMaxWidth(70);
+
+        TextField tsysAdmin_id = new TextField();
+        tsysAdmin_id.setMaxWidth(50);
+        //TextField tregdate = new TextField();
+
+
+
+        adding.getChildren().add(id);
+        adding.getChildren().add(tid);
+        adding.getChildren().add(start_date);
+        adding.getChildren().add(tstart_date);
+        adding.getChildren().add(end_date);
+
+        adding.getChildren().add(tend_date);
+        adding.getChildren().add(content);
+
+        adding.getChildren().add(tcontent);
+        adding.getChildren().add(fees);
+        adding.getChildren().add(tfees);
+
+        adding.getChildren().add(sysAdmin_id);
+        adding.getChildren().add(tsysAdmin_id);
+
+
+        Button addnewAdd = new Button("add");
+
+        adding.getChildren().add(addnewAdd);
+        adding.setHgap(10);
+        adding.setVgap(10);
+
+        grid.add(adding,0,6);
+        */
         //Set Back Action
         /*back.setOnMouseClicked((MouseEvent e) -> {
             MainView show = new MainView();
@@ -192,8 +245,14 @@ public class ClinicReceptionist  extends Application {
             //Users user = Main.TheUser;
 
             DataBase admin = new DataBase();
-            Users user = admin.U_Login("a201","444");
-            tableView.getItems().addAll(user);
+
+            Preferences pref = Preferences.userNodeForPackage(Preferences.class);
+            String uid = (pref.get("User", "root"));
+
+            Users RA = admin.getClinicAdmin(uid);
+            ArrayList<Appointments> ads = admin.getAppointments(RA);
+            //Users user = admin.
+            tableView.getItems().addAll(ads);
 
         }catch (Exception e){
             System.out.println(e.getMessage());

@@ -82,9 +82,9 @@ public class Clinics extends Application {
         TableColumn columnId = new TableColumn("C_ID");
         columnId.setStyle("-fx-alignment: CENTER;");
         columnId.setCellValueFactory(new PropertyValueFactory<>("C_ID"));
-        TableColumn columnUser = new TableColumn("_Profile");
+        TableColumn columnUser = new TableColumn("Profile");
         columnUser.setStyle("-fx-alignment: CENTER;");
-        columnUser.setCellValueFactory(new PropertyValueFactory<>("_Profile"));
+        columnUser.setCellValueFactory(new PropertyValueFactory<>("Profile"));
 
         TableColumn columnFN = new TableColumn("Services");
         columnFN.setCellValueFactory(new PropertyValueFactory<>("Services"));
@@ -125,7 +125,7 @@ public class Clinics extends Application {
             T[i] = new TextField();
            */
         //Add Butttons
-        Button btn1 = new Button("Submit");
+        Button btn1 = new Button("Clinic Admins");
         // Button btn2 = new Button("search");
         // Button btn3 = new Button("reset");
 
@@ -232,8 +232,8 @@ public class Clinics extends Application {
             //Users user = Main.TheUser;
 
             DataBase admin = new DataBase();
-            Users user = admin.U_Login("a201","444");
-            tableView.getItems().addAll(user);
+            ArrayList<data_types.Clinics> clinics = admin.getClinics();
+            tableView.getItems().addAll(clinics);
 
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -245,11 +245,28 @@ public class Clinics extends Application {
 
 
         //reset CRN Text Field
-        /*btn3.setOnAction((ActionEvent e) -> {
-            for (int i = 0; i < T.length; i++)
-                T[i].clear();
+        btn1.setOnAction((ActionEvent e) -> {
+            Admins admins = new Admins();
+            try {
+                admins.start(primaryStage);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+
         });
-*/
+        add.setOnAction((ActionEvent e) -> {
+            try {
+                DataBase db = new DataBase();
+                data_types.Clinics clinics = new data_types.Clinics(Integer.valueOf(tid.getText()),tprofile.getText(),tservices.getText(),tlocation.getText(),twebsite.getText(),temail.getText(),Double.valueOf(trating.getText()),Integer.valueOf(tmanid.getText()),Integer.valueOf(tstatus.getText()));
+                db.addClinic(clinics);
+                tableView.getItems().addAll(clinics);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+
+
+        });
+
         //Set the message that will show the errors
         Alert message = new Alert(Alert.AlertType.INFORMATION);
         message.setHeaderText(null);
