@@ -50,6 +50,7 @@ public class ClinicAdmin extends Application {
         //Button back = new Button("Back");
         HBox btnB = new HBox();
         btnB.getChildren().add(back);
+        Button update = new Button("Update");
 
 
 
@@ -81,8 +82,11 @@ public class ClinicAdmin extends Application {
 
 
 
-
         // ...
+        Button receptionist = new Button("receptionist\t");
+        Button dentist = new Button("dentist\t\t");
+        Button advertisement = new Button("advertisement\t");
+
 
         Label Title = new Label("Clinic Admin");
         Title.setFont(new Font(20));
@@ -119,7 +123,11 @@ public class ClinicAdmin extends Application {
 
 
 
+        grid.add(receptionist,0,0);
+        grid.add(dentist,0,1);
+        grid.add(advertisement,0,2);
 
+        grid.setVgap(30);
 
         grid3.add(clId, 0, 0);
         grid3.add(tclId, 1, 0);
@@ -141,6 +149,8 @@ public class ClinicAdmin extends Application {
         grid3.add(tClinicID, 1, 7);
         grid3.add(status, 0, 8);
         grid3.add(tstatus, 1, 8);
+        grid3.add(update, 0, 9);
+
 
         grid3.setVgap(10);
         grid3.setHgap(10);
@@ -190,6 +200,16 @@ public class ClinicAdmin extends Application {
             //add data
 
             tclId.setText(clinic.getC_ID()+"");
+            tClinicID.setText(clinic.getClinic_ManID()+"");
+            temail.setText(clinic.getEMail());
+            tlocation.setText(clinic.getLocation());
+            tprofile.setText(clinic.getProfile());
+            tservices.setText(clinic.getServices());
+            twebsite.setText(clinic.getWebsite());
+            trating.setText(clinic.getRating()+"");
+            tstatus.setText(""+clinic.getStatus_ID());
+
+
 
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -207,11 +227,18 @@ public class ClinicAdmin extends Application {
 
 
         //reset CRN Text Field
-        /*btn3.setOnAction((ActionEvent e) -> {
-            for (int i = 0; i < T.length; i++)
-                T[i].clear();
+        update.setOnAction((ActionEvent e) -> {
+            Clinics clinic = new Clinics(Integer.parseInt(tclId.getText()),tprofile.getText(),tservices.getText(),tlocation.getText(),temail.getText(),Integer.parseInt(tClinicID.getText()),Integer.parseInt(tstatus.getText()));
+            DataBase db = null;
+            try {
+                db = new DataBase();
+                db.ClinicUpdate(clinic);
+
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
         });
-*/
+
         //Set the message that will show the errors
         Alert message = new Alert(Alert.AlertType.INFORMATION);
         message.setHeaderText(null);
@@ -280,7 +307,7 @@ public class ClinicAdmin extends Application {
         });*/
 
         primaryStage.setTitle("Clinics");
-        primaryStage.setScene(new Scene(MainGrid, 900, 450));
+        primaryStage.setScene(new Scene(MainGrid, 600, 450));
         primaryStage.show();
 
     }

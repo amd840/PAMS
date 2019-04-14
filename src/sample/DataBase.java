@@ -1,4 +1,5 @@
 package sample;
+import data_types.Advertisements;
 import data_types.Clinic_Contact_Numbers;
 import data_types.Clinics;
 
@@ -62,11 +63,37 @@ public class DataBase {
 
         return Result2;
     }
+    public Users getClinicAdmin(String ID) throws Exception{
+        //statement = connection.createStatement();
+        String datainfo = ("SELECT * FROM Users where U_ID = "+ID+"");
+        PreparedStatement statement1 = connection.prepareStatement(datainfo);
+        ResultSet Result = statement1.executeQuery();
+
+       // ResultSet Result =statement.executeQuery(datainfo);
+        String Result2 = "";
+
+        //if (!Result.next()) {}
+
+        Result.next();
+        Users user = new Users(Result.getString("UserName"),Result.getString("Hashed_PW"),Result.getString("EMail"),Result.getString("FName"),Result.getString("LName"),Result.getString("Reg_Date"),Result.getInt("U_ID"),Result.getInt("Type_ID"),Result.getInt("Status_ID"));
+
+        String breakstr;
+        return user;
+    }
     public void addUser(Users users)throws Exception{
 
 
         PreparedStatement add = connection.prepareStatement("INSERT INTO Users () values ("+users.getU_ID()+",'"+users.getUserName()+"','"+users.getFName()+"','"+users.getLName()+"','"+users.getHashPassword()+"','"+users.getEMail()+"',CURRENT_TIMESTAMP,'"+users.getType_ID()+"',1)");
         add.executeUpdate();
+
+
+    }
+    public void addAd(Advertisements ad)throws Exception{
+
+
+        PreparedStatement add = connection.prepareStatement("INSERT INTO `Advertisements` (`Ad_ID`, `Start_Date`, `End_Date`, `Content`, `Fees`, `SysAdmin_ID`) VALUES ('"+ad.getAd_ID()+"', '"+ad.getStart_Date()+"', '"+ad.getEnd_Date()+"', '"+ad.getContent()+"', '"+ad.getFees()+"', '"+ad.getSysAdmin_ID()+"');");
+        add.executeUpdate();
+        //INSERT INTO `Advertisements` (`Ad_ID`, `Start_Date`, `End_Date`, `Content`, `Fees`, `SysAdmin_ID`) VALUES ('222', '2019-04-15', '2019-04-03', 'text', '1.5', '1');
 
 
     }
@@ -123,8 +150,38 @@ public class DataBase {
         System.out.println("Done");
         return arrayList;
 
+    }
+
+    public ArrayList<Advertisements> getAdvertisment(Users CAdmin) throws Exception{
+        PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Advertisements WHERE SysAdmin_ID ="+CAdmin.getU_ID()+";");
+        ResultSet Result = statement1.executeQuery();
+
+        ArrayList<Advertisements> arrayList = new ArrayList<Advertisements>();
+
+        //if (!Result.next())
+         //   throw new Exception("There is no Advertisements");
+        while(Result.next()){
+
+            //Users users = new Users(Result.getString("UserName"),Result.getString("Hashed_PW"),Result.getString("EMail"),Result.getString("FName"),Result.getString("LName"),Result.getString("Reg_Date"),id,1,0);
+            Advertisements advert = new Advertisements(Integer.parseInt(Result.getString("Ad_ID")),Result.getString("Start_Date"),Result.getString("End_Date"),Result.getString("Content"),Result.getDouble("Fees"),Result.getInt("SysAdmin_ID"));
+            arrayList.add(advert);
+
+            /*
+            arrayList.add(Result.getString("U_ID"));
+
+            arrayList.add(Result.getString("UserName"));
+            arrayList.add(Result.getString("FName + LName"));
+
+            arrayList.add(Result.getString("Hashed_PW"));
+            arrayList.add(Result.getString("EMail"));
+            arrayList.add(Result.getString("Reg_Date"));
+            arrayList.add(Result.getString("Type_ID"));
+            */
 
 
+        }
+        System.out.println("Done");
+        return arrayList;
 
     }
 
@@ -430,6 +487,7 @@ public class DataBase {
         add.executeUpdate();
 
     }
+
     public void UpdateWholeCA(Users user) throws Exception{
 
         PreparedStatement add = connection.prepareStatement("UPDATE `Users` SET `U_ID`="+user.getU_ID()+",`UserName`='"+user.getUserName()+"',`FName`='"+user.getFName()+"',`LName`='"+user.getLName()+"',`HashPassword`='"+user.getHashPassword()+"',`EMail`='"+user.getEMail()+"',`Reg_Date`='CURRENT_TIMESTAMP',`Type_ID`= 2,`Status_ID`="+user.getStatus_ID()+" WHERE C_ID = "+user.getU_ID());
@@ -491,13 +549,9 @@ public class DataBase {
             arrayList.add(Result.getString("Reg_Date"));
             arrayList.add(Result.getString("Type_ID"));
             */
-
-
         }
         System.out.println("Done");
         return arrayList;
-
-
 
 
     }
@@ -523,7 +577,7 @@ public class DataBase {
                 System.out.println(Result.getString("LName"));
                 System.out.println(" ");
                 int id = Integer.valueOf(Result.getString("U_ID"));
-                Users users = new Users(Result.getString("UserName"),Result.getString("Hashed_PW"),Result.getString("EMail"),Result.getString("FName"),Result.getString("LName"),Result.getString("Reg_Date"),id,2,Result.getInt("Status_ID"));
+                Users users = new Users(Result.getString("UserName"),Result.getString("Hashed_PW"),Result.getString("EMail"),Result.getString("FName"),Result.getString("LName"),Result.getString("Reg_Date"),id,3,Result.getInt("Status_ID"));
 
                 arrayList.add(users);
 

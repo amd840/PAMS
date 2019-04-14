@@ -8,19 +8,20 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class Advertisements{
-	private int Ad_ID, 
-	sysAdmin_ID;
-	private Date Start_Date, 
+	private int Ad_ID;
+	private String Start_Date,
 	End_Date;
 	private String Content;
-	private BigDecimal Fees;
+	private double Fees;
+	private int SysAdmin_ID;
 	
-	public Advertisements(int Ad_ID, Date Start_Date, Date End_Date, String Content, BigDecimal Fees) {
+	public Advertisements(int Ad_ID, String Start_Date, String End_Date, String Content, double Fees,int SysAdmin_ID) {
 		this.Ad_ID = Ad_ID;
 		this.Start_Date = Start_Date;
 		this.End_Date = End_Date;
 		this.Content = Content;
 		this.Fees = Fees;
+		this.SysAdmin_ID=SysAdmin_ID;
 	}
 	
 	public int getAd_ID() {
@@ -31,20 +32,20 @@ public class Advertisements{
 		return Content;
 	}
 	
-	public Date getEnd_Date() {
+	public String getEnd_Date() {
 		return End_Date;
 	}
 	
-	public BigDecimal getFees() {
+	public double getFees() {
 		return Fees;
 	}
 	
-	public Date getStart_Date() {
+	public String getStart_Date() {
 		return Start_Date;
 	}
 	
 	public int getSysAdmin_ID() {
-		return sysAdmin_ID;
+		return SysAdmin_ID;
 	}
 	
 	public void setAd_ID(int ad_ID) {
@@ -55,30 +56,30 @@ public class Advertisements{
 		Content = content;
 	}
 	
-	public void setEnd_Date(Date end_Date) {
+	public void setEnd_Date(String end_Date) {
 		End_Date = end_Date;
 	}
 	
-	public void setFees(BigDecimal fees) {
+	public void setFees(double fees) {
 		Fees = fees;
 	}
 	
-	public void setStart_Date(Date start_Date) {
+	public void setStart_Date(String start_Date) {
 		Start_Date = start_Date;
 	}
 	
 	public void setSysAdmin_ID(int sysAdmin_ID) {
-		this.sysAdmin_ID = sysAdmin_ID;
+		this.SysAdmin_ID = sysAdmin_ID;
 	}
 	
-    public static ArrayList<Advertisements> getAllArrayList(Connection connect) throws Exception{
+   /* public static ArrayList<Advertisements> getAllArrayList(Connection connect) throws Exception{
     	ArrayList<Advertisements> al = new ArrayList<Advertisements>();
     	ResultSet r = connect.prepareStatement("SELECT * From Advertisements;").executeQuery();
     	
     	while(r.next())
-    		al.add(new Advertisements(r.getInt ("Ad_ID"), r.getDate ("Start_Date"), r.getDate ("End_Date"), r.getString ("Content"), r.getBigDecimal ("Fees")));
+    		al.add(new Advertisements(r.getInt ("Ad_ID"), r.getString ("Start_Date"), r.getString ("End_Date"), r.getString ("Content"), r.getDouble ("Fees")));
     	return al;
-    }
+    }*/
 	
 }
 
