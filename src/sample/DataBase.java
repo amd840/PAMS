@@ -331,6 +331,51 @@ public class DataBase {
         }
         return clinicsArrayList;
     }
+    public Clinics getClinic(Users admin)throws Exception{
+        PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Clinics where Clinic_ManID = "+admin.getU_ID());
+        ResultSet Result =statement1.executeQuery();
+        //ArrayList<Clinics> clinicsArrayList = new ArrayList<>();
+
+        //while(Result.next()){
+            Clinics clinic = new Clinics();
+
+            clinic.setC_ID(Result.getInt("C_ID"));
+            clinic.setEMail(Result.getString("EMail"));
+            clinic.set_Profile(Result.getString("Profile"));
+            clinic.setLocation(Result.getString("Location"));
+            clinic.setRating(Result.getDouble("Rating"));
+            clinic.setServices(Result.getString("Services"));
+            clinic.setClinic_ManID(Result.getInt("Clinic_ManID"));
+            clinic.setWebsite(Result.getString("Website"));
+            clinic.setStatus_ID(Result.getInt("Status_ID"));
+            return clinic;
+            //clinicsArrayList.add(clinic);
+        //}
+       // return clinicsArrayList;
+    }
+    public Clinics getClinic(String ID)throws Exception{
+        PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Clinics where Clinic_ManID = "+ID);
+        ResultSet Result =statement1.executeQuery();
+        //ArrayList<Clinics> clinicsArrayList = new ArrayList<>();
+
+        //while(Result.next()){
+        Clinics clinic = new Clinics();
+        if(!Result.next())
+            throw new Exception("No Clinic is there");
+        clinic.setC_ID(Result.getInt("C_ID"));
+        clinic.setEMail(Result.getString("EMail"));
+        clinic.set_Profile(Result.getString("Profile"));
+        clinic.setLocation(Result.getString("Location"));
+        clinic.setRating(Result.getDouble("Rating"));
+        clinic.setServices(Result.getString("Services"));
+        clinic.setClinic_ManID(Result.getInt("Clinic_ManID"));
+        clinic.setWebsite(Result.getString("Website"));
+        clinic.setStatus_ID(Result.getInt("Status_ID"));
+        return clinic;
+        //clinicsArrayList.add(clinic);
+        //}
+        // return clinicsArrayList;
+    }
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///// login.... enter the password and username in the method to check if the user exist and the enter password is correct... null will be returned if password or username are wrong.
@@ -379,10 +424,128 @@ public class DataBase {
         add.executeUpdate();
 
     }
+    public void userUpdate(Users user,String values,int value) throws Exception{
+
+        PreparedStatement add = connection.prepareStatement("UPDATE `Users` SET "+values+" = "+value+" WHERE U_ID = "+user.getU_ID());
+        add.executeUpdate();
+
+    }
+    public void UpdateWholeCA(Users user) throws Exception{
+
+        PreparedStatement add = connection.prepareStatement("UPDATE `Users` SET `U_ID`="+user.getU_ID()+",`UserName`='"+user.getUserName()+"',`FName`='"+user.getFName()+"',`LName`='"+user.getLName()+"',`HashPassword`='"+user.getHashPassword()+"',`EMail`='"+user.getEMail()+"',`Reg_Date`='CURRENT_TIMESTAMP',`Type_ID`= 2,`Status_ID`="+user.getStatus_ID()+" WHERE C_ID = "+user.getU_ID());
+        add.executeUpdate();
+
+    }
+    public void UpdateWholeRA(Users user) throws Exception{
+
+        PreparedStatement add = connection.prepareStatement("UPDATE `Users` SET `U_ID`="+user.getU_ID()+",`UserName`='"+user.getUserName()+"',`FName`='"+user.getFName()+"',`LName`='"+user.getLName()+"',`HashPassword`='"+user.getHashPassword()+"',`EMail`='"+user.getEMail()+"',`Reg_Date`='CURRENT_TIMESTAMP',`Type_ID`= 3,`Status_ID`="+user.getStatus_ID()+" WHERE C_ID = "+user.getU_ID());
+        add.executeUpdate();
+
+    }
+    public void userUpdate(Users user,String values,String value) throws Exception{
+
+        PreparedStatement add = connection.prepareStatement("UPDATE `Users` SET "+values+" = '"+value+"' WHERE U_ID = "+user.getU_ID());
+        add.executeUpdate();
+
+    }
     public void addClinic(Clinics clinic) throws Exception{
 
         PreparedStatement add = connection.prepareStatement("insert into `Clinics`(`C_ID`, `Profile`, `Services`, `Location`, `Website`, `EMail`, `Rating`, `Clinic_ManID`, `Status_ID`) VALUES ("+clinic.getC_ID()+",'"+clinic.getProfile()+"','"+clinic.getServices()+"','"+clinic.getLocation()+"','"+clinic.getWebsite()+"','"+clinic.getEMail()+"','"+clinic.getRating()+"', "+clinic.getClinic_ManID()+" ,"+clinic.getStatus_ID()+")");
         add.executeUpdate();
+
+    }
+    public ArrayList<Users> getCAdmins() throws Exception{
+        PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Users where Type_ID = 2 ;");
+        ResultSet Result = statement1.executeQuery();
+
+        ArrayList<Users> arrayList = new ArrayList<Users>();
+
+        //if (!Result.next())
+            //throw new Exception("There is no Users");
+        while(Result.next()){
+            System.out.println(Result.getString("U_ID"));
+            System.out.println(" ");
+
+            System.out.println(Result.getString("UserName"));
+            System.out.println(" ");
+
+
+            System.out.println(Result.getString("FName"));
+            System.out.println(" ");
+
+            System.out.println(Result.getString("LName"));
+            System.out.println(" ");
+            int id = Integer.valueOf(Result.getString("U_ID"));
+            Users users = new Users(Result.getString("UserName"),Result.getString("Hashed_PW"),Result.getString("EMail"),Result.getString("FName"),Result.getString("LName"),Result.getString("Reg_Date"),id,2,Result.getInt("Status_ID"));
+
+            arrayList.add(users);
+
+            /*
+            arrayList.add(Result.getString("U_ID"));
+
+            arrayList.add(Result.getString("UserName"));
+            arrayList.add(Result.getString("FName + LName"));
+
+            arrayList.add(Result.getString("Hashed_PW"));
+            arrayList.add(Result.getString("EMail"));
+            arrayList.add(Result.getString("Reg_Date"));
+            arrayList.add(Result.getString("Type_ID"));
+            */
+
+
+        }
+        System.out.println("Done");
+        return arrayList;
+
+
+
+
+    }
+        public ArrayList<Users> getCRec() throws Exception{
+            PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Users where Type_ID = 3 ;");
+            ResultSet Result = statement1.executeQuery();
+
+            ArrayList<Users> arrayList = new ArrayList<Users>();
+
+            //if (!Result.next())
+            //throw new Exception("There is no Users");
+            while(Result.next()){
+                System.out.println(Result.getString("U_ID"));
+                System.out.println(" ");
+
+                System.out.println(Result.getString("UserName"));
+                System.out.println(" ");
+
+
+                System.out.println(Result.getString("FName"));
+                System.out.println(" ");
+
+                System.out.println(Result.getString("LName"));
+                System.out.println(" ");
+                int id = Integer.valueOf(Result.getString("U_ID"));
+                Users users = new Users(Result.getString("UserName"),Result.getString("Hashed_PW"),Result.getString("EMail"),Result.getString("FName"),Result.getString("LName"),Result.getString("Reg_Date"),id,2,Result.getInt("Status_ID"));
+
+                arrayList.add(users);
+
+            /*
+            arrayList.add(Result.getString("U_ID"));
+
+            arrayList.add(Result.getString("UserName"));
+            arrayList.add(Result.getString("FName + LName"));
+
+            arrayList.add(Result.getString("Hashed_PW"));
+            arrayList.add(Result.getString("EMail"));
+            arrayList.add(Result.getString("Reg_Date"));
+            arrayList.add(Result.getString("Type_ID"));
+            */
+
+
+            }
+        System.out.println("Done");
+        return arrayList;
+
+
+
 
     }
     ///// signup... it checks if the username or email is used before or not... if they are unique... user is created... true is returned if the signuo is sucessful... if it failed, false will be returned.

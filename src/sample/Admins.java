@@ -35,7 +35,7 @@ import java.util.Collection;
 import java.util.Date;
 
 
-public class CARec extends Application {
+public class Admins extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -73,7 +73,7 @@ public class CARec extends Application {
 
         TextField tstatus = new TextField();
 
-        Button add = new Button("Add receptionest Admin");
+        Button add = new Button("Add Clinic Admin");
 
 
         // ...
@@ -290,7 +290,7 @@ public class CARec extends Application {
 
         tableView.setEditable(true);
         add.setOnAction(ActionEvent ->{
-            Users newUser = new Users(tuser.getText(),tPW.getText(),temail.getText(),tfname.getText(),tlname.getText(),tregdate.getText(),Integer.parseInt(tid.getText()),3,Integer.parseInt(tstatus.getText()));
+            Users newUser = new Users(tuser.getText(),tPW.getText(),temail.getText(),tfname.getText(),tlname.getText(),tregdate.getText(),Integer.parseInt(tid.getText()),2,Integer.parseInt(tstatus.getText()));
             tableView.getItems().add(newUser);
             try{
                 DataBase db = new DataBase();
@@ -426,7 +426,7 @@ public class CARec extends Application {
             //Users user = Main.TheUser;
 
             DataBase admin = new DataBase();
-            ArrayList<Users> arrlist = admin.getCRec();
+            ArrayList<Users> arrlist = admin.getCAdmins();
             //Users user = admin.U_Login("a201","444");
             tableView.getItems().addAll(arrlist);
 
@@ -512,7 +512,7 @@ public class CARec extends Application {
 
         });*/
 
-        primaryStage.setTitle("Clinic admins");
+        primaryStage.setTitle("admins");
         primaryStage.setScene(new Scene(MainGrid, 950, 450));
         primaryStage.show();
 

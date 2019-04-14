@@ -2,29 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/sample/CARec.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/Admins.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/SystemAdmin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Advertisements.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Advertisements.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Appointments.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Appointments.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Clinic_Contact_Numbers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Clinic_Contact_Numbers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Clinics.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Clinics.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Dentist_Contact_Numbers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Dentist_Contact_Numbers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Dentists.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Dentists.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/News.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/News.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Reviews.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Reviews.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Specialties.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Specialties.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Status.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/User_Contact_Numbers.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/User_Contact_Numbers.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/User_Types.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/User_Types.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Users.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/data_types/Users.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/sample/CARec.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/sample/CARec.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/sample/ClinicAdmin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/sample/ClinicAdmin.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/sample/DataBase.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/sample/DataBase.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/sample/Guest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/sample/Guest.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_types/Clinics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_types/Clinics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_types/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_types/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/hospitalDataBase/sample/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/hospitalDataBase/sample/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/CARec.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/CARec.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/ClinicAdmin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/ClinicAdmin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/DataBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Main.java" afterDir="false" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,11 +69,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/DataBase.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="383" column="400" selection-start-line="383" selection-start-column="400" selection-end-line="383" selection-end-column="400" />
+            <state relative-caret-position="166">
+              <caret line="363" column="54" selection-start-line="363" selection-start-column="54" selection-end-line="363" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -94,25 +82,14 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data_types/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="510" column="16" lean-forward="true" selection-start-line="510" selection-start-column="16" selection-end-line="510" selection-end-column="16" />
+            <state relative-caret-position="1434">
+              <caret line="117" lean-forward="true" selection-start-line="117" selection-end-line="117" />
               <folding>
                 <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/data_types/Clinics.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="115" column="18" selection-start-line="115" selection-start-column="15" selection-end-line="115" selection-end-column="18" />
-              <folding>
-                <element signature="e#3572#3573#0" expanded="true" />
-                <element signature="e#3596#3597#0" expanded="true" />
+                <element signature="e#3813#3814#0" expanded="true" />
+                <element signature="e#3841#3842#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -121,10 +98,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/ClinicReceptionist.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="111" column="42" selection-start-line="111" selection-start-column="34" selection-end-line="111" selection-end-column="42" />
+            <state relative-caret-position="15">
+              <caret line="96" selection-start-line="96" selection-end-line="97" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1654#1662#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,13 +118,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/sample/ClinicAdmin.java">
+        <entry file="file://$PROJECT_DIR$/src/sample/SystemAdmin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="300" column="49" selection-start-line="300" selection-start-column="49" selection-end-line="300" selection-end-column="49" />
+            <state relative-caret-position="147">
+              <caret line="25" column="36" selection-end-line="525" />
               <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2859#2868#0" expanded="true" />
+                <element signature="e#16667#16668#0" expanded="true" />
                 <element signature="e#16695#16696#0" expanded="true" />
               </folding>
             </state>
@@ -154,10 +131,27 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_201.jdk/Contents/Home/javafx-src.zip!/javafx/event/EventHandler.java">
+        <entry file="file://$PROJECT_DIR$/src/sample/Admins.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="44" column="9" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="9" />
+            <state relative-caret-position="280">
+              <caret line="66" column="43" selection-end-line="525" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/sample/ClinicAdmin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="387">
+              <caret line="128" column="10" selection-start-line="128" selection-start-column="10" selection-end-line="128" selection-end-column="10" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#16665#16666#0" expanded="true" />
+                <element signature="e#16693#16694#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -165,8 +159,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/CARec.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="40" column="36" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="36" />
+            <state relative-caret-position="76">
+              <caret line="292" column="171" selection-start-line="292" selection-start-column="171" selection-end-line="292" selection-end-column="171" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -177,7 +171,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/sample/Clinics.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
+            <state relative-caret-position="90">
               <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -198,8 +192,10 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>add cl</find>
       <find>get_</find>
+      <find>add cl</find>
+      <find>add c</find>
+      <find>add</find>
     </findStrings>
   </component>
   <component name="FindManager">
@@ -218,17 +214,19 @@
         <option value="$PROJECT_DIR$/src/Users.java" />
         <option value="$PROJECT_DIR$/src/sample/Register.java" />
         <option value="$PROJECT_DIR$/src/sample/sample.fxml" />
-        <option value="$PROJECT_DIR$/src/sample/Main.java" />
         <option value="$PROJECT_DIR$/src/sample/Users.java" />
         <option value="$PROJECT_DIR$/src/sample/patient.java" />
-        <option value="$PROJECT_DIR$/src/sample/ClinicReceptionist.java" />
         <option value="$PROJECT_DIR$/src/sample/Clinics.java" />
         <option value="$PROJECT_DIR$/src/sample/Guest.java" />
-        <option value="$PROJECT_DIR$/src/sample/CARec.java" />
         <option value="$PROJECT_DIR$/src/data_types/Clinics.java" />
         <option value="$PROJECT_DIR$/src/data_types/Main.java" />
-        <option value="$PROJECT_DIR$/src/sample/ClinicAdmin.java" />
+        <option value="$PROJECT_DIR$/src/sample/SystemAdmin.java" />
+        <option value="$PROJECT_DIR$/src/sample/Admins.java" />
+        <option value="$PROJECT_DIR$/src/sample/ClinicReceptionist.java" />
+        <option value="$PROJECT_DIR$/src/sample/CARec.java" />
+        <option value="$PROJECT_DIR$/src/sample/Main.java" />
         <option value="$PROJECT_DIR$/src/sample/DataBase.java" />
+        <option value="$PROJECT_DIR$/src/sample/ClinicAdmin.java" />
       </list>
     </option>
   </component>
@@ -247,7 +245,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -264,19 +262,13 @@
               <item name="hospitalDataBase" type="b2602c69:ProjectViewProjectNode" />
               <item name="hospitalDataBase" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="data_types" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hospitalDataBase" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hospitalDataBase" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="sample" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -288,13 +280,14 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555159927059" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555248742726" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -313,7 +306,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ClinicAdmin">
+  <component name="RunManager" selected="Application.Main">
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -328,6 +321,34 @@
     </configuration>
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Admins" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sample.Admins" />
+      <module name="hospitalDataBase" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sample.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CARec" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sample.CARec" />
+      <module name="hospitalDataBase" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sample.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -360,20 +381,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="data_types.Main" />
-      <module name="hospitalDataBase" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="data_types.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="sample.Main" />
       <module name="hospitalDataBase" />
@@ -390,8 +397,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Register" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="sample.Register" />
+    <configuration name="SystemAdmin" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sample.SystemAdmin" />
       <module name="hospitalDataBase" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <extension name="coverage">
@@ -444,9 +451,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ClinicAdmin" />
+        <item itemvalue="Application.CARec" />
+        <item itemvalue="Application.Admins" />
+        <item itemvalue="Application.SystemAdmin" />
         <item itemvalue="Application.Guest" />
-        <item itemvalue="Application.Register" />
-        <item itemvalue="Application.Main (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -471,7 +479,7 @@
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.32471728" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.32956383" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" />
       <window_info id="Designer" order="3" />
@@ -490,8 +498,8 @@
       <window_info anchor="bottom" id="Problems" order="9" />
       <window_info anchor="bottom" id="Changes" order="10" />
       <window_info anchor="bottom" id="Profiler" order="11" />
-      <window_info anchor="bottom" id="Event Log" order="12" weight="0.329927" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.3260274" />
+      <window_info anchor="bottom" id="Event Log" order="12" weight="0.32876712" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.23972602" />
       <window_info anchor="bottom" id="Terminal" order="14" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -515,7 +523,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/sample/Main.java</url>
-          <line>111</line>
+          <line>136</line>
           <properties />
           <option name="timeStamp" value="7" />
         </line-breakpoint>
@@ -526,10 +534,16 @@
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sample/ClinicAdmin.java</url>
+          <url>file://$PROJECT_DIR$/src/sample/SystemAdmin.java</url>
           <line>427</line>
           <properties />
           <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/sample/ClinicAdmin.java</url>
+          <line>186</line>
+          <properties />
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -586,16 +600,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2010">
-          <caret line="136" selection-start-line="20" selection-start-column="18" selection-end-line="136" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Guest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3165">
@@ -626,6 +630,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="21" column="144" selection-start-line="21" selection-start-column="144" selection-end-line="21" selection-end-column="144" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Users.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1020">
@@ -633,18 +645,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/sample.fxml">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="144" selection-start-line="21" selection-start-column="144" selection-end-line="21" selection-end-column="144" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/CARec.java">
+    <entry file="file://$PROJECT_DIR$/src/sample/Clinics.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="40" column="36" selection-start-line="40" selection-start-column="30" selection-end-line="40" selection-end-column="36" />
+          <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -658,65 +662,95 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Clinics.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="20" selection-start-line="23" selection-start-column="20" selection-end-line="23" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/ClinicReceptionist.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="111" column="42" selection-start-line="111" selection-start-column="34" selection-end-line="111" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/data_types/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
-          <caret line="510" column="16" lean-forward="true" selection-start-line="510" selection-start-column="16" selection-end-line="510" selection-end-column="16" />
+          <caret line="510" column="16" selection-start-line="510" selection-start-column="16" selection-end-line="510" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/ClinicAdmin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="300" column="49" selection-start-line="300" selection-start-column="49" selection-end-line="300" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2859#2868#0" expanded="true" />
-            <element signature="e#16695#16696#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/data_types/Clinics.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
+        <state relative-caret-position="272">
           <caret line="115" column="18" selection-start-line="115" selection-start-column="15" selection-end-line="115" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/ClinicReceptionist.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="96" selection-start-line="96" selection-end-line="97" />
           <folding>
-            <element signature="e#3572#3573#0" expanded="true" />
-            <element signature="e#3596#3597#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1654#1662#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/CARec.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="292" column="171" selection-start-line="292" selection-start-column="171" selection-end-line="292" selection-end-column="171" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Admins.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="280">
+          <caret line="66" column="43" selection-end-line="525" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/SystemAdmin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="25" column="36" selection-end-line="525" />
+          <folding>
+            <element signature="e#16667#16668#0" expanded="true" />
+            <element signature="e#16695#16696#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/DataBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="383" column="400" selection-start-line="383" selection-start-column="400" selection-end-line="383" selection-end-column="400" />
+        <state relative-caret-position="166">
+          <caret line="363" column="54" selection-start-line="363" selection-start-column="54" selection-end-line="363" selection-end-column="54" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1434">
+          <caret line="117" lean-forward="true" selection-start-line="117" selection-end-line="117" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3813#3814#0" expanded="true" />
+            <element signature="e#3841#3842#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/ClinicAdmin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="128" column="10" selection-start-line="128" selection-start-column="10" selection-end-line="128" selection-end-column="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#16665#16666#0" expanded="true" />
+            <element signature="e#16693#16694#0" expanded="true" />
           </folding>
         </state>
       </provider>

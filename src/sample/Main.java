@@ -18,7 +18,11 @@ import javax.swing.JButton;
 import javafx.event.ActionEvent;
 
 import java.util.Date;
+import java.util.prefs.PreferenceChangeListener;
+import java.util.prefs.Preferences;
+
 public class Main extends Application {
+    public static Users user = new Users() ;
 
 
     public static Connection getConnection() throws Exception{
@@ -95,6 +99,27 @@ public class Main extends Application {
             Register register = new Register();
             try {
                 register.start(primaryStage);
+            } catch (Exception e) {
+                Alert at = new Alert(Alert.AlertType.ERROR);
+                at.setContentText(e.getMessage());
+                at.show();
+                e.printStackTrace();
+            }
+
+
+        });
+        sign.setOnAction((ActionEvent a)-> {
+            try {
+                user = dataBase.U_Login(username.getText(),password.getText());
+                Preferences pref = Preferences.userNodeForPackage(Preferences.class);
+                //pref.put(user.getUserName(),"User");
+                pref.put("User",user.getU_ID()+"");
+                System.out.println(pref.get("User","root"));
+
+                if (user.getType_ID()==3) {
+                    ClinicAdmin clinicAdmin = new ClinicAdmin();
+                    clinicAdmin.start(primaryStage);
+                }
             } catch (Exception e) {
                 Alert at = new Alert(Alert.AlertType.ERROR);
                 at.setContentText(e.getMessage());
