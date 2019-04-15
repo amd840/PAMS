@@ -1,6 +1,11 @@
 package sample;
 
+import data_types.Advertisements;
+import data_types.Appointments;
+import data_types.Dentists;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,10 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -23,6 +25,7 @@ import javafx.event.ActionEvent;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.prefs.Preferences;
 
 public class patient extends Application {
 
@@ -56,42 +59,170 @@ public class patient extends Application {
         TableBox.setAlignment(Pos.CENTER);
 
 
-        TableColumn columnId = new TableColumn("U_ID");
+        TableColumn columnId = new TableColumn("Apm_ID");
         columnId.setStyle("-fx-alignment: CENTER;");
-        columnId.setCellValueFactory(new PropertyValueFactory<>("U_ID"));
-        TableColumn columnUser = new TableColumn("UserName");
-        columnUser.setStyle("-fx-alignment: CENTER;");
-        columnUser.setCellValueFactory(new PropertyValueFactory<>("UserName"));
+        columnId.setCellValueFactory(new PropertyValueFactory<>("Apm_ID"));
 
-        TableColumn columnFN = new TableColumn("FName");
-        columnFN.setCellValueFactory(new PropertyValueFactory<>("FName"));
-        columnFN.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnLN = new TableColumn("LName");
-        columnLN.setCellValueFactory(new PropertyValueFactory<>("LName"));
-        columnLN.setStyle("-fx-alignment: CENTER;");
-
-        TableColumn columnPW = new TableColumn("Hashed_PW");
-        columnPW.setCellValueFactory(new PropertyValueFactory<>("Hashed_PW"));
-        columnPW.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnEmail = new TableColumn("EMail");
-        columnEmail.setCellValueFactory(new PropertyValueFactory<>("EMail"));
-        columnEmail.setStyle("-fx-alignment: CENTER;");
-
-
-        TableColumn columnDate = new TableColumn("Reg_Date");
-        columnDate.setCellValueFactory(new PropertyValueFactory<>("Reg_Date"));
+        TableColumn columnDate = new TableColumn("Apm_Date");
         columnDate.setStyle("-fx-alignment: CENTER;");
-        TableColumn columnType = new TableColumn("Type_ID");
-        columnType.setCellValueFactory(new PropertyValueFactory<>("Type_ID"));
+        columnDate.setCellValueFactory(new PropertyValueFactory<>("Apm_Date"));
+
+        TableColumn columnType = new TableColumn("Apm_Type");
+        columnType.setCellValueFactory(new PropertyValueFactory<>("Apm_Type"));
         columnType.setStyle("-fx-alignment: CENTER;");
+        TableColumn columnPatient_ID = new TableColumn("Patient_ID");
+        columnPatient_ID.setCellValueFactory(new PropertyValueFactory<>("Patient_ID"));
+        columnPatient_ID.setStyle("-fx-alignment: CENTER;");
+
+        TableColumn columnRecept_ID = new TableColumn("Recept_ID");
+        columnRecept_ID.setCellValueFactory(new PropertyValueFactory<>("Recept_ID"));
+        columnRecept_ID.setStyle("-fx-alignment: CENTER;");
+        TableColumn columnDentist_ID = new TableColumn("Dentist_ID");
+        columnDentist_ID.setCellValueFactory(new PropertyValueFactory<>("Dentist_ID"));
+        columnDentist_ID.setStyle("-fx-alignment: CENTER;");
+
 
 
         TableColumn columnState = new TableColumn("Status_ID");
-        columnState.setCellValueFactory(new PropertyValueFactory<>("Status_ID"));
+        columnState.setCellValueFactory(new PropertyValueFactory<>("Status"));
         columnState.setStyle("-fx-alignment: CENTER;");
-        ArrayList<Users> x1 = new ArrayList<>();
 
         //add element in the table
+        FlowPane adding = new FlowPane();
+        //componant
+        Label id = new Label("Apm_ID");
+        Label start_date = new Label("Apm_Date");
+        Label apmType = new Label("Apm_Type");
+        Label receptId = new Label("Recept_ID");
+        Label dentistId = new Label("Dentist_ID");
+
+        // Label regdate = new Label("Reg_Date");
+        //Label status = new Label("Status ID");
+
+        TextField tid = new TextField();
+        tid.setMaxWidth(50);
+        TextField tstart_date = new TextField();
+        tstart_date.setMaxWidth(60);
+
+
+        TextField tapmType = new TextField();
+        tapmType.setMaxWidth(100);
+
+
+
+        /*TextField treceptId = new TextField();
+        treceptId.setMaxWidth(50);*/
+        ObservableList<String> options = FXCollections.observableArrayList();
+        ArrayList<Users> stuff = new DataBase().getCRec();
+        ArrayList<String> datastuff = new ArrayList<>();
+        for(int i=0 ;i<stuff.size();i++){
+            datastuff.add(stuff.get(i).getFName() +" "+stuff.get(i).getLName());
+        }
+        options.addAll(datastuff);
+
+        ComboBox<Users> treceptId = new ComboBox(options);
+        treceptId.setMaxWidth(150);
+
+        //ArrayList<Dentists> stuff2 = new ArrayList<Dentists>();
+
+
+
+
+
+
+
+        /*TextField tdentistId = new TextField();
+        tdentistId.setMaxWidth(50);
+        */
+        ArrayList<Dentists> stuff2 = new ArrayList<>();
+
+        ObservableList<String> options1 = FXCollections.observableArrayList();
+        ArrayList<String> datastuff2 = new ArrayList<>();
+
+        options1.addAll(datastuff2);
+
+        ComboBox<String> tdentistId = new ComboBox(options1);
+        tdentistId.setMaxWidth(150);
+
+        treceptId.setOnAction((event) -> {
+
+            //Login.Current_term = Integer.parseInt((String) Term.getSelectionModel().getSelectedItem());
+
+            try {
+                datastuff2.clear();
+                stuff2.clear();
+                stuff2.addAll(new DataBase().getDentists(stuff.get(treceptId.getSelectionModel().getSelectedIndex())));
+                for(int i=0 ;i<stuff2.size();i++){
+                    datastuff2.add(stuff2.get(i).getFName() +" "+stuff2.get(i).getLName());
+                    options1.addAll(datastuff2);
+
+                }
+                tdentistId.setItems(options1);
+
+
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });
+
+
+
+
+        //TextField tregdate = new TextField();
+
+
+
+        adding.getChildren().add(id);
+        adding.getChildren().add(tid);
+        adding.getChildren().add(start_date);
+        adding.getChildren().add(tstart_date);
+
+        adding.getChildren().add(apmType);
+        adding.getChildren().add(tapmType);
+
+
+
+        adding.getChildren().add(receptId);
+        adding.getChildren().add(treceptId);
+
+        adding.getChildren().add(dentistId);
+        adding.getChildren().add(tdentistId);
+
+
+
+
+        Button addnewAdd = new Button("add");
+        addnewAdd.setOnAction((ActionEvent e) -> {
+            //Users newUser = new Users(tuser.getText(),tPW.getText(),temail.getText(),tfname.getText(),tlname.getText(),"",Integer.parseInt(tid.getText()),3,Integer.parseInt(tstatus.getText()));
+            String breakstr;
+            try {
+                //System.out.println((tid.getText()));
+                Preferences pref = Preferences.userNodeForPackage(Preferences.class);
+                String uid = (pref.get("User", "root"));
+                DataBase date = new DataBase();
+                String userType = date.getUserType(uid);
+
+                //Advertisements advertisements = new Advertisements(Integer.valueOf(tid.getText()),tstart_date.getText(),tapmType.getText(),tcontent.getText(),Integer.valueOf(tfees.getText()),Integer.valueOf(uid));
+                //Need To Update
+                Appointments appointments = new Appointments(Integer.valueOf(tid.getText()),tstart_date.getText(),tapmType.getText(),Integer.valueOf(uid),Integer.valueOf(stuff.get(treceptId.getSelectionModel().getSelectedIndex()).getU_ID()),Integer.valueOf(stuff2.get(tdentistId.getSelectionModel().getSelectedIndex()).getD_ID()),0,userType);
+                tableView.getItems().addAll(appointments);
+                date.addAppointment(appointments);
+
+            } catch (Exception e1) {
+                e1.printStackTrace();
+                System.out.println(e1.getMessage());
+                Alert a = new Alert(Alert.AlertType.ERROR);
+                a.setContentText(e1.getMessage());
+                a.show();
+            }
+
+        });
+
+        adding.getChildren().add(addnewAdd);
+        adding.setHgap(10);
+        adding.setVgap(10);
+
 
        /* x1 = Connecter.getUser();
 
@@ -114,7 +245,7 @@ public class patient extends Application {
         // Button btn3 = new Button("reset");
 
         //Add Columns and set their width
-        tableView.getColumns().addAll(columnId,columnUser,columnFN,columnLN,columnPW,columnEmail,columnDate, columnType, columnState);
+        tableView.getColumns().addAll(columnId,columnDate, columnType,columnPatient_ID,columnRecept_ID,columnDentist_ID, columnState);
         //columnCourse.setPrefWidth(100);
         //columnCRN.setPrefWidth(75);
         //columnDay.setPrefWidth(75);
@@ -158,6 +289,8 @@ public class patient extends Application {
 
 
         grid.add(btn1, 0, 5);
+        grid.add(adding,0,6);
+
         grid.setPadding(new Insets(10, 10, 10, 10));
 
         //Set Back Action

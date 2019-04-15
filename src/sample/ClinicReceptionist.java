@@ -83,7 +83,7 @@ public class ClinicReceptionist  extends Application {
         columnDate.setCellValueFactory(new PropertyValueFactory<>("Apm_Date"));
 
         TableColumn columnType = new TableColumn("Apm_Type");
-        columnType.setCellValueFactory(new PropertyValueFactory<>("State"));
+        columnType.setCellValueFactory(new PropertyValueFactory<>("Apm_Type"));
         columnType.setStyle("-fx-alignment: CENTER;");
         TableColumn columnPatient_ID = new TableColumn("Patient_ID");
         columnPatient_ID.setCellValueFactory(new PropertyValueFactory<>("Patient_ID"));
@@ -98,8 +98,8 @@ public class ClinicReceptionist  extends Application {
 
 
 
-        TableColumn columnState = new TableColumn("Status_ID");
-        columnState.setCellValueFactory(new PropertyValueFactory<>("Status_ID"));
+        TableColumn columnState = new TableColumn("Status");
+        columnState.setCellValueFactory(new PropertyValueFactory<>("Status"));
         columnState.setStyle("-fx-alignment: CENTER;");
 
 

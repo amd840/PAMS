@@ -16,11 +16,14 @@ public class Appointments {
 	Status_ID;
 	private String Apm_Date;
 	private String Apm_Type;
+	private String UserType;
+
 	private ComboBox<String> State;
+	private ComboBox<String> Status;
 
 
 
-	public Appointments(int Apm_ID, String Apm_Date, String Apm_Type, int Patient_ID, int Recept_ID, int Dentist_ID, int Status_ID) {
+	public Appointments(int Apm_ID, String Apm_Date, String Apm_Type, int Patient_ID, int Recept_ID, int Dentist_ID, int Status_ID,String userType) {
 		if(Meth.var_valid(Apm_Type,64)){
 			this.Apm_ID = Apm_ID;
 			this.Apm_Date = Apm_Date;
@@ -29,12 +32,36 @@ public class Appointments {
 			this.Recept_ID = Recept_ID;
 			this.Dentist_ID = Dentist_ID;
 			this.Status_ID = Status_ID;
+			this.UserType=userType;
 			ObservableList<String> options =
 					FXCollections.observableArrayList(
 							"Confirmed","Not Confirmed"
 					);
 			this.State = new ComboBox<String>(options);
 			this.State.setPromptText(Apm_Type);
+			//..
+			ObservableList<String> options1;
+			System.out.println(UserType);
+			if (UserType.contains("3")) {
+				 options1 =
+						FXCollections.observableArrayList(
+								"Confirmed","deleted"
+						);
+			}else{
+				 options1 =
+						FXCollections.observableArrayList(
+								"deleted"
+						);
+
+			}
+
+			this.Status = new ComboBox<String>(options1);
+			if(Status_ID==1)
+				this.Status.setPromptText("Confirmed");
+			else if(Status_ID==2)
+				this.Status.setPromptText("deleted");
+			else
+				this.Status.setPromptText("unknown");
 
 		}else{
 			System.out.println("Error... input invalid");
@@ -57,7 +84,11 @@ public class Appointments {
 	public ComboBox<String> getState() {
 		return State;
 	}
-	
+	public ComboBox<String> getStatus() {
+		return Status;
+	}
+
+
 	public int getApm_ID() {
 		return Apm_ID;
 	}
@@ -119,7 +150,7 @@ public class Appointments {
     	ResultSet r = connect.prepareStatement("SELECT * From Appointments;").executeQuery();
     	
     	while(r.next())
-    		al.add(new Appointments(r.getInt("Apm_ID"), r.getString("Apm_Date"), r.getString("Apm_Type"), r.getInt("Patient_ID"), r.getInt("Recept_ID"), r.getInt("Dentist_ID"), r.getInt("Status_ID")));
+    		al.add(new Appointments(r.getInt("Apm_ID"), r.getString("Apm_Date"), r.getString("Apm_Type"), r.getInt("Patient_ID"), r.getInt("Recept_ID"), r.getInt("Dentist_ID"), r.getInt("Status_ID"),"2"));
     	return al;
     }
 }

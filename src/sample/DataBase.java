@@ -82,7 +82,15 @@ public class DataBase {
     public void addUser(Users users)throws Exception{
 
 
-        PreparedStatement add = connection.prepareStatement("INSERT INTO Users () values ("+users.getU_ID()+",'"+users.getUserName()+"','"+users.getFName()+"','"+users.getLName()+"','"+users.getHashPassword()+"','"+users.getEMail()+"',CURRENT_TIMESTAMP,'"+users.getType_ID()+"',1)");
+        PreparedStatement add = connection.prepareStatement("INSERT INTO Users () values ("+users.getU_ID()+",'"+users.getUserName()+"','"+users.getFName()+"','"+users.getLName()+"','"+users.getHashPassword()+"','"+users.getEMail()+"',CURRENT_TIMESTAMP,'"+users.getType_ID()+"',7)");
+        add.executeUpdate();
+
+
+    }
+    public void addAppointment(Appointments appo)throws Exception{
+
+
+        PreparedStatement add = connection.prepareStatement("INSERT INTO Appointments () values ("+appo.getApm_ID()+",CURRENT_TIMESTAMP,'"+appo.getApm_Type()+"',"+appo.getPatient_ID()+","+appo.getRecept_ID()+","+appo.getDentist_ID()+",8)");
         add.executeUpdate();
 
 
@@ -183,10 +191,31 @@ public class DataBase {
         return arrayList;
 
     }
+    public String getUserType(Users user)throws Exception{
+        PreparedStatement statementUserType = connection.prepareStatement("SELECT Type_ID FROM Users WHERE U_ID ="+user.getU_ID()+";");
+        ResultSet usertype = statementUserType.executeQuery();
+        usertype.next();
+
+        return usertype.getString("Type_ID");
+
+    }
+    public String getUserType(String userid)throws Exception{
+        PreparedStatement statementUserType = connection.prepareStatement("SELECT Type_ID FROM Users WHERE U_ID ="+userid+";");
+        ResultSet usertype = statementUserType.executeQuery();
+        usertype.next();
+
+        return usertype.getString("Type_ID");
+
+    }
+
 
     public ArrayList<Appointments> getAppointments(Users RA) throws Exception{
         PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Appointments WHERE Recept_ID ="+RA.getU_ID()+";");
         ResultSet Result = statement1.executeQuery();
+
+        PreparedStatement statementUserType = connection.prepareStatement("SELECT Type_ID FROM Users WHERE U_ID ="+RA.getU_ID()+";");
+        ResultSet usertype = statementUserType.executeQuery();
+        usertype.next();
 
         ArrayList<Appointments> arrayList = new ArrayList<Appointments>();
 
@@ -194,7 +223,7 @@ public class DataBase {
         //   throw new Exception("There is no Advertisements");
         while(Result.next()){
 
-            Appointments appointment = new Appointments(Result.getInt("Apm_ID"),Result.getString("Apm_Date"),Result.getString("Apm_Type"),Result.getInt("Patient_ID"),Result.getInt("Recept_ID"),Result.getInt("Dentist_ID"),Result.getInt("Status_ID"));
+            Appointments appointment = new Appointments(Result.getInt("Apm_ID"),Result.getString("Apm_Date"),Result.getString("Apm_Type"),Result.getInt("Patient_ID"),Result.getInt("Recept_ID"),Result.getInt("Dentist_ID"),Result.getInt("Status_ID"),usertype.getString("Type_ID"));
             arrayList.add(appointment);
 
             /*
@@ -457,6 +486,40 @@ public class DataBase {
         }
         return dentistsArrayList;
     }
+    public ArrayList<Dentists> getDentists(Users rec)throws Exception{
+        try {
+            PreparedStatement clinicID = connection.prepareStatement("SELECT * FROM Clinics where Clinic_ManID = " + rec.getU_ID());
+            ResultSet Resultcid = clinicID.executeQuery();
+            Resultcid.next();
+            PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Dentists where " + Resultcid.getString("C_ID"));
+            ResultSet Result = statement1.executeQuery();
+            ArrayList<Dentists> dentistsArrayList = new ArrayList<>();
+
+            while (Result.next()) {
+                Dentists dentists = new Dentists();
+
+                dentists.setD_ID(Result.getInt("D_ID"));
+                dentists.setEMail(Result.getString("EMail"));
+                dentists.set_Profile(Result.getString("_Profile"));
+                dentists.setYears_Active(Result.getInt("Years_Active"));
+                dentists.setRating(Result.getDouble("Rating"));
+                dentists.setFName(Result.getString("FName"));
+                dentists.setLName(Result.getString("LName"));
+                dentists.setWebsite(Result.getString("Website"));
+                dentists.setClinic_Office(Result.getString("Clinic_Office"));
+                dentists.setClinic_ID(Result.getInt("Clinic_ID"));
+                dentists.setClinic_Num(Result.getInt("Clinic_Num"));
+                dentists.setSpecialty_ID(Result.getInt("Specialty_ID"));
+                dentists.setStatus_ID(Result.getInt("Status_ID"));
+
+                dentistsArrayList.add(dentists);
+            }
+            return dentistsArrayList;
+        }catch (Exception e){
+            return  new ArrayList<Dentists>();
+
+        }
+    }
     public Clinics getClinic(Users admin)throws Exception{
         PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Clinics where Clinic_ManID = "+admin.getU_ID());
         ResultSet Result =statement1.executeQuery();
@@ -671,6 +734,7 @@ public class DataBase {
 
 
     }
+
     ///// signup... it checks if the username or email is used before or not... if they are unique... user is created... true is returned if the signuo is sucessful... if it failed, false will be returned.
     ///// note: a method to create an apropriate ID for a new user is needed before using this method.
     /*public boolean U_SignUp(Users u) throws Exception{
