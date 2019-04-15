@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 import java.sql.*;
 import javax.swing.JButton;
 import javafx.event.ActionEvent;
+import javafx.stage.WindowEvent;
 
 import java.util.Date;
 import java.util.prefs.PreferenceChangeListener;
@@ -119,9 +121,19 @@ public class Main extends Application {
                 if (user.getType_ID()==2) {
                     ClinicAdmin clinicAdmin = new ClinicAdmin();
                     clinicAdmin.start(primaryStage);
+                    //No Yet
                 }else if (user.getType_ID()==1) {
                     Admins admin = new Admins();
                     admin.start(primaryStage);
+                }else if (user.getType_ID()==3) {
+                    ClinicReceptionist receptionist = new ClinicReceptionist();
+                    receptionist.start(primaryStage);
+                }else if (user.getType_ID()==4) {
+                    patient patient = new patient();
+                    patient.start(primaryStage);
+                    //No Yet
+
+
                 }
 
             } catch (Exception e) {
@@ -155,7 +167,20 @@ public class Main extends Application {
         root.setAlignment(Pos.CENTER);
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 300, 200));
+        primaryStage.setOnCloseRequest(
+                WindowEvent -> {
+                    System.out.println("exit");
+                   /* Guest gest = new Guest();
+                    try {
+                        gest.start(primaryStage);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }*/
+                }
+
+        );
         primaryStage.show();
+        //primaryStage.onCloseRequestProperty();
     }
 
 

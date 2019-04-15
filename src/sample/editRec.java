@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
@@ -351,6 +352,7 @@ public class editRec extends Application {
                     T[i].clear();
 
         });*/
+
 
         primaryStage.setTitle("ADD and DROP SYSTEM");
         primaryStage.setScene(new Scene(grid, 550, 450));

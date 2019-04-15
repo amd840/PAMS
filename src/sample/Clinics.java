@@ -28,7 +28,7 @@ public class Clinics extends Application {
 
         //DataBase Connecter = new DataBase();
 
-        Label back = new Label("Back");
+        Label back = new Label("Log out");
         back.setTextFill(Color.BLUE);
         back.setFont(Font.font(17));
         //Button back = new Button("Back");
@@ -154,8 +154,10 @@ public class Clinics extends Application {
         GridPane grid2 = new GridPane();
         grid2.setAlignment(Pos.CENTER);
         GridPane grid3 = new GridPane();
-        MainGrid.add(grid, 1, 0);
-        MainGrid.add(grid3, 0, 0);
+        MainGrid.add(grid, 1, 1);
+        MainGrid.add(grid3, 0, 1);
+
+        MainGrid.add(btnB, 0, 0);
 
         grid3.add(id,0,0);
         grid3.add(tid,1,0);
@@ -201,15 +203,15 @@ public class Clinics extends Application {
         grid.setPadding(new Insets(10, 10, 10, 10));
 
         //Set Back Action
-        /*back.setOnMouseClicked((MouseEvent e) -> {
-            MainView show = new MainView();
+        back.setOnMouseClicked((MouseEvent e) -> {
+            Main show = new Main();
             try {
-                Connecter.Save();
+
                 show.start(primaryStage);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-        });*/
+        });
 
         //Setect the Term Action
         /*Term.setOnAction((event) -> {

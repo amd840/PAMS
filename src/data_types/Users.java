@@ -1,4 +1,8 @@
 package data_types;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -16,8 +20,10 @@ public class Users {
     private Date Reg_Date;        //DATETIME        NOT NULL,
     private int Type_ID;         //INT             NOT NULL,
     private int Status_ID;       //INT             NOT NULL,
-    
-    public Users(int U_ID, String UserName, String FName, String LName, String Hashed_PW, String EMail, Date Reg_Date, int Type_ID, int Status_ID) {
+	private ComboBox<String> State;
+
+
+	public Users(int U_ID, String UserName, String FName, String LName, String Hashed_PW, String EMail, Date Reg_Date, int Type_ID, int Status_ID) {
 		if(Meth.var_valid(UserName, 32) && Meth.var_valid(FName, 24) && Meth.var_valid(LName, 24) && Meth.var_valid(Hashed_PW, 64) && Meth.var_valid(EMail, 64)){
 			this.U_ID = U_ID;
 			this.UserName = UserName;
@@ -28,6 +34,16 @@ public class Users {
 			this.Reg_Date = Reg_Date;
 			this.Type_ID = Type_ID;
 			this.Status_ID = Status_ID;
+			ObservableList<String> options =
+					FXCollections.observableArrayList(
+							"valid","not valid"
+					);
+			this.State = new ComboBox<String>(options);
+			if(Status_ID==7)
+				this.State.setPromptText("valid");
+			else
+				this.State.setPromptText("not valid");
+
 		}
 		else{
 			System.out.println("Error... input invalid");
@@ -44,7 +60,16 @@ public class Users {
   			this.Reg_Date = null;
   			this.Type_ID = -1;
   			this.Status_ID = -1;
+		ObservableList<String> options =
+				FXCollections.observableArrayList(
+						"1","2","3","4","5"
+				);
+		this.State = new ComboBox<String>(options);
+		this.State.setPromptText(Status_ID+"");
   	}
+	public ComboBox<String> getState() {
+		return State;
+	}
     
     public Users(ResultSet r) {
 			try {
@@ -73,6 +98,7 @@ public class Users {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+
 	}
     
     public String getEMail() {

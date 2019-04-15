@@ -1,4 +1,8 @@
 package data_types;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
+
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -12,7 +16,10 @@ public class Appointments {
 	Status_ID;
 	private String Apm_Date;
 	private String Apm_Type;
-	
+	private ComboBox<String> State;
+
+
+
 	public Appointments(int Apm_ID, String Apm_Date, String Apm_Type, int Patient_ID, int Recept_ID, int Dentist_ID, int Status_ID) {
 		if(Meth.var_valid(Apm_Type,64)){
 			this.Apm_ID = Apm_ID;
@@ -22,6 +29,13 @@ public class Appointments {
 			this.Recept_ID = Recept_ID;
 			this.Dentist_ID = Dentist_ID;
 			this.Status_ID = Status_ID;
+			ObservableList<String> options =
+					FXCollections.observableArrayList(
+							"Confirmed","Not Confirmed"
+					);
+			this.State = new ComboBox<String>(options);
+			this.State.setPromptText(Apm_Type);
+
 		}else{
 			System.out.println("Error... input invalid");
 		}
@@ -39,6 +53,9 @@ public class Appointments {
 	
 	public String getApm_Date() {
 		return Apm_Date;
+	}
+	public ComboBox<String> getState() {
+		return State;
 	}
 	
 	public int getApm_ID() {

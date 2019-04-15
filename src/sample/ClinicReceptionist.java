@@ -3,6 +3,8 @@ package sample;
 import data_types.Advertisements;
 import data_types.Appointments;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -31,7 +34,7 @@ public class ClinicReceptionist  extends Application {
 
         //DataBase Connecter = new DataBase();
 
-        Label back = new Label("Back");
+        Label back = new Label("LogOut");
         back.setTextFill(Color.BLUE);
         back.setFont(Font.font(17));
         //Button back = new Button("Back");
@@ -56,6 +59,21 @@ public class ClinicReceptionist  extends Application {
         TableBox.setAlignment(Pos.CENTER);
 
 
+
+        /*Term.setOnAction((event) -> {
+
+            Login.Current_term = Integer.parseInt((String) Term.getSelectionModel().getSelectedItem());
+            try {
+                tableView.getItems().clear();
+                Section[] obj = Connecter.GetStudentTermSection();
+                if (obj != null)
+                    tableView.getItems().addAll(obj);
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        });*/
+
         TableColumn columnId = new TableColumn("Apm_ID");
         columnId.setStyle("-fx-alignment: CENTER;");
         columnId.setCellValueFactory(new PropertyValueFactory<>("Apm_ID"));
@@ -65,7 +83,7 @@ public class ClinicReceptionist  extends Application {
         columnDate.setCellValueFactory(new PropertyValueFactory<>("Apm_Date"));
 
         TableColumn columnType = new TableColumn("Apm_Type");
-        columnType.setCellValueFactory(new PropertyValueFactory<>("Apm_Type"));
+        columnType.setCellValueFactory(new PropertyValueFactory<>("State"));
         columnType.setStyle("-fx-alignment: CENTER;");
         TableColumn columnPatient_ID = new TableColumn("Patient_ID");
         columnPatient_ID.setCellValueFactory(new PropertyValueFactory<>("Patient_ID"));
@@ -83,6 +101,8 @@ public class ClinicReceptionist  extends Application {
         TableColumn columnState = new TableColumn("Status_ID");
         columnState.setCellValueFactory(new PropertyValueFactory<>("Status_ID"));
         columnState.setStyle("-fx-alignment: CENTER;");
+
+
         ArrayList<Users> x1 = new ArrayList<>();
 
         //add element in the table
@@ -129,14 +149,88 @@ public class ClinicReceptionist  extends Application {
         GridPane grid3 = new GridPane();
 
 
-        //grid.add(btnB, 0, 0);
+        grid.add(btnB, 0, 0);
         grid.add(Title, 0, 1);
 
         //grid.add(Term, 0, 2);
         grid.add(TableBox, 0, 2);
         grid.add(grid2, 0, 3);
+        grid.add(btn1, 0, 4);
 
         grid3.setVgap(10);
+
+
+        Alert message = new Alert(Alert.AlertType.ERROR);
+        btn1.setOnAction((ActionEvent e) -> {
+            boolean Error=false;
+            int size;
+
+            try {
+                DataBase dataBase = new DataBase();
+                Preferences pref = Preferences.userNodeForPackage(Preferences.class);
+                String uid = (pref.get("User", "root"));
+
+                Users RA = dataBase.getClinicAdmin(uid);
+                ArrayList<Appointments> ads = dataBase.getAppointments(RA);
+                size = ads.size();
+                for (int i = 0; i < size; i++) {
+                    Object cellobj = ((TableColumn) tableView.getColumns().get(2)).getCellObservableValue(i).getValue();
+                    String value = (String) ((ComboBox) cellobj).getSelectionModel().getSelectedItem();
+                    if (value != null && (value.equals("Confirmed")||value.equals("Not Confirmed"))) {
+                        cellobj = (((TableColumn) tableView.getColumns().get(1)).getCellObservableValue(i).getValue());
+                        String id = ((TableColumn) tableView.getColumns().get(0)).getCellObservableValue(i).getValue().toString();
+                        System.out.println(id);
+                        dataBase.updateAppointment(id,value);
+                    }
+
+                }
+            } catch (Exception e1) {
+                Error=true;
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+            /*
+            for (int i = 0; i < T.length; i++) {
+                if (!T[i].getText().isEmpty()) {
+                    try {
+                        Connecter.AddCourse(Integer.parseInt(T[i].getText()));
+
+                    } catch (NumberFormatException e2) {
+                        Error=true;
+                        message.setContentText("please write a correct CRN");
+                        message.show();
+
+                        // e2.printStackTrace();
+                    } catch (Exception e1) {
+                        Error=true;
+                        message.setContentText(e1.getMessage());
+                        message.show();
+                        // e1.printStackTrace();
+                    }
+
+                }
+
+            }
+
+            tableView.getItems().clear();
+            Section[] obj;
+            try {
+                obj = Connecter.GetStudentTermSection();
+                if (obj != null)
+                    tableView.getItems().addAll(obj);
+            } catch (Exception e1) {
+                Error=true;
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            if(!Error)
+                for (int i = 0; i < T.length; i++)
+                    T[i].clear();
+*/
+        });
+
+
 
 
         //grid5.setHgap(10);
@@ -214,15 +308,15 @@ public class ClinicReceptionist  extends Application {
         grid.add(adding,0,6);
         */
         //Set Back Action
-        /*back.setOnMouseClicked((MouseEvent e) -> {
-            MainView show = new MainView();
+        back.setOnMouseClicked((MouseEvent e) -> {
+            Main show = new Main();
             try {
-                Connecter.Save();
+                //Connecter.Save();
                 show.start(primaryStage);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-        });*/
+        });
 
         //Setect the Term Action
         /*Term.setOnAction((event) -> {
@@ -270,9 +364,7 @@ public class ClinicReceptionist  extends Application {
         });
 */
         //Set the message that will show the errors
-        Alert message = new Alert(Alert.AlertType.INFORMATION);
-        message.setHeaderText(null);
-        message.setTitle("ERROR in CRN");
+
 
 
         //Add or Drop Courses
@@ -337,7 +429,7 @@ public class ClinicReceptionist  extends Application {
         });*/
 
         primaryStage.setTitle("ADD and DROP SYSTEM");
-        primaryStage.setScene(new Scene(grid, 550, 450));
+        primaryStage.setScene(new Scene(grid, 550, 350));
         primaryStage.show();
 
     }

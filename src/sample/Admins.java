@@ -41,7 +41,7 @@ public class Admins extends Application {
 
         //DataBase Connecter = new DataBase();
 
-        Label back = new Label("Back");
+        Label back = new Label("Log out");
         back.setTextFill(Color.BLUE);
         back.setFont(Font.font(17));
         //Button back = new Button("Back");
@@ -281,7 +281,7 @@ public class Admins extends Application {
 
 
         TableColumn<Users,String> columnState = new TableColumn<>("Status_ID");
-        columnState.setCellValueFactory(new PropertyValueFactory<>("Status_ID"));
+        columnState.setCellValueFactory(new PropertyValueFactory<>("State"));
         columnState.setStyle("-fx-alignment: CENTER;");
 
 
@@ -348,8 +348,10 @@ public class Admins extends Application {
         GridPane grid2 = new GridPane();
         grid2.setAlignment(Pos.CENTER);
         GridPane grid3 = new GridPane();
-        MainGrid.add(grid, 1, 0);
-        MainGrid.add(grid3, 0, 0);
+        MainGrid.add(grid, 1, 1);
+        MainGrid.add(grid3, 0, 1);
+        MainGrid.add(btnB, 0, 0);
+
 
         grid3.add(id,0,0);
         grid3.add(tid,1,0);
@@ -382,27 +384,26 @@ public class Admins extends Application {
         //grid.add(Title, 1, 0);
 
         //grid.add(Term, 0, 2);
-        grid.add(TableBox, 1, 0);
-        grid.add(grid2, 1, 1);
+        grid.add(TableBox, 1, 1);
+        grid.add(grid2, 1, 2);
 
         grid3.setVgap(10);
         grid3.setHgap(10);
 
 
 
-        grid.add(btn1, 1, 2);
+        grid.add(btn1, 1, 3);
         grid.setPadding(new Insets(10, 10, 10, 10));
 
         //Set Back Action
-        /*back.setOnMouseClicked((MouseEvent e) -> {
-            MainView show = new MainView();
+        back.setOnMouseClicked((MouseEvent e) -> {
+            Main show = new Main();
             try {
-                Connecter.Save();
                 show.start(primaryStage);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-        });*/
+        });
 
         //Setect the Term Action
         /*Term.setOnAction((event) -> {

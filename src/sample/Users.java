@@ -1,5 +1,9 @@
 package sample;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ComboBox;
+
 import java.util.Date;
 
 public class Users {
@@ -12,6 +16,8 @@ public class Users {
     private int U_ID;
     private int typeID;
     private int statusID;
+    private ComboBox<String> State;
+
 
     public Users(){}
     public Users( String userName,
@@ -32,11 +38,24 @@ public class Users {
         this.U_ID=UID;
         this.typeID=typeID;
         this.statusID=statusID;
+        ObservableList<String> options =
+                FXCollections.observableArrayList(
+                        "valid","not valid"
+                );
+        this.State = new ComboBox<String>(options);
+        if(statusID==7)
+            this.State.setPromptText("valid");
+        else
+            this.State.setPromptText("not valid");
     }
 
     public int getU_ID() {
         return U_ID;
     }
+    public ComboBox<String> getState() {
+        return State;
+    }
+
 
     public String getDate() {
         return date;

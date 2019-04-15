@@ -215,6 +215,18 @@ public class DataBase {
         return arrayList;
 
     }
+    public void updateAppointment(String APM,String value)throws SQLException{
+
+        PreparedStatement add = connection.prepareStatement("UPDATE `Appointments` SET Apm_Type = '"+value+"' WHERE Apm_ID = "+APM);
+        try {
+            add.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+
+    }
+
 
     public ArrayList<String> getStatus() throws Exception{
             PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Status;");

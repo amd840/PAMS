@@ -23,6 +23,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -43,11 +44,19 @@ public class CARec extends Application {
         //DataBase Connecter = new DataBase();
 
         Label back = new Label("Back");
+        Label logout = new Label("Log out");
+
         back.setTextFill(Color.BLUE);
         back.setFont(Font.font(17));
+        logout.setTextFill(Color.BLUE);
+        logout.setFont(Font.font(17));
         //Button back = new Button("Back");
-        HBox btnB = new HBox();
+        FlowPane btnB = new FlowPane();
         btnB.getChildren().add(back);
+        btnB.getChildren().add(logout);
+        btnB.setHgap(20);
+        btnB.setMaxHeight(200);
+
 
 
 
@@ -338,7 +347,6 @@ public class CARec extends Application {
         //Adding the Main Drid for Coordinate the Page
         GridPane MainGrid = new GridPane();
         MainGrid.setAlignment(Pos.CENTER);
-        MainGrid.setHgap(30);
 
 
         GridPane grid = new GridPane();
@@ -349,8 +357,13 @@ public class CARec extends Application {
         GridPane grid2 = new GridPane();
         grid2.setAlignment(Pos.CENTER);
         GridPane grid3 = new GridPane();
-        MainGrid.add(grid, 1, 0);
-        MainGrid.add(grid3, 0, 0);
+        MainGrid.add(btnB, 0, 0);
+
+        MainGrid.add(grid3, 0, 1);
+
+        MainGrid.add(grid, 1, 1);
+
+       // MainGrid.setHgap(0);
 
         grid3.add(id,0,0);
         grid3.add(tid,1,0);
@@ -392,18 +405,25 @@ public class CARec extends Application {
 
 
         grid.add(btn1, 1, 2);
-        grid.setPadding(new Insets(10, 10, 10, 10));
+        //MainGrid.setPadding(new Insets(10, 10, 10, 10));
 
         //Set Back Action
-        /*back.setOnMouseClicked((MouseEvent e) -> {
-            MainView show = new MainView();
+        back.setOnMouseClicked((MouseEvent e) -> {
+            ClinicAdmin show = new ClinicAdmin();
             try {
-                Connecter.Save();
                 show.start(primaryStage);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-        });*/
+        });
+        logout.setOnMouseClicked((MouseEvent e) -> {
+            Main show = new Main();
+            try {
+                show.start(primaryStage);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
 
         //Setect the Term Action
         /*Term.setOnAction((event) -> {
@@ -513,7 +533,7 @@ public class CARec extends Application {
         });*/
 
         primaryStage.setTitle("Clinic admins");
-        primaryStage.setScene(new Scene(MainGrid, 950, 450));
+        primaryStage.setScene(new Scene(MainGrid, 1050, 450));
         primaryStage.show();
 
     }

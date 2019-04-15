@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
@@ -38,9 +39,16 @@ public class ad extends Application {
         Label back = new Label("Back");
         back.setTextFill(Color.BLUE);
         back.setFont(Font.font(17));
+        Label logout = new Label("Log out");
+        logout.setTextFill(Color.BLUE);
+        logout.setFont(Font.font(17));
         //Button back = new Button("Back");
-        HBox btnB = new HBox();
+        FlowPane btnB = new FlowPane();
         btnB.getChildren().add(back);
+        btnB.getChildren().add(logout);
+
+        btnB.setHgap(20);
+
 
         // ...
 
@@ -132,7 +140,7 @@ public class ad extends Application {
 
 
 
-        //grid.add(btnB, 0, 0);
+        grid.add(btnB, 0, 0);
         grid.add(Title, 0, 1);
 
         //grid.add(Term, 0, 2);
@@ -211,6 +219,23 @@ public class ad extends Application {
 
             // eXception & Errors
         }
+
+        back.setOnMouseClicked((MouseEvent e) -> {
+            ClinicAdmin show = new ClinicAdmin();
+            try {
+                show.start(primaryStage);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
+        logout.setOnMouseClicked((MouseEvent e) -> {
+            Main show = new Main();
+            try {
+                show.start(primaryStage);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
 
         /*FlowPane flowPane = new FlowPane();
 
@@ -370,7 +395,7 @@ public class ad extends Application {
 
         });*/
 
-        primaryStage.setTitle("ADD and DROP SYSTEM");
+        primaryStage.setTitle("Advertisment");
         primaryStage.setScene(new Scene(grid, 550, 450));
         primaryStage.show();
 

@@ -10,10 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
@@ -125,7 +122,9 @@ public class Guest extends Application {
             T[i] = new TextField();
            */
         //Add Butttons
-        Button btn1 = new Button("Submit");
+        Button btn1 = new Button("Log in");
+        Button btn2 = new Button("Register");
+
         // Button btn2 = new Button("search");
         // Button btn3 = new Button("reset");
 
@@ -194,8 +193,10 @@ public class Guest extends Application {
         //grid3.add(grid5, 0, 1);
         //grid3.add(btn1, 0, 2);
 
-
-        grid.add(btn1, 0, 2);
+        FlowPane flowPane = new FlowPane();
+        flowPane.getChildren().addAll(btn1,btn2);
+        flowPane.setHgap(10);
+        grid.add(flowPane, 0, 2);
         grid.setPadding(new Insets(10, 10, 10, 10));
 
         //Set Back Action
@@ -246,11 +247,23 @@ public class Guest extends Application {
 
 
         //reset CRN Text Field
-        /*btn3.setOnAction((ActionEvent e) -> {
-            for (int i = 0; i < T.length; i++)
-                T[i].clear();
+        btn1.setOnAction((ActionEvent e) -> {
+            Main log = new Main();
+            try {
+                log.start(primaryStage);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
         });
-*/
+        btn2.setOnAction((ActionEvent e) -> {
+            Register register = new Register();
+            try {
+                register.start(primaryStage);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        });
+
         //Set the message that will show the errors
         Alert message = new Alert(Alert.AlertType.INFORMATION);
         message.setHeaderText(null);
@@ -319,7 +332,7 @@ public class Guest extends Application {
         });*/
 
         primaryStage.setTitle("Guest");
-        primaryStage.setScene(new Scene(grid, 550, 450));
+        primaryStage.setScene(new Scene(grid, 550, 300));
         primaryStage.show();
 
     }
