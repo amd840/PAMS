@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -151,6 +152,7 @@ public class patient extends Application {
             try {
                 datastuff2.clear();
                 stuff2.clear();
+                options1.clear();
                 stuff2.addAll(new DataBase().getDentists(stuff.get(treceptId.getSelectionModel().getSelectedIndex())));
                 for(int i=0 ;i<stuff2.size();i++){
                     datastuff2.add(stuff2.get(i).getFName() +" "+stuff2.get(i).getLName());
@@ -294,15 +296,14 @@ public class patient extends Application {
         grid.setPadding(new Insets(10, 10, 10, 10));
 
         //Set Back Action
-        /*back.setOnMouseClicked((MouseEvent e) -> {
-            MainView show = new MainView();
+        back.setOnMouseClicked((MouseEvent e) -> {
+            Main show = new Main();
             try {
-                Connecter.Save();
                 show.start(primaryStage);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-        });*/
+        });
 
         //Setect the Term Action
         /*Term.setOnAction((event) -> {
@@ -325,8 +326,10 @@ public class patient extends Application {
             //Users user = Main.TheUser;
 
             DataBase admin = new DataBase();
-            Users user = admin.U_Login("a201","444");
-            tableView.getItems().addAll(user);
+
+            Preferences pref = Preferences.userNodeForPackage(Preferences.class);
+            String uid = (pref.get("User", "root"));
+            tableView.getItems().addAll(admin.getAppointmentsForP(uid));
 
         }catch (Exception e){
             System.out.println(e.getMessage());
@@ -338,11 +341,36 @@ public class patient extends Application {
 
 
         //reset CRN Text Field
-        /*btn3.setOnAction((ActionEvent e) -> {
-            for (int i = 0; i < T.length; i++)
-                T[i].clear();
+        btn1.setOnAction((ActionEvent e) -> {
+            boolean Error=false;
+            int size;
+
+            try {
+                DataBase dataBase = new DataBase();
+                Preferences pref = Preferences.userNodeForPackage(Preferences.class);
+                String uid = (pref.get("User", "root"));
+
+                Users Pa = dataBase.getClinicAdmin(uid);
+                ArrayList<Appointments> ads = dataBase.getAppointmentsForP(uid);
+                size = ads.size();
+                for (int i = 0; i < size; i++) {
+                    Object cellobj = ((TableColumn) tableView.getColumns().get(6)).getCellObservableValue(i).getValue();
+                    String value = (String) ((ComboBox) cellobj).getSelectionModel().getSelectedItem();
+                    if (value != null && (value.equals("deleted"))) {
+                        cellobj = (((TableColumn) tableView.getColumns().get(1)).getCellObservableValue(i).getValue());
+                        String idd = ((TableColumn) tableView.getColumns().get(0)).getCellObservableValue(i).getValue().toString();
+                        System.out.println(idd);
+                        dataBase.updateAppointment(idd,value);
+                    }
+
+                }
+            } catch (Exception e1) {
+                Error=true;
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
         });
-*/
+
         //Set the message that will show the errors
         Alert message = new Alert(Alert.AlertType.INFORMATION);
         message.setHeaderText(null);
@@ -410,7 +438,7 @@ public class patient extends Application {
 
         });*/
 
-        primaryStage.setTitle("ADD and DROP SYSTEM");
+        primaryStage.setTitle("Patient");
         primaryStage.setScene(new Scene(grid, 550, 450));
         primaryStage.show();
 

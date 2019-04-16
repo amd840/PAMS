@@ -165,7 +165,7 @@ public class Main extends Application {
         }
         */
         root.setAlignment(Pos.CENTER);
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("PAMS");
         primaryStage.setScene(new Scene(root, 300, 200));
         primaryStage.setOnCloseRequest(
                 WindowEvent -> {

@@ -244,9 +244,47 @@ public class DataBase {
         return arrayList;
 
     }
-    public void updateAppointment(String APM,String value)throws SQLException{
+    public ArrayList<Appointments> getAppointmentsForP(String Pa) throws Exception{
+        PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Appointments WHERE Patient_ID ="+Pa+";");
+        ResultSet Result = statement1.executeQuery();
 
-        PreparedStatement add = connection.prepareStatement("UPDATE `Appointments` SET Apm_Type = '"+value+"' WHERE Apm_ID = "+APM);
+        PreparedStatement statementUserType = connection.prepareStatement("SELECT Type_ID FROM Users WHERE U_ID ="+Pa+";");
+        ResultSet usertype = statementUserType.executeQuery();
+        usertype.next();
+
+        ArrayList<Appointments> arrayList = new ArrayList<Appointments>();
+
+        //if (!Result.next())
+        //   throw new Exception("There is no Advertisements");
+        while(Result.next()){
+
+            Appointments appointment = new Appointments(Result.getInt("Apm_ID"),Result.getString("Apm_Date"),Result.getString("Apm_Type"),Result.getInt("Patient_ID"),Result.getInt("Recept_ID"),Result.getInt("Dentist_ID"),Result.getInt("Status_ID"),usertype.getString("Type_ID"));
+            arrayList.add(appointment);
+
+            /*
+            arrayList.add(Result.getString("U_ID"));
+
+            arrayList.add(Result.getString("UserName"));
+            arrayList.add(Result.getString("FName + LName"));
+
+            arrayList.add(Result.getString("Hashed_PW"));
+            arrayList.add(Result.getString("EMail"));
+            arrayList.add(Result.getString("Reg_Date"));
+            arrayList.add(Result.getString("Type_ID"));
+            */
+
+
+        }
+        System.out.println("Done");
+        return arrayList;
+
+    }
+    public void updateAppointment(String APM,String value)throws SQLException{
+        PreparedStatement add = null;
+        if (value=="deleted")
+             add = connection.prepareStatement("UPDATE `Appointments` SET Status_ID = '"+2+"' WHERE Apm_ID = "+APM);
+        else if (value=="deleted")
+             add = connection.prepareStatement("UPDATE `Appointments` SET Status_ID = '"+1+"' WHERE Apm_ID = "+APM);
         try {
             add.executeUpdate();
         } catch (SQLException e) {
@@ -494,6 +532,7 @@ public class DataBase {
             PreparedStatement statement1 = connection.prepareStatement("SELECT * FROM Dentists where " + Resultcid.getString("C_ID"));
             ResultSet Result = statement1.executeQuery();
             ArrayList<Dentists> dentistsArrayList = new ArrayList<>();
+            //Result.next();
 
             while (Result.next()) {
                 Dentists dentists = new Dentists();

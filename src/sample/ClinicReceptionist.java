@@ -123,7 +123,7 @@ public class ClinicReceptionist  extends Application {
             T[i] = new TextField();
            */
         //Add Butttons
-        Button btn1 = new Button("Register");
+        Button btn1 = new Button("Update");
         // Button btn2 = new Button("search");
         // Button btn3 = new Button("reset");
 
@@ -174,9 +174,9 @@ public class ClinicReceptionist  extends Application {
                 ArrayList<Appointments> ads = dataBase.getAppointments(RA);
                 size = ads.size();
                 for (int i = 0; i < size; i++) {
-                    Object cellobj = ((TableColumn) tableView.getColumns().get(2)).getCellObservableValue(i).getValue();
+                    Object cellobj = ((TableColumn) tableView.getColumns().get(6)).getCellObservableValue(i).getValue();
                     String value = (String) ((ComboBox) cellobj).getSelectionModel().getSelectedItem();
-                    if (value != null && (value.equals("Confirmed")||value.equals("Not Confirmed"))) {
+                    if (value != null && (value.equals("Confirmed")||value.equals("deleted"))) {
                         cellobj = (((TableColumn) tableView.getColumns().get(1)).getCellObservableValue(i).getValue());
                         String id = ((TableColumn) tableView.getColumns().get(0)).getCellObservableValue(i).getValue().toString();
                         System.out.println(id);
@@ -428,7 +428,7 @@ public class ClinicReceptionist  extends Application {
 
         });*/
 
-        primaryStage.setTitle("ADD and DROP SYSTEM");
+        primaryStage.setTitle("Clinic Receptionist");
         primaryStage.setScene(new Scene(grid, 550, 350));
         primaryStage.show();
 

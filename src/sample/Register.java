@@ -18,6 +18,7 @@ public class Register extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Button back = new Button("Back");
 
 
         GridPane root = new GridPane();
@@ -35,7 +36,7 @@ public class Register extends Application {
         //Label label5 = new Label("Email");
         Label label6 = new Label("First Name");
         Label label7 = new Label("Last Name");
-        Label label8 = new Label("Types");
+        //Label label8 = new Label("Types");
 
         TextField ID = new TextField();
         TextField username = new TextField();
@@ -45,34 +46,35 @@ public class Register extends Application {
         // TextField email2 = new TextField();
         TextField fName = new TextField();
         TextField lName = new TextField();
-        TextField Types = new TextField();
+        //TextField Types = new TextField();
 
 
         String Result2 = "";
         Alert alert = new Alert(Alert.AlertType.WARNING);
 
+        root.add(back,0,0);
 
-        root.add(label,0,0);
+        root.add(label,0,1);
         label.setAlignment(Pos.CENTER_LEFT);
-        root.add(label1,0,1);
+        root.add(label1,0,2);
 
-        root.add(label2,0,2);
-        root.add(label3,0,3);
-        root.add(label4,0,4);
+        root.add(label2,0,3);
+        root.add(label3,0,4);
+        root.add(label4,0,5);
         //root.add(label5,0,5);
         root.add(label6,0,6);
         root.add(label7,0,7);
-        root.add(label8,0,8);
+        //root.add(label8,0,8);
 
-        root.add(ID,1,0);
-        root.add(username,1,1);
-        root.add(passWord,1,2);
-        root.add(passWord2,1,3);
-        root.add(email,1,4);
+        root.add(ID,1,1);
+        root.add(username,1,2);
+        root.add(passWord,1,3);
+        root.add(passWord2,1,4);
+        root.add(email,1,5);
         // root.add(email2,1,5);
         root.add(fName,1,6);
         root.add(lName,1,7);
-        root.add(Types,1,8);
+        //root.add(Types,1,8);
 
         HBox btnBox = new HBox();
         btnBox.getChildren().addAll(btn);
@@ -98,7 +100,7 @@ public class Register extends Application {
             }
             else {
                 try{
-                    Users user1 = new Users(username.getText(),passWord.getText(),email.getText(),fName.getText(),lName.getText(),"",new Integer(ID.getText()),new Integer(Types.getText()),1);
+                    Users user1 = new Users(username.getText(),passWord.getText(),email.getText(),fName.getText(),lName.getText(),"",new Integer(ID.getText()),4,1);
                     dataBase.addUser(user1);
                     alert.setAlertType(Alert.AlertType.INFORMATION);
                     alert.setContentText("Registeration Success");
@@ -111,6 +113,17 @@ public class Register extends Application {
 
             }
         });
+
+        back.setOnAction((ActionEvent e) -> {
+            Main main = new Main();
+            try {
+                main.start(primaryStage);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+
+            });
+
 
         /*
         // ----just for test----//
